@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ISPO Rokan Hulu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  @vite('resources/css/app.css')
+  @livewireStyles
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .bg-gradient-primary {
+      background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+    }
+
+    .bg-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="flex items-center">
+          <svg class="h-10 w-10 text-green-700" viewBox="0 0 48 48" fill="none" stroke="currentColor">
+            <path d="M24 40 L24 20 M24 20 L16 12 M24 20 L32 12 M18 28 L12 22 M30 28 L36 22" stroke-width="2.5" stroke-linecap="round" />
+            <circle cx="24" cy="40" r="3" fill="currentColor" />
+          </svg>
+          <div class="ml-3">
+            <span class="text-xl font-bold text-gray-800">ISPO Rokan Hulu</span>
+            <p class="text-xs text-gray-600">Indonesian Sustainable Palm Oil</p>
+          </div>
+        </a>
+        <div class="hidden md:block">
+          <a href="{{ url('/') }}" class="bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition">
+            Kembali ke Beranda
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Login Section -->
+  <section class="pt-24 pb-16 bg-gradient-primary bg-pattern relative overflow-hidden">
+    <!-- Decorative Elements -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
+    <div class="absolute bottom-20 right-10 w-72 h-72 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left Side - Information -->
+        <div class="text-white hidden md:block">
+          <div class="inline-block bg-green-700 bg-opacity-30 px-4 py-2 rounded-full mb-6">
+            <span class="text-sm font-semibold">🌴 Platform Sertifikasi ISPO</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-green-950">
+            Selamat Datang Kembali
+          </h1>
+          <p class="text-lg md:text-xl mb-8 text-green-900">
+            Kelola proses sertifikasi ISPO perkebunan kelapa sawit Anda dengan mudah melalui platform digital kami.
+          </p>
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1 text-green-950">Proses Digital</h3>
+                <p class="text-green-900 text-sm">Ajukan dan pantau sertifikasi secara online 24/7</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1 text-green-950">Lebih Cepat</h3>
+                <p class="text-green-900 text-sm">Hemat waktu hingga 30% dengan sistem terintegrasi</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-lg mb-1 text-green-950">Terpercaya</h3>
+                <p class="text-green-900 text-sm">Platform resmi dari Dinas Pertanian Rokan Hulu</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side - Login Form Component -->
+        <div class="w-full">
+          @livewire('login-form')
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-400 text-sm mb-4 md:mb-0">
+          &copy; 2025 ISPO Rokan Hulu. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  @livewireScripts
+</body>
+
+</html>
