@@ -12,6 +12,9 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +24,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'no_hp',
+        'nik',
+        'npwp',
+        'alamat',
+        'desa',
+        'kecamatan',
+        'foto_profil',
+        'jumlah_anggota_keluarga',
+        'jenis_kelamin',
+        'role',
     ];
 
     /**
@@ -44,5 +57,31 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Mark email as verified
+     */
+    public function markEmailAsVerified(): bool
+    {
+        return $this->forceFill([
+            'email_verified_at' => now(),
+        ])->save();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = (string) \Illuminate\Support\Str::uuid();
+            }
+        });
+    }
+
+    public function kebun()
+    {
+        return $this->hasMany(Kebun::class);
     }
 }

@@ -32,12 +32,31 @@ class LoginForm extends Component
     {
         $this->validate();
 
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-            session()->regenerate();
-            return redirect()->intended('/dashboard');
+        if (!Auth::attempt(
+            ['email' => $this->email, 'password' => $this->password],
+            $this->remember
+        )) {
+            return redirect(url('/login'))->with([
+                'error' => [
+                    'title' => 'Email atau password salah.',
+                ],
+            ]);
         }
 
-        $this->addError('email', 'Email atau password salah.');
-    }
+        $user = Auth::user();
 
+        return match ($user->role) {
+            'pekebun' => redirect(url('/pekebun'))->with([
+                'success' => [
+                    'title' => 'Berhasil masuk sebagai Pekebun.',
+                ],
+            ]),
+            'admin' => redirect(url('/admin'))->with([
+                'success' => [
+                    'title' => 'Berhasil masuk sebagai Admin.',
+                ],
+            ]),
+            default => redirect('/'),
+        };
+    }
 }

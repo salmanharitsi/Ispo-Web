@@ -9,10 +9,6 @@
     rel="stylesheet">
   @vite('resources/css/app.css')
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-
     .bg-gradient-primary {
       background: linear-gradient(135deg, #15803d 0%, #166534 100%);
     }
@@ -126,12 +122,12 @@
             dan internasional. Proses mudah, cepat, dan terpercaya.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <button
-              class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg">
+            <a href="{{ url('/login') }}"
+              class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg text-center">
               Daftar Sertifikasi
-            </button>
+            </a>
             <a href="#ispo"
-              class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-700 transition">
+              class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-700 transition text-center">
               Pelajari ISPO
             </a>
           </div>
@@ -688,10 +684,10 @@
           tingkatkan daya saing produk Anda di pasar global
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
+          <a href="{{ url('/login') }}"
             class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg text-lg">
             Daftar Sekarang
-          </button>
+          </a>
         </div>
       </div>
     </div>

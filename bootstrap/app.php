@@ -11,7 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'pekebun' => App\Http\Middleware\PekebunMiddleware::class,
+            'admin' => App\Http\Middleware\AdminMiddleware::class,
+            'no-cache' => App\Http\Middleware\NoCacheMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
