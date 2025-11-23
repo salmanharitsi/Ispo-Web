@@ -193,7 +193,7 @@
       </div>
 
       <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-white rounded-2xl shadow-lg p-8">
+        <div class="bg-white rounded-lg shadow-lg p-8">
           <div class="flex items-start mb-4">
             <div class="bg-green-100 p-3 rounded-lg mr-4">
               <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -214,7 +214,7 @@
           </div>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-lg p-8">
+        <div class="bg-white rounded-lg shadow-lg p-8">
           <div class="flex items-start mb-4">
             <div class="bg-amber-100 p-3 rounded-lg mr-4">
               <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -244,7 +244,7 @@
       </div>
 
       <!-- Legal Basis -->
-      <div class="bg-gradient-primary text-white rounded-2xl shadow-xl p-8 mb-12">
+      <div class="bg-gradient-primary text-white rounded-lg shadow-xl p-8 mb-12">
         <div class="flex items-center mb-6">
           <svg class="w-10 h-10 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -385,7 +385,7 @@
 
       <div class="grid md:grid-cols-3 gap-8 mb-12">
         <!-- Benefits for Business -->
-        <div class="bg-linear-to-br from-green-500 to-green-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="bg-linear-to-br from-green-500 to-green-600 rounded-lg shadow-xl p-8 text-white">
           <div
             class="bg-linear-to-tr from-green-500 to-green-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -440,7 +440,7 @@
         </div>
 
         <!-- Benefits for Environment -->
-        <div class="bg-linear-to-br from-emerald-500 to-teal-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg shadow-xl p-8 text-white">
           <div
             class="bg-linear-to-tr from-emerald-500 to-teal-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -495,7 +495,7 @@
         </div>
 
         <!-- Benefits for Government -->
-        <div class="bg-linear-to-br from-blue-500 to-indigo-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="bg-linear-to-br from-blue-500 to-indigo-600 rounded-lg shadow-xl p-8 text-white">
           <div
             class="bg-linear-to-tr from-blue-500 to-indigo-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -606,7 +606,7 @@
         </div>
       </div>
 
-      <div class="mt-12 bg-green-50 rounded-2xl p-8 border border-green-200">
+      <div class="mt-12 bg-green-50 rounded-lg p-8 border border-green-200">
         <div class="flex items-start">
           <div class="bg-green-600 rounded-full p-3 mr-4">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -675,7 +675,7 @@
         </div>
       </div>
 
-      <div class="bg-gradient-secondary rounded-2xl shadow-xl p-8 text-white text-center">
+      <div class="bg-gradient-secondary rounded-lg shadow-xl p-8 text-white text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
           Siap Mendapatkan Sertifikasi ISPO?
         </h2>

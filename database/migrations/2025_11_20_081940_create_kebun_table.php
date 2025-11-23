@@ -26,7 +26,11 @@ return new class extends Migration
             $table->integer('umur_tanaman')->nullable();
             $table->integer('jumlah_pohon')->nullable();
             $table->json('polygon')->nullable();
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
             $table->enum('status_ispo', ['belum', 'proses', 'sudah'])->default('belum');
+            $table->enum('status_finalisasi', ['belum', 'final'])->default('belum');
+            $table->text('catatan_pengecekan')->nullable();
             $table->timestamps();
         });
     }

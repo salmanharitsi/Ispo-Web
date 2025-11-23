@@ -1,4 +1,4 @@
-<div class="bg-white rounded-2xl shadow-2xl p-8 md:p-10">
+<div class="bg-white rounded-lg shadow-2xl p-8 md:p-10">
   <!-- Header -->
   <div class="text-center mb-8">
     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">

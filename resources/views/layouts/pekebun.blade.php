@@ -8,9 +8,15 @@
     <title>Pekebun - ISPO Rokan Hulu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    {{-- Leaflet + Leaflet.Draw --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css"/>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+
+    @stack('styles')
 </head>
 
 <body class="min-h-screen">
@@ -29,7 +35,7 @@
             <div class="flex items-center justify-between px-6 py-[18px] border-b border-gray-100">
                 <div class="flex items-center space-x-3" id="logo-section">
                     <div
-                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shrink-0">
+                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg shrink-0">
                         <i class="fas fa-seedling text-white text-lg shrink-0"></i>
                     </div>
                     <div class="sidebar-text">
@@ -52,7 +58,7 @@
                     <ul class="space-y-2">
                         <li>
                             <a href="{{ url('/pekebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('pekebun') }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun') }}">
                                 <i class="fas fa-home text-lg w-5 shrink-0 {{ iconColor('pekebun') }}"></i>
                                 <span class="sidebar-text font-medium">Dashboard</span>
                             </a>
@@ -67,23 +73,31 @@
                     <ul class="space-y-2">
                         <li>
                             <a href="{{ url('/pekebun/daftar-kebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
                                 <i
                                     class="fas fa-plant-wilt text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}"></i>
                                 <span class="sidebar-text font-medium">Daftar Kebun</span>
                             </a>
                         </li>
                         <li>
-                            <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('riwayat-presensi-guru') }}">
+                            <a href="{{ url('/pekebun/daftar-pemetaan') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}">
                                 <i
-                                    class="fas fa-map text-lg w-5 shrink-0 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                                    class="fas fa-map text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}"></i>
                                 <span class="sidebar-text font-medium">Pemetaan</span>
                             </a>
                         </li>
                         <li>
                             <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('riwayat-presensi-guru') }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
+                                <i
+                                    class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                                <span class="sidebar-text font-medium">Kuisioner</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href=""
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
                                 <i
                                     class="fas fa-chart-line text-lg w-5 shrink-0 {{ iconColor('riwayat-presensi-guru') }}"></i>
                                 <span class="sidebar-text font-medium">Hasil SPK</span>
@@ -91,7 +105,7 @@
                         </li>
                         <li>
                             <a href="{{ url('/pekebun/data-diri') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('pekebun.data-diri') }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.data-diri') }}">
                                 <i class="fas fa-user-circle text-lg w-5 shrink-0 {{ iconColor('pekebun.data-diri') }}"></i>
                                 <span class="sidebar-text font-medium">Data Diri</span>
                             </a>
@@ -103,7 +117,7 @@
             <!-- Sidebar Footer -->
             <div class="p-4 border-t border-gray-100 bg-white mt-auto">
                 <a href="{{ url('/logout') }}"
-                    class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 transition-all duration-200 hover-lift">
+                    class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-all duration-200 hover-lift">
                     <i class="fas fa-sign-out-alt text-lg w-5 shrink-0"></i>
                     <span class="sidebar-text font-medium">Keluar</span>
                 </a>
@@ -116,7 +130,7 @@
             <div class="flex items-center justify-between px-6 py-[18px] border-b border-gray-100">
                 <div class="flex items-center space-x-3">
                     <div
-                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg">
                         <i class="fas fa-seedling text-white text-lg"></i>
                     </div>
                     <div>
@@ -136,7 +150,7 @@
                     <ul class="space-y-2">
                         <li>
                             <a href="{{ url('/pekebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('pekebun') }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun') }}">
                                 <i class="fas fa-home text-lg w-5 {{ iconColor('pekebun') }}"></i>
                                 <span class="font-medium">Dashboard</span>
                                 @if (request()->routeIs('pekebun'))
@@ -154,28 +168,35 @@
                     <ul class="space-y-2">
                         <li>
                             <a href="{{ url('/pekebun/daftar-kebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
                                 <i class="fas fa-list-check text-lg w-5 {{ iconColor(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}"></i>
                                 <span class="font-medium">Daftar Kebun</span>
                             </a>
                         </li>
                         <li>
-                            <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('riwayat-presensi-guru') }}">
-                                <i class="fas fa-map text-lg w-5 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                            <a href="{{ url('/pekebun/daftar-pemetaan') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}">
+                                <i class="fas fa-map text-lg w-5 {{ iconColor(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}"></i>
                                 <span class="font-medium">Pemetaan</span>
                             </a>
                         </li>
                         <li>
                             <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('riwayat-presensi-guru') }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
+                                <i class="fas fa-list-check text-lg w-5 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                                <span class="font-medium">Kuisioner</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href=""
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
                                 <i class="fas fa-chart-line text-lg w-5 {{ iconColor('riwayat-presensi-guru') }}"></i>
                                 <span class="font-medium">Hasil SPK</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('/pekebun/data-diri') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl {{ menuActive('pekebun.data-diri') }}">
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.data-diri') }}">
                                 <i class="fas fa-user-circle text-lg w-5 {{ iconColor('pekebun.data-diri') }}"></i>
                                 <span class="font-medium">Data Diri</span>
                             </a>
@@ -187,7 +208,7 @@
             <!-- Mobile Sidebar Footer -->
             <div class="p-4 border-t border-gray-100 bg-white mt-auto">
                 <a href="{{ url('/logout') }}"
-                    class="menu-item flex items-center space-x-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 transition-all duration-200 hover-lift">
+                    class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 transition-all duration-200 hover-lift">
                     <i class="fas fa-sign-out-alt text-lg w-5"></i>
                     <span class="font-medium">Keluar</span>
                 </a>
@@ -239,7 +260,7 @@
                         <!-- User Menu -->
                         <div class="relative">
                             <button id="user-menu-btn"
-                                class="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50 transition-colors">
+                                class="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
                                 @if (Auth::user()->foto_profil)
                                     <img src="{{ asset('storage/' . Auth::user()->foto_profil) }}" alt="foto_profil"
                                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-100">
@@ -261,7 +282,7 @@
 
                             <!-- User Dropdown -->
                             <div id="user-dropdown"
-                                class="hidden absolute right-0 mt-2 w-[345px] bg-white rounded-xl shadow-2xl z-50">
+                                class="hidden absolute right-0 mt-2 w-[345px] bg-white rounded-lg shadow-2xl z-50">
                                 <!-- Profile Header -->
                                 <div class="p-4 bg-linear-to-r from-green-600 to-emerald-600 rounded-t-xl">
                                     <div class="flex items-center space-x-3">
@@ -336,6 +357,10 @@
 
     @livewireScripts
     @stack('scripts')
+    {{-- Leaflet + Leaflet.Draw --}}
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
 </body>
 

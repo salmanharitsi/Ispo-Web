@@ -26,5 +26,10 @@ Route::group(['middleware' => ['pekebun', 'no-cache']], function () {
     Route::get('/pekebun/data-diri', [PekebunController::class, 'get_data_diri_pekebun'])->name('pekebun.data-diri');
     Route::get('/pekebun/daftar-kebun', [PekebunController::class, 'get_daftar_kebun_pekebun'])->name('pekebun.daftar-kebun');
     Route::get('/pekebun/daftar-kebun/{id}', [PekebunController::class, 'get_detail_data_kebun'])->name('pekebun.detail-data-kebun');
+    Route::post('/pekebun/daftar-kebun/{id}/delete', [PekebunController::class, 'delete_kebun'])->name('pekebun.delete-kebun');
+    Route::get('/pekebun/daftar-pemetaan', [PekebunController::class, 'get_daftar_pemetaan_kebun'])->name('pekebun.daftar-pemetaan');
+    Route::get('/pekebun/daftar-pemetaan/semua-pemetaan', [PekebunController::class, 'get_allPemetaan'])->name('pekebun.allPemetaan');
+    Route::get('/pekebun/daftar-pemetaan/{id}', [PekebunController::class, 'get_pemetaan_kebun'])->name('pekebun.pemetaan-kebun');
+    Route::post('/pekebun/daftar-pemetaan/{id}', [PekebunController::class, 'post_pemetaan_kebun'])->name('pekebun.pemetaan.simpan');
 });
 

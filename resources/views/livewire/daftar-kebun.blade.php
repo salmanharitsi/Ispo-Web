@@ -154,7 +154,7 @@
   @else
     @if ($isDataDiriComplete)
       <!-- Empty State -->
-      <div class="bg-white rounded-xl shadow-lg p-12 text-center">
+      <div class="bg-white rounded-lg shadow-lg p-12 text-center">
         <div class="bg-gray-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -188,7 +188,7 @@
   @if($showModal)
   <div class="fixed inset-0 z-50 flex items-center justify-center p-4" wire:click.self="closeModal">
     <div class="absolute inset-0 bg-black/50 z-0"></div>
-    <div class="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="relative bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
       <!-- Modal Header -->
       <div class="sticky top-0 bg-linear-to-r from-green-600 to-green-700 text-white p-6 rounded-t-2xl">
         <div class="flex items-center justify-between">
