@@ -66,7 +66,7 @@ class PekebunController extends Controller
         $jumlahKebunFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->count();
 
         // Check if all steps complete
-        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner;
+        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasFinalisasi;
 
         return view('pekebun.dashboard', compact(
             'user',
@@ -102,7 +102,11 @@ class PekebunController extends Controller
             }
         }
 
-        $needFinalisasi = $user->kebun()->where('status_finalisasi', '=','belum')->count();
+        $needFinalisasi = $user->kebun()
+            ->where('status_finalisasi', '=','belum')
+            ->where('polygon', '!=', null)
+            ->whereHas('kuisioner')
+            ->count();
 
         return view('pekebun.daftar-kebun', [
             'isDataDiriComplete' => $isDataDiriComplete,
@@ -134,6 +138,10 @@ class PekebunController extends Controller
         $kebun = Kebun::findOrFail($id);
         $allKebun = $this->buildAllKebunForMap();
 
+        if ($kebun->status_finalisasi == "final") {
+            return redirect()->back();
+        }
+
         return view('pekebun.pemetaan', [
             'kebun'    => $kebun,
             'allKebun' => $allKebun,
@@ -148,6 +156,31 @@ class PekebunController extends Controller
         return view('pekebun.all-pemetaan', [
             'user'     => $user,
             'allKebun' => $allKebun,
+        ]);
+    }
+
+    public function get_daftar_kuisioner_kebun()
+    {
+        $user = Auth::user();
+        $needKuisioner = $user->kebun()
+        ->doesntHave('kuisioner')   
+        ->count();
+
+        return view('pekebun.daftar-kuisioner', [
+            'needKuisioner'=> $needKuisioner,
+        ]);
+    }
+
+    public function get_kuisioner_kebun(string $id)
+    {
+        $kebun = Kebun::findOrFail($id);
+
+        if ($kebun->status_finalisasi == "final") {
+            return redirect()->back();
+        }
+
+        return view('pekebun.kuisioner', [
+            'kebun'    => $kebun,
         ]);
     }
 
@@ -189,6 +222,44 @@ class PekebunController extends Controller
         return redirect(url('/pekebun/daftar-pemetaan'))->with([
             'success' => [
                 "title" => "Peta lahan berhasil disimpan.",
+            ]
+        ]);
+    }
+
+    public function post_finalisasiKebun(string $id)
+    {
+        $user = Auth::user();
+
+        $kebun = Kebun::where('id', $id)
+            ->where('user_id', $user->id)
+            ->with(['kuisioner'])
+            ->firstOrFail();
+
+        // Optional: cegah finalisasi ulang
+        if ($kebun->status_finalisasi === 'final') {
+            return redirect(url('/pekebun/daftar-kebun'))->with([
+                'error' => [
+                    "title" => "Data kebun ini sudah difinalisasi sebelumnya.",
+                ]
+            ]);
+        }
+
+        // Optional: pastikan data lengkap dulu
+        if (!$kebun->polygon || !$kebun->kuisioner) {
+            return redirect(url('/pekebun/daftar-kebun'))->with([
+                'error' => [
+                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan dan kuisioner sebelum finalisasi.",
+                ]
+            ]);
+        }
+
+        $kebun->status_finalisasi = 'final';
+        $kebun->status_ispo = 'proses';
+        $kebun->save();
+
+        return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
+            'success' => [
+                "title" => "Data kebun berhasil difinalisasi. Data tidak dapat diubah lagi.",
             ]
         ]);
     }

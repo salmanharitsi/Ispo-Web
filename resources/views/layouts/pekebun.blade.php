@@ -88,10 +88,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
+                            <a href="{{ url('/pekebun/daftar-kuisioner') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}">
                                 <i
-                                    class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                                    class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}"></i>
                                 <span class="sidebar-text font-medium">Kuisioner</span>
                             </a>
                         </li>
@@ -181,9 +181,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
-                                <i class="fas fa-list-check text-lg w-5 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                            <a href="{{ url('/pekebun/daftar-kuisioner') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}">
+                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}"></i>
                                 <span class="font-medium">Kuisioner</span>
                             </a>
                         </li>

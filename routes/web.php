@@ -27,9 +27,12 @@ Route::group(['middleware' => ['pekebun', 'no-cache']], function () {
     Route::get('/pekebun/daftar-kebun', [PekebunController::class, 'get_daftar_kebun_pekebun'])->name('pekebun.daftar-kebun');
     Route::get('/pekebun/daftar-kebun/{id}', [PekebunController::class, 'get_detail_data_kebun'])->name('pekebun.detail-data-kebun');
     Route::post('/pekebun/daftar-kebun/{id}/delete', [PekebunController::class, 'delete_kebun'])->name('pekebun.delete-kebun');
+    Route::post('/pekebun/daftar-kebun/{id}/finalisasi', [PekebunController::class,'post_finalisasiKebun'])->name('pekebun.finalisasi-kebun');
     Route::get('/pekebun/daftar-pemetaan', [PekebunController::class, 'get_daftar_pemetaan_kebun'])->name('pekebun.daftar-pemetaan');
     Route::get('/pekebun/daftar-pemetaan/semua-pemetaan', [PekebunController::class, 'get_allPemetaan'])->name('pekebun.allPemetaan');
     Route::get('/pekebun/daftar-pemetaan/{id}', [PekebunController::class, 'get_pemetaan_kebun'])->name('pekebun.pemetaan-kebun');
     Route::post('/pekebun/daftar-pemetaan/{id}', [PekebunController::class, 'post_pemetaan_kebun'])->name('pekebun.pemetaan.simpan');
+    Route::get('/pekebun/daftar-kuisioner', [PekebunController::class, 'get_daftar_kuisioner_kebun'])->name('pekebun.daftar-kuisioner');
+    Route::get('/pekebun/daftar-kuisioner/{id}', [PekebunController::class, 'get_kuisioner_kebun'])->name('pekebun.kuisioner-kebun');
 });
 

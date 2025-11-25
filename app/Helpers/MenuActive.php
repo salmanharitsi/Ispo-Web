@@ -39,17 +39,23 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Detail Data Kebun'],
             ],
             'pekebun.daftar-pemetaan' => [
-                ['label' => 'Pemetaan'],
+                ['label' => 'Daftar Pemetaan'],
             ],
             'pekebun.pemetaan-kebun' => [
-                ['label' => 'Pemetaan', 'route' => 'pekebun.daftar-pemetaan'],
+                ['label' => 'Daftar Pemetaan', 'route' => 'pekebun.daftar-pemetaan'],
                 ['label' => 'Pemetaan Kebun'],
             ],
             'pekebun.allPemetaan' => [
-                ['label' => 'Pemetaan', 'route' => 'pekebun.daftar-pemetaan'],
+                ['label' => 'Daftar Pemetaan', 'route' => 'pekebun.daftar-pemetaan'],
                 ['label' => 'Semua Pemetaan'],
             ],
-
+            'pekebun.daftar-kuisioner' => [
+                ['label' => 'Daftar Kuisioner'],
+            ],
+            'pekebun.kuisioner-kebun' => [
+                ['label' => 'Daftar Kuisioner', 'route' => 'pekebun.daftar-kuisioner'],
+                ['label' => 'Kuisioner Kebun'],
+            ],
             'riwayat-presensi-guru' => [
                 ['label' => 'Riwayat Presensi'],
             ],

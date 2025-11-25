@@ -66,7 +66,7 @@
           <div class="flex-1">
             <h3 class="text-blue-800 font-semibold mb-1">Kuisioner Belum Diisi</h3>
             <p class="text-blue-700 text-sm mb-3">Lengkapi kuisioner untuk melengkapi data kebun dan persyaratan sertifikasi ISPO.</p>
-            <a href="" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition">
+            <a href="{{ url('/pekebun/daftar-kuisioner', $kebun->id) }}" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
@@ -77,24 +77,30 @@
       </div>
       @endif
 
-      @if ($kebun->polygon && $kebun->kuisioner)
-      <div class="bg-green-50 border border-green-500 p-4 rounded-lg">
-        <div class="flex items-start">
-          <svg class="w-6 h-6 text-green-500 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <div class="flex-1">
-            <h3 class="text-green-800 font-semibold mb-1">Data Sudah Lengkap!</h3>
-            <p class="text-green-700 text-sm mb-3">Data Anda sudah lengkap. Silahkan finalisasi data untuk melanjutkan ke tahap pengecekan.</p>
-            <button class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition">
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-              Finalisasi Data Sekarang
-            </button>
+      @if ($kebun->polygon && $kebun->kuisioner && $kebun->status_finalisasi === 'belum')
+        <div class="bg-green-50 border border-green-500 p-4 rounded-lg">
+          <div class="flex items-start">
+            <svg class="w-6 h-6 text-green-500 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div class="flex-1">
+              <h3 class="text-green-800 font-semibold mb-1">Data Sudah Lengkap!</h3>
+              <p class="text-green-700 text-sm mb-3">
+                Data Anda sudah lengkap. Silahkan finalisasi data untuk melanjutkan ke tahap pengecekan.
+              </p>
+              <button
+                type="button"
+                onclick="openFinalizeModal()"
+                class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition cursor-pointer"
+              >
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Finalisasi Data Sekarang
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       @endif
 
     </div>
@@ -249,10 +255,10 @@
         </div>
   
         <!-- Action Cards -->
-        @if ($kebun->polygon || $kebun->kuisioner)
+        @if (($kebun->polygon || $kebun->kuisioner) && $kebun->status_finalisasi !== 'final')
           <div class="bg-white rounded-lg shadow-md p-6">
             <h3 class="text-lg font-bold text-gray-800 mb-4">Aksi Lainnya</h3>
-            <div class="space-y-3">
+            <div class="space-y-4">
               @if($kebun->polygon)
               <a href="{{ url('/pekebun/daftar-pemetaan', $kebun->id) }}" class="block w-full text-center px-4 py-3 bg-green-50 hover:bg-green-100 text-green-700 font-semibold rounded-lg transition border border-green-200">
                 <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -262,7 +268,7 @@
               </a>
               @endif
               @if($kebun->kuisioner)
-              <a href="" class="block w-full text-center px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold rounded-lg transition border border-blue-200">
+              <a href="{{ url('/pekebun/daftar-kuisioner', $kebun->id) }}" class="block w-full text-center px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold rounded-lg transition border border-blue-200">
                 <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                 </svg>
@@ -276,30 +282,51 @@
         <!-- Finalization Cards -->
         <div class="bg-white rounded-lg shadow-md p-6">
           <h3 class="text-lg font-bold text-gray-800 mb-4">Finalisasi Data</h3>
-          @if ($kebun->polygon && $kebun->kuisioner)
-            <div class="space-y-3">
-              <div class="text-green-600 flex items-start mb-4">
+
+          @if ($kebun->status_finalisasi === 'final')
+            <div class="flex items-start text-green-600">
+              <i class="fas fa-circle-check mr-2 mt-1"></i>
+              <p class="text-sm">
+                Data kebun ini sudah <span class="font-semibold">difinalisasi</span>. Perubahan data tidak lagi diizinkan.
+              </p>
+            </div>
+          @else
+            @if ($kebun->polygon && $kebun->kuisioner)
+              <div class="space-y-3">
+                <div class="text-green-600 flex items-start mb-4">
+                  <svg class="w-5 h-5 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  <p class="text-sm">
+                    Data kebun sudah lengkap, lakukan finalisasi untuk melanjutkan ke tahap pengecekan.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onclick="openFinalizeModal()"
+                  class="block w-full text-center px-4 py-3 bg-green-50 hover:bg-green-100 text-green-700 font-semibold rounded-lg transition border border-green-200 cursor-pointer"
+                >
+                  <i class="fas fa-check mr-2"></i>
+                  Finalisasi Data
+                </button>
+              </div>
+            @else
+              <div class="text-red-500 flex items-start mb-4">
                 <svg class="w-5 h-5 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <p class="text-sm">Data kebun sudah lengkap, lakukan finalisasi untuk melanjutkan ke tahap pengecekan</p>
+                <p class="text-sm">
+                  Lengkapi semua data kebun seperti pemetaan dan kuisioner untuk melakukan finalisasi, dan melanjutkan proses pengecekan.
+                </p>
               </div>
-              <button class="block w-full text-center px-4 py-3 bg-green-50 hover:bg-green-100 text-green-700 font-semibold rounded-lg transition border border-green-200">
+              <button
+                disabled
+                class="block w-full text-center px-4 py-3 bg-gray-200 text-gray-500 font-semibold rounded-lg border border-gray-300 cursor-not-allowed"
+              >
                 <i class="fas fa-check mr-2"></i>
                 Finalisasi Data
               </button>
-            </div>
-          @else
-            <div class="text-red-500 flex items-start mb-4">
-              <svg class="w-5 h-5 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <p class="text-sm">Lengkapi semua data kebun seperti pemetaan dan kuisioner untuk melakukan finalisasi, dan melanjutkan proses pengecekan</p>
-            </div>
-            <button disabled class="block w-full text-center px-4 py-3 bg-gray-200 text-gray-500 font-semibold rounded-lg border border-gray-300 cursor-not-allowed">
-              <i class="fas fa-check mr-2"></i>
-              Finalisasi Data
-            </button>
+            @endif
           @endif
         </div>
       </div>
@@ -337,6 +364,56 @@
   </div>
 </div>
 
+<!-- Finalisasi Confirmation Modal -->
+<div id="finalizeModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/50" onclick="closeFinalizeModal()"></div>
+  <div class="relative bg-white rounded-lg shadow-2xl max-w-md w-full p-6">
+    <div class="text-center">
+      <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m2 4a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+
+      <h3 class="text-2xl font-bold text-gray-800 mb-2">Finalisasi Data Kebun?</h3>
+
+      <p class="text-gray-600 mb-3">
+        Setelah difinalisasi, <span class="font-semibold text-red-600">data kebun tidak dapat diubah lagi</span>.
+      </p>
+      <p class="text-gray-600 mb-6">
+        Pastikan semua informasi, pemetaan, dan kuisioner untuk kebun
+        <span class="font-semibold">{{ $kebun->nama_kebun }}</span> sudah benar.
+      </p>
+
+      <div class="bg-yellow-50 border border-yellow-200 text-yellow-800 text-sm rounded-lg px-3 py-2 mb-6">
+        Tindakan ini hanya dapat dilakukan <span class="font-semibold">satu kali</span>.
+        Jika Anda yakin, lanjutkan dengan finalisasi.
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <button
+          type="button"
+          onclick="closeFinalizeModal()"
+          class="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+        >
+          Batal
+        </button>
+
+        <form action="{{ route('pekebun.finalisasi-kebun', $kebun->id) }}" method="POST">
+          @csrf
+          <button
+            type="submit"
+            class="w-full px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition"
+          >
+            Ya, Finalisasi
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 @push('scripts')
 <script>
 function confirmDelete() {
@@ -345,6 +422,16 @@ function confirmDelete() {
 
 function closeDeleteModal() {
   document.getElementById('deleteModal').classList.add('hidden');
+}
+
+function openFinalizeModal() {
+  const modal = document.getElementById('finalizeModal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeFinalizeModal() {
+  const modal = document.getElementById('finalizeModal');
+  if (modal) modal.classList.add('hidden');
 }
 </script>
 @endpush

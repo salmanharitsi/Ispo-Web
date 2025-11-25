@@ -136,11 +136,19 @@
     </div>
 
     <!-- Submit Button -->
-    <button 
-      type="submit" 
-      class="w-full m-0 bg-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+    <button
+      type="submit"
+      wire:loading.attr="disabled"
+      wire:target="register"
+      class="w-full m-0 bg-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
     >
-      <span>Daftar Sekarang</span>
+      <span wire:loading.remove wire:target="register">
+        Daftar Sekarang
+      </span>
+
+      <span wire:loading wire:target="register" class="inline-flex items-center justify-center gap-2">
+        Proses...
+      </span>
     </button>
 
     <!-- Divider -->

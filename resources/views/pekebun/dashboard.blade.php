@@ -249,7 +249,7 @@
                   <div class="flex-1">
                     <p class="text-amber-800 font-medium mb-2">Kuisioner belum diisi!</p>
                     <p class="text-amber-700 text-sm mb-3">Isi kuisioner minimal untuk 1 kebun yang sudah dipetakan.</p>
-                    <a href="" class="inline-flex items-center bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition text-sm font-semibold">
+                    <a href="{{ url('/pekebun/daftar-kuisioner') }}" class="inline-flex items-center bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition text-sm font-semibold">
                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                       </svg>
@@ -374,7 +374,7 @@
         </div>
         <h3 class="text-gray-600 text-sm font-medium mb-1">Kebun Difinalisasi</h3>
         <p class="text-3xl font-bold text-gray-800">{{ $jumlahKebunFinalisasi }}</p>
-        <p class="text-sm text-gray-500 mt-2">Siap dinilai</p>
+        <p class="text-sm text-gray-500 mt-2">Proses pengecekan</p>
       </div>
     </div>
 
@@ -411,7 +411,7 @@
         </a>
 
         <!-- Kuisioner -->
-        <a href="" class="group border-2 border-gray-200 rounded-lg p-6 hover:border-green-500 hover:shadow-lg transition">
+        <a href="{{ route('pekebun.daftar-kuisioner') }}" class="group border-2 border-gray-200 rounded-lg p-6 hover:border-green-500 hover:shadow-lg transition">
           <div class="bg-green-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-500 transition">
             <svg class="w-7 h-7 text-green-600 group-hover:text-white transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>

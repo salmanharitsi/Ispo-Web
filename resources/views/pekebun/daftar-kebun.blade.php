@@ -54,7 +54,7 @@
                 <div>
                   <p class="text-sm font-medium text-yellow-800">Peringatan</p>
                   <p class="text-sm text-yellow-700 mt-1">
-                    Terdapat <span class="font-semibold">{{ $needFinalisasi }}</span> kebun yang belum
+                    Terdapat <span class="font-semibold">{{ $needFinalisasi }}</span> kebun yang perlu
                     difinalisasi, finalisasi data untuk memulai proses pengecekan ISPO!
                   </p>
                 </div>
