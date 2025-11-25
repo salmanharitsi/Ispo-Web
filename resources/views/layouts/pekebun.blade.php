@@ -153,11 +153,6 @@
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun') }}">
                                 <i class="fas fa-home text-lg w-5 {{ iconColor('pekebun') }}"></i>
                                 <span class="font-medium">Dashboard</span>
-                                @if (request()->routeIs('pekebun'))
-                                    <div class="ml-auto">
-                                        <span class="w-2 h-2 bg-white bg-opacity-60 rounded-full inline-block"></span>
-                                    </div>
-                                @endif
                             </a>
                         </li>
                     </ul>
@@ -266,7 +261,7 @@
                                         class="w-12 h-12 rounded-full object-cover border-2 border-gray-100">
                                 @else
                                     <div
-                                        class="w-8 h-8 bg-linear-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
+                                        class="w-12 h-12 bg-linear-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
                                         <span
                                             class="text-white font-semibold text-sm">{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
                                     </div>

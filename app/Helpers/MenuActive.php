@@ -25,6 +25,7 @@ if (!function_exists('breadcrumb')) {
 
         // Daftar label dan parent (jika ada)
         $breadcrumbs = [
+            // Pekebun Breadcrumbs
             'pekebun' => [
                 ['label' => 'Dashboard'],
             ],
@@ -56,15 +57,10 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Daftar Kuisioner', 'route' => 'pekebun.daftar-kuisioner'],
                 ['label' => 'Kuisioner Kebun'],
             ],
-            'riwayat-presensi-guru' => [
-                ['label' => 'Riwayat Presensi'],
-            ],
-            'profil' => [
-                ['label' => 'Profil'],  
-            ],
-            'face-detection-page' => [
-                ['label' => 'Presensi', 'route' => 'presensi-guru'],
-                ['label' => 'Deteksi Wajah'],
+
+            // Admin Breadcrumbs
+            'admin' => [
+                ['label' => 'Dashboard'],
             ],
         ];
 
