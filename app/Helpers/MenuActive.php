@@ -62,6 +62,9 @@ if (!function_exists('breadcrumb')) {
             'admin' => [
                 ['label' => 'Dashboard'],
             ],
+            'admin.daftar-pekebun'=> [
+                ['label' => 'Daftar Pekebun'],
+            ],
         ];
 
         return $breadcrumbs[$route] ?? [

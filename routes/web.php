@@ -18,6 +18,7 @@ Route::get('/register', [AuthController::class, 'get_register_page']);
 // Admin Routes
 Route::group(['middleware' => ['admin', 'no-cache']], function () {
     Route::get('/admin', [AdminController::class, 'get_dashboard_admin'])->name('admin');
+    Route::get('/admin/daftar-pekebun', [AdminController::class,'get_daftar_pekebun'])->name('admin.daftar-pekebun');
 });
 
 // Pekebun Routes

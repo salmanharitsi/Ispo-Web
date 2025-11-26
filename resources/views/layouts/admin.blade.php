@@ -72,10 +72,10 @@
                     </h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="{{ url('/pekebun/daftar-kebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
+                            <a href="{{ url('/admin/daftar-pekebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun']) }}">
                                 <i
-                                    class="fas fa-users text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}"></i>
+                                    class="fas fa-users text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-pekebun']) }}"></i>
                                 <span class="sidebar-text font-medium">Kelola Pekebun</span>
                             </a>
                         </li>
@@ -147,9 +147,9 @@
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">Menu</h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="{{ url('/pekebun/daftar-kebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
-                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}"></i>
+                            <a href="{{ url('/admin/daftar-pekebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun']) }}">
+                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.daftar-pekebun']) }}"></i>
                                 <span class="font-medium">Kelola Pekebun</span>
                             </a>
                         </li>
@@ -203,7 +203,7 @@
 
                         <!-- Breadcrumb -->
                         <div class="hidden md:flex items-center space-x-2 text-sm">
-                            <a href="{{ url("/pekebun") }}" class="text-gray-500 hover:text-green-600 transition-colors">Home</a>
+                            <a href="{{ url("/admin") }}" class="text-gray-500 hover:text-green-600 transition-colors">Home</a>
 
                             @foreach (breadcrumb() as $item)
                                 <i class="fas fa-chevron-right text-gray-300 text-xs"></i>

@@ -55,4 +55,9 @@ class AdminController extends Controller
             'ispoSudah',
         ));
     }
+
+    public function get_daftar_pekebun()
+    {
+        return view('admin.daftar-pekebun');
+    }
 }
