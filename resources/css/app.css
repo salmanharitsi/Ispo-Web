@@ -520,3 +520,75 @@ button,
 .leaflet-draw-toolbar a {
     background-color: #ffffff;
 }
+
+/* ===== Pemetaan Kebun – Label Jarak & Bearing ===== */
+
+.distance-label {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #16a34a;             /* hijau */
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #15803d;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  
+  .distance-label .distance {
+    display: block;
+    font-size: 13px;
+    color: #15803d;
+  }
+  
+  .distance-label .bearing {
+    display: block;
+    font-size: 10px;
+    color: #059669;
+    margin-top: 2px;
+  }
+  
+  /* ===== Pemetaan Kebun – Marker Pin (dipakai di semua halaman peta) ===== */
+  
+  .kebun-marker-pin {
+    background: white;
+    border-radius: 50% 50% 50% 0;
+    border: 3px solid;
+    position: relative;
+    transform: rotate(-45deg);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .kebun-marker-pin i {
+    transform: rotate(45deg);
+    font-size: 14px;
+  }
+  
+  /* Kebun milik user saat ini */
+  .kebun-marker-pin--current,
+  .kebun-marker-pin--mine {
+    border-color: #16a34a;
+    background: #bbf7d0;
+  }
+  
+  .kebun-marker-pin--current i,
+  .kebun-marker-pin--mine i {
+    color: #16a34a;
+  }
+  
+  /* Kebun pekebun lain */
+  .kebun-marker-pin--other {
+    border-color: #2563eb;
+    background: #bfdbfe;
+  }
+  
+  .kebun-marker-pin--other i {
+    color: #2563eb;
+  }
+  

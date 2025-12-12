@@ -18,11 +18,14 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('no_hp')->nullable();
-            $table->string('nik', 20)->nullable();
-            $table->string('npwp', 20)->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('pendidikan_terakhir')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('desa')->nullable();
+            $table->string('rt_rw')->nullable();
             $table->string('kecamatan')->nullable();
+            $table->string('kabupaten')->nullable();
+            $table->string('kota')->nullable();
             $table->string('foto_profil')->nullable();
             $table->integer('jumlah_anggota_keluarga')->nullable();
             $table->string('jenis_kelamin')->nullable();

@@ -35,8 +35,8 @@
             <div class="flex items-center justify-between px-6 py-[18px] border-b border-gray-100">
                 <div class="flex items-center space-x-3" id="logo-section">
                     <div
-                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg shrink-0">
-                        <i class="fas fa-seedling text-white text-lg shrink-0"></i>
+                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shrink-0">
+                        <img src="{{ asset('images/ppsks-logo.jpg') }}" class="h-10 w-10" alt="PPSKS logo">
                     </div>
                     <div class="sidebar-text">
                         <h1 class="text-xl font-bold text-gray-800">SPK ISPO</h1>

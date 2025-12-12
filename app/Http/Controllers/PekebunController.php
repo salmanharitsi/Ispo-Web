@@ -39,7 +39,7 @@ class PekebunController extends Controller
         $user = Auth::user();
 
         // Check Step 1: Data Diri
-        $dataRequiredFields = ['name', 'no_hp', 'nik', 'npwp', 'alamat', 'desa', 'kecamatan', 'jumlah_anggota_keluarga', 'jenis_kelamin'];
+        $dataRequiredFields = ['name', 'no_hp','tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'alamat', 'rt_rw', 'kecamatan', 'kabupaten', 'kota', 'foto_profil', 'jumlah_anggota_keluarga', 'jenis_kelamin'];
         $isDataDiriComplete = true;
 
         foreach ($dataRequiredFields as $field) {
@@ -61,12 +61,16 @@ class PekebunController extends Controller
         $hasKuisioner = $user->kebun()->whereHas('kuisioner')->exists();
         $jumlahKuisionerSelesai = $user->kebun()->whereHas('kuisioner')->count();
 
-        // Check Step 5: Finalisasi (minimal 1 kebun yang sudah difinalisasi)
+        // Check Step 5: Kuisioner (minimal 1 kebun yang sudah ada kuisionernya)
+        $hasPernyataanStdb = $user->kebun()->where('pernyataan_stdb', true)->exists();
+        $jumlahPernyataanStdb = $user->kebun()->where('pernyataan_stdb', true)->count();
+
+        // Check Step 6: Finalisasi (minimal 1 kebun yang sudah difinalisasi)
         $hasFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->exists();
         $jumlahKebunFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->count();
 
         // Check if all steps complete
-        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasFinalisasi;
+        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasPernyataanStdb && $hasFinalisasi;
 
         return view('pekebun.dashboard', compact(
             'user',
@@ -77,6 +81,8 @@ class PekebunController extends Controller
             'jumlahKebunTerpetakan',
             'hasKuisioner',
             'jumlahKuisionerSelesai',
+            'hasPernyataanStdb',
+            'jumlahPernyataanStdb',
             'hasFinalisasi',
             'jumlahKebunFinalisasi',
             'allStepsComplete'
@@ -92,7 +98,7 @@ class PekebunController extends Controller
     {
         $user = Auth::user();
         
-        $dataRequiredFields = ['name', 'no_hp', 'nik', 'npwp', 'alamat', 'desa', 'kecamatan', 'jumlah_anggota_keluarga', 'jenis_kelamin'];
+        $dataRequiredFields = ['name', 'no_hp','tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'alamat', 'rt_rw', 'kecamatan', 'kabupaten', 'kota', 'foto_profil', 'jumlah_anggota_keluarga', 'jenis_kelamin'];
         $isDataDiriComplete = true;
 
         foreach ($dataRequiredFields as $field) {
@@ -102,17 +108,26 @@ class PekebunController extends Controller
             }
         }
 
+        $needSTDB = $user->kebun()
+            ->where('polygon', '!=', null)
+            ->whereHas('kuisioner')
+            ->where('pernyataan_stdb','=', false)
+            ->count();
+
         $needFinalisasi = $user->kebun()
             ->where('status_finalisasi', '=','belum')
             ->where('polygon', '!=', null)
+            ->where('pernyataan_stdb','=', true)
             ->whereHas('kuisioner')
             ->count();
 
         return view('pekebun.daftar-kebun', [
             'isDataDiriComplete' => $isDataDiriComplete,
             'needFinalisasi' => $needFinalisasi,
+            'needSTDB'=> $needSTDB,
         ]);
     }
+
 
     public function get_detail_data_kebun($id)
     {
@@ -200,8 +215,12 @@ class PekebunController extends Controller
     {
         $request->validate([
             'geometry'     => 'required|string',
+            'polygon_sides' => 'required|json',
             'centroid_lat' => 'required|numeric',
             'centroid_lng' => 'required|numeric',
+            'area_m2' => 'required|numeric',
+            'area_hectare' => 'required|numeric',
+            'perimeter_m' => 'required|numeric',
         ]);
 
         $kebun = Kebun::where('id', $id)
@@ -215,6 +234,14 @@ class PekebunController extends Controller
         }
 
         $kebun->polygon   = $geometry;
+        $kebun->polygon_sides = json_decode($request->polygon_sides, true);
+        $kebun->centroid = [
+            'lat' => round($request->centroid_lat, 8),
+            'lng' => round($request->centroid_lng, 8),
+        ];
+        $kebun->area_m2 = $request->area_m2;
+        $kebun->area_hectare = $request->area_hectare;
+        $kebun->perimeter_m = $request->perimeter_m;
         $kebun->latitude  = round($request->centroid_lat, 8);
         $kebun->longitude = round($request->centroid_lng, 8);
         $kebun->save();
@@ -245,10 +272,10 @@ class PekebunController extends Controller
         }
 
         // Optional: pastikan data lengkap dulu
-        if (!$kebun->polygon || !$kebun->kuisioner) {
+        if (!$kebun->polygon || !$kebun->kuisioner || $kebun->pernyataan_stdb == false) {
             return redirect(url('/pekebun/daftar-kebun'))->with([
                 'error' => [
-                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan dan kuisioner sebelum finalisasi.",
+                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan, kuisioner, dan pernyataan STDB sebelum finalisasi.",
                 ]
             ]);
         }
@@ -260,6 +287,42 @@ class PekebunController extends Controller
         return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
             'success' => [
                 "title" => "Data kebun berhasil difinalisasi. Data tidak dapat diubah lagi.",
+            ]
+        ]);
+    }
+
+    public function post_pernyataanStdb(string $id)
+    {
+        $user = Auth::user();
+
+        $kebun = Kebun::where('id', $id)
+            ->where('user_id', $user->id)
+            ->firstOrFail();
+
+        // Optional: cegah finalisasi ulang
+        if ($kebun->pernyataan_stdb === true) {
+            return redirect(url('/pekebun/daftar-kebun'))->with([
+                'error' => [
+                    "title" => "Data kebun ini sudah memiliki pernyataan STDB.",
+                ]
+            ]);
+        }
+
+        // Optional: pastikan data lengkap dulu
+        if (!$kebun->polygon || !$kebun->kuisioner) {
+            return redirect(url('/pekebun/daftar-kebun'))->with([
+                'error' => [
+                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan dan kuisioner sebelum finalisasi.",
+                ]
+            ]);
+        }
+
+        $kebun->pernyataan_stdb = true;
+        $kebun->save();
+
+        return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
+            'success' => [
+                "title" => "Berhasil mengisi pernyataan STDB untuk kebun ini.",
             ]
         ]);
     }

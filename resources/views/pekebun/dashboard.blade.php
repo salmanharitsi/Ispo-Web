@@ -262,7 +262,61 @@
           </div>
         </div>
 
-        <!-- Step 5: Finalisasi Data -->
+        <!-- Step 5: Pernyataan STDB -->
+        <div class="flex items-start mb-6 relative">
+          <div class="shrink-0 relative z-10">
+            @if($hasPernyataanStdb)
+              <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+            @else
+              <div class="w-12 h-12 {{ $hasKuisioner ? 'bg-amber-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center shadow-lg">
+                <span class="text-white font-bold text-lg">5</span>
+              </div>
+            @endif
+          </div>
+          
+          <div class="ml-6 flex-1">
+            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
+              <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-1">Isi Pernyataan STDB</h3>
+                <p class="text-gray-600 text-sm">Lengkapi pernyataan stdb untuk setiap kebun</p>
+              </div>
+              @if($hasPernyataanStdb)
+                <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                  <svg class="w-4 h-4 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                  </svg>
+                  {{ $jumlahPernyataanStdb }} Selesai
+                </span>
+              @endif
+            </div>
+            
+            @if(!$hasPernyataanStdb && $hasKuisioner)
+              <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <div class="flex items-start">
+                  <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                  </svg>
+                  <div class="flex-1">
+                    <p class="text-amber-800 font-medium mb-2">Pernyataan STDB belum diisi!</p>
+                    <p class="text-amber-700 text-sm mb-3">Isi pernyataan STDB minimal untuk 1 kebun yang sudah lengkap datanya (data kebun, pemetaan, dan kuisioner) agar dapat melanjutkan ke tahap finalisasi.</p>
+                    <a href="{{ url('/pekebun/daftar-kebun') }}" class="inline-flex items-center bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition text-sm font-semibold">
+                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                      </svg>
+                      Isi Pernyataan STDB
+                    </a>
+                  </div>
+                </div>
+              </div>
+            @endif
+          </div>
+        </div>
+
+        <!-- Step 6: Finalisasi Data -->
         <div class="flex items-start relative">
           <div class="shrink-0 relative z-10">
             @if($hasFinalisasi)
@@ -272,8 +326,8 @@
                 </svg>
               </div>
             @else
-              <div class="w-12 h-12 {{ $hasKuisioner ? 'bg-amber-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center shadow-lg">
-                <span class="text-white font-bold text-lg">5</span>
+              <div class="w-12 h-12 {{ $hasPernyataanStdb ? 'bg-amber-500' : 'bg-gray-300' }} rounded-full flex items-center justify-center shadow-lg">
+                <span class="text-white font-bold text-lg">6</span>
               </div>
             @endif
           </div>
@@ -294,7 +348,7 @@
               @endif
             </div>
             
-            @if(!$hasFinalisasi && $hasKuisioner)
+            @if(!$hasFinalisasi && $hasPernyataanStdb)
               <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-4">
                 <div class="flex items-start">
                   <svg class="w-5 h-5 text-amber-600 mr-3 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -302,7 +356,7 @@
                   </svg>
                   <div class="flex-1">
                     <p class="text-amber-800 font-medium mb-2">Data kebun belum difinalisasi!</p>
-                    <p class="text-amber-700 text-sm mb-3">Finalisasi minimal 1 kebun yang sudah lengkap datanya (data kebun, pemetaan, dan kuisioner) agar dapat dinilai oleh admin untuk sertifikasi ISPO.</p>
+                    <p class="text-amber-700 text-sm mb-3">Finalisasi minimal 1 kebun yang sudah lengkap datanya (data kebun, pemetaan, kuisioner, dan pernyataan STDB) agar dapat dinilai oleh admin untuk sertifikasi ISPO.</p>
                     <a href="{{ route('pekebun.daftar-kebun') }}" class="inline-flex items-center bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition text-sm font-semibold">
                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>

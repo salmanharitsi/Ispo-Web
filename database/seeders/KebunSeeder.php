@@ -14,7 +14,7 @@ class KebunSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::first();
+        $user = User::where('role', 'pekebun')->first();
 
         if (! $user) {
             throw new \Exception('Tidak ada user untuk dihubungkan dengan kebun. Jalankan UserSeeder dulu.');
@@ -25,27 +25,39 @@ class KebunSeeder extends Seeder
                 'user_id' => $user->id,
                 'nama_kebun' => 'Kebun sawit megalodon',
                 'lokasi_kebun' => 'Jl taman karya no 45',
-                'luas_lahan' => 4,
                 'desa' => 'sukamaju',
                 'kecamatan' => 'sukaramai',
+                'luas_lahan' => 4,
                 'tahun_tanam' => 2021,
-                'tahun_tanam_pertama' => 2020,
-                'kondisi_tanah' => 'gambut',
-                'umur_tanaman' => 20,
                 'jumlah_pohon' => 300,
+                'jenis_tanah' => 'gambut',
+                'asal_lahan' => 'bekas hutan',
+                'status_lahan' => 'milik sendiri',
+                'dokumen_kepemilikan_lahan' => 'surat hak milik',
+                'jenis_bibit' => 'bersertifikat',
+                'frekuensi_panen' => 14,
+                'harga_jual_tbs_terakhir' => 2500,
+                'pendapatan_bersih' => 3000000,
+                'kepada_siapa_hasil_panen_dijual' => 'RAM'
             ],
             [
                 'user_id' => $user->id,
                 'nama_kebun' => 'Kebun sawit ancient',
                 'lokasi_kebun' => 'Jl taman karya no 47',
-                'luas_lahan' => 3.5,
                 'desa' => 'sukamaju',
                 'kecamatan' => 'sukaramai',
+                'luas_lahan' => 3.5,
                 'tahun_tanam' => 2024,
-                'tahun_tanam_pertama' => 2022,
-                'kondisi_tanah' => 'gambut',
-                'umur_tanaman' => 17,
                 'jumlah_pohon' => 200,
+                'jenis_tanah' => 'gambut',
+                'asal_lahan' => 'bekas hutan',
+                'status_lahan' => 'milik sendiri',
+                'dokumen_kepemilikan_lahan' => 'surat hak milik',
+                'jenis_bibit' => 'bersertifikat',
+                'frekuensi_panen' => 10,
+                'harga_jual_tbs_terakhir' => 2700,
+                'pendapatan_bersih' => 3500000,
+                'kepada_siapa_hasil_panen_dijual' => 'PKS langsung'
             ],
         ];
 
@@ -54,14 +66,20 @@ class KebunSeeder extends Seeder
                 'user_id' => $value['user_id'],
                 'nama_kebun'=> $value['nama_kebun'],
                 'lokasi_kebun'=> $value['lokasi_kebun'],
-                'luas_lahan'=> $value['luas_lahan'],
                 'desa'=> $value['desa'],
                 'kecamatan'=> $value['kecamatan'],
+                'luas_lahan'=> $value['luas_lahan'],
                 'tahun_tanam'=> $value['tahun_tanam'],
-                'tahun_tanam_pertama'=> $value['tahun_tanam_pertama'],
-                'kondisi_tanah'=> $value['kondisi_tanah'],
-                'umur_tanaman'=> $value['umur_tanaman'],
                 'jumlah_pohon'=> $value['jumlah_pohon'],
+                'jenis_tanah'=> $value['jenis_tanah'],
+                'asal_lahan'=> $value['asal_lahan'],
+                'status_lahan'=> $value['status_lahan'],
+                'dokumen_kepemilikan_lahan'=> $value['dokumen_kepemilikan_lahan'],
+                'jenis_bibit'=> $value['jenis_bibit'],
+                'frekuensi_panen'=> $value['frekuensi_panen'],
+                'harga_jual_tbs_terakhir'=> $value['harga_jual_tbs_terakhir'],
+                'pendapatan_bersih'=> $value['pendapatan_bersih'],
+                'kepada_siapa_hasil_panen_dijual'=> $value['kepada_siapa_hasil_panen_dijual'],
             ]);
         }
     }

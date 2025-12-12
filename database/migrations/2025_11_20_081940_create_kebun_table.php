@@ -21,16 +21,31 @@ return new class extends Migration
             $table->string('desa')->nullable();
             $table->string('kecamatan')->nullable();
             $table->integer('tahun_tanam')->nullable();
-            $table->integer('tahun_tanam_pertama')->nullable();
-            $table->string('kondisi_tanah')->nullable();
-            $table->integer('umur_tanaman')->nullable();
             $table->integer('jumlah_pohon')->nullable();
-            $table->json('polygon')->nullable();
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 11, 8)->nullable();
             $table->enum('status_ispo', ['belum', 'proses', 'sudah'])->default('belum');
             $table->enum('status_finalisasi', ['belum', 'final'])->default('belum');
             $table->text('catatan_pengecekan')->nullable();
+
+            $table->json('polygon')->nullable();
+            $table->json('polygon_sides')->nullable();
+            $table->json('centroid')->nullable();
+            $table->decimal('area_m2', 12, 2)->nullable();
+            $table->decimal('area_hectare', 10, 4)->nullable();
+            $table->decimal('perimeter_m', 10, 2)->nullable();
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
+
+            $table->string('jenis_tanah')->nullable(); 
+            $table->string('asal_lahan')->nullable(); 
+            $table->string('status_lahan')->nullable(); 
+            $table->string('dokumen_kepemilikan_lahan')->nullable(); 
+            $table->string('jenis_bibit')->nullable(); 
+            $table->integer('frekuensi_panen')->nullable(); 
+            $table->string('kepada_siapa_hasil_panen_dijual')->nullable(); 
+            $table->integer('harga_jual_tbs_terakhir')->nullable(); 
+            $table->integer('pendapatan_bersih')->nullable(); 
+            $table->boolean('pernyataan_stdb')->nullable()->default(false);
+
             $table->timestamps();
         });
     }

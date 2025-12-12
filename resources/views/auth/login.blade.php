@@ -41,10 +41,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <a href="/" class="flex items-center">
-          <svg class="h-10 w-10 text-green-700" viewBox="0 0 48 48" fill="none" stroke="currentColor">
-            <path d="M24 40 L24 20 M24 20 L16 12 M24 20 L32 12 M18 28 L12 22 M30 28 L36 22" stroke-width="2.5" stroke-linecap="round" />
-            <circle cx="24" cy="40" r="3" fill="currentColor" />
-          </svg>
+          <img src="{{ asset('images/ppsks-logo.jpg') }}" class="h-10 w-10" alt="PPSKS logo">
           <div class="ml-3">
             <span class="text-xl font-bold text-gray-800">ISPO Rokan Hulu</span>
             <p class="text-xs text-gray-600">Indonesian Sustainable Palm Oil</p>

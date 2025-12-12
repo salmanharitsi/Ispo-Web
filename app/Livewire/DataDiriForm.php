@@ -13,68 +13,97 @@ class DataDiriForm extends Component
 
     public $foto_profil;
     public $existing_foto;
+
     public $name;
     public $email;
     public $no_hp;
-    public $nik;
-    public $npwp;
+
+    public $tempat_lahir;
+    public $tanggal_lahir;
+    public $pendidikan_terakhir;
+
     public $alamat;
-    public $desa;
+    public $rt;
+    public $rw;
     public $kecamatan;
+    public $kabupaten;
+    public $kota;
+
     public $jumlah_anggota_keluarga;
     public $jenis_kelamin;
 
     protected function rules()
     {
         return [
-            'foto_profil' => 'required|image|max:2048',
-            'name' => 'required|string|min:3|max:255',
-            'no_hp' => 'required|string|max:15',
-            'nik' => 'required|string|size:16',
-            'npwp' => 'required|string|max:20',
-            'alamat' => 'required|string',
-            'desa' => 'required|string|max:255',
-            'kecamatan' => 'required|string|max:255',
-            'jumlah_anggota_keluarga' => 'required|integer|min:1',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'foto_profil'               => 'required|image|max:2048',
+            'name'                      => 'required|string|min:3|max:255',
+            'no_hp'                     => 'required|string|max:15',
+            'tempat_lahir'              => 'required|string|max:255',
+            'tanggal_lahir'             => 'required|date',
+            'pendidikan_terakhir'       => 'required|string|max:50',
+            'alamat'                    => 'required|string',
+            'rt'                        => 'required|string|max:5',
+            'rw'                        => 'required|string|max:5',
+            'kecamatan'                 => 'required|string|max:255',
+            'kabupaten'                 => 'required|string|max:255',
+            'kota'                      => 'required|string|max:255',
+            'jumlah_anggota_keluarga'   => 'required|integer|min:1',
+            'jenis_kelamin'             => 'required|in:Laki-laki,Perempuan',
         ];
     }
 
     protected $messages = [
-        'foto_profil.image' => 'File harus berupa gambar',
-        'foto_profil.max' => 'Ukuran foto maksimal 2MB',
-        'name.required' => 'Nama lengkap wajib diisi',
-        'fota_profil.required' => 'Foto profil wajib diunggah',
-        'no_hp.required' => 'Nomor HP wajib diisi',
-        'nik.required' => 'NIK wajib diisi',
-        'npwp.required' => 'NPWP wajib diisi',
-        'alamat.required' => 'Alamat wajib diisi',
-        'desa.required' => 'Desa wajib diisi',
-        'kecamatan.required' => 'Kecamatan wajib diisi',
-        'jumlah_anggota_keluarga.required' => 'Jumlah anggota keluarga wajib diisi',
-        'jenis_kelamin' => 'Jenis kelamin wajib diisi',
-        'name.min' => 'Nama lengkap minimal 3 karakter',
-        'no_hp.max' => 'Nomor HP maksimal 15 karakter',
-        'nik.size' => 'NIK harus 16 digit',
-        'npwp.max' => 'NPWP maksimal 20 karakter',
-        'jumlah_anggota_keluarga.min' => 'Jumlah anggota keluarga minimal 1',
-        'jenis_kelamin.in' => 'Pilih jenis kelamin yang valid',
+        'foto_profil.image'                  => 'File harus berupa gambar.',
+        'foto_profil.max'                    => 'Ukuran foto maksimal 2MB.',
+        'foto_profil.required'               => 'Foto profil wajib diisi',
+        'name.required'                      => 'Nama lengkap wajib diisi.',
+        'name.min'                           => 'Nama lengkap minimal 3 karakter.',
+        'no_hp.required'                     => 'Nomor HP wajib diisi.',
+        'no_hp.max'                          => 'Nomor HP maksimal 15 karakter.',
+        'tempat_lahir.required'              => 'Tempat lahir wajib diisi',
+        'tanggal_lahir.required'             => 'Tanggal lahir wajib diisi',
+        'pendidikan_terakhir.required'       => 'Pendidikan terakhir wajib diisi',
+        'rt.required'                        => 'RT wajib diisi',
+        'rw.required'                        => 'RW wajib diisi',
+        'alamat.required'                    => 'Alamat wajib diisi.',
+        'kecamatan.required'                 => 'Kecamatan wajib diisi.',
+        'kabupaten.required'                 => 'Kabupaten wajib diisi.',
+        'kota.required'                      => 'Kota wajib diisi.',
+        'jumlah_anggota_keluarga.required'   => 'Jumlah anggota keluarga wajib diisi.',
+        'jumlah_anggota_keluarga.min'        => 'Jumlah anggota keluarga minimal 1.',
+        'jenis_kelamin.required'             => 'Jenis kelamin wajib diisi.',
+        'jenis_kelamin.in'                   => 'Pilih jenis kelamin yang valid.',
     ];
 
     public function mount()
     {
         $user = Auth::user();
-        $this->existing_foto = $user->foto_profil;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->no_hp = $user->no_hp;
-        $this->nik = $user->nik;
-        $this->npwp = $user->npwp;
-        $this->alamat = $user->alamat;
-        $this->desa = $user->desa;
-        $this->kecamatan = $user->kecamatan;
-        $this->jumlah_anggota_keluarga = $user->jumlah_anggota_keluarga;
-        $this->jenis_kelamin = $user->jenis_kelamin;
+
+        $this->existing_foto             = $user->foto_profil;
+        $this->name                      = $user->name;
+        $this->email                     = $user->email;
+        $this->no_hp                     = $user->no_hp;
+
+        $this->tempat_lahir              = $user->tempat_lahir;
+        $this->tanggal_lahir             = $user->tanggal_lahir;
+        $this->pendidikan_terakhir       = $user->pendidikan_terakhir;
+
+        $this->alamat                    = $user->alamat;
+        $this->kecamatan                 = $user->kecamatan;
+        $this->kabupaten                 = $user->kabupaten;
+        $this->kota                      = $user->kota;
+
+        $this->jumlah_anggota_keluarga   = $user->jumlah_anggota_keluarga;
+        $this->jenis_kelamin             = $user->jenis_kelamin;
+
+        // Parsing rt_rw => rt, rw
+        $this->rt = null;
+        $this->rw = null;
+        if ($user->rt_rw) {
+            [$rt, $rw] = array_pad(explode('/', $user->rt_rw), 2, '');
+            $this->rt = $rt;
+            $this->rw = $rw;
+        }
     }
 
     public function updated($propertyName)
@@ -93,36 +122,59 @@ class DataDiriForm extends Component
             $hasChanges = true;
         }
 
-        if (!$hasChanges) {
+        if (! $hasChanges) {
+            $currentRtRw = $user->rt_rw ?? null;
+            $newRtRw = null;
+            if (trim((string) $this->rt) !== '' || trim((string) $this->rw) !== '') {
+                $newRtRw = trim((string) $this->rt) . '/' . trim((string) $this->rw);
+            }
+
             $hasChanges = $this->name !== $user->name ||
                 $this->no_hp !== $user->no_hp ||
-                $this->nik !== $user->nik ||
-                $this->npwp !== $user->npwp ||
+                $this->tempat_lahir !== $user->tempat_lahir ||
+                $this->tanggal_lahir !== $user->tanggal_lahir ||
+                $this->pendidikan_terakhir !== $user->pendidikan_terakhir ||
                 $this->alamat !== $user->alamat ||
-                $this->desa !== $user->desa ||
+                $newRtRw !== $currentRtRw ||
                 $this->kecamatan !== $user->kecamatan ||
-                $this->jumlah_anggota_keluarga != $user->jumlah_anggota_keluarga ||
+                $this->kabupaten !== $user->kabupaten ||
+                $this->kota !== $user->kota ||
+                (int) $this->jumlah_anggota_keluarga !== (int) $user->jumlah_anggota_keluarga ||
                 $this->jenis_kelamin !== $user->jenis_kelamin;
         }
 
-        if (!$hasChanges) {
+        if (! $hasChanges) {
             return redirect(url('/pekebun/data-diri'))->with([
                 'warning' => [
-                    'title' => 'Tidak ada perubahan data'
-                ]
+                    'title' => 'Tidak ada perubahan data',
+                ],
             ]);
         }
 
+        // Build rt_rw string
+        $rtRw = null;
+        if (trim((string) $this->rt) !== '' || trim((string) $this->rw) !== '') {
+            $rt = trim((string) $this->rt);
+            $rw = trim((string) $this->rw);
+            // Kalau mau auto padding 3 digit:
+            // $rt = str_pad(preg_replace('/\D/', '', $rt), 3, '0', STR_PAD_LEFT);
+            // $rw = str_pad(preg_replace('/\D/', '', $rw), 3, '0', STR_PAD_LEFT);
+            $rtRw = $rt . '/' . $rw;
+        }
+
         $data = [
-            'name' => $this->name,
-            'no_hp' => $this->no_hp,
-            'nik' => $this->nik,
-            'npwp' => $this->npwp,
-            'alamat' => $this->alamat,
-            'desa' => $this->desa,
-            'kecamatan' => $this->kecamatan,
-            'jumlah_anggota_keluarga' => $this->jumlah_anggota_keluarga,
-            'jenis_kelamin' => $this->jenis_kelamin,
+            'name'                      => $this->name,
+            'no_hp'                     => $this->no_hp,
+            'tempat_lahir'              => $this->tempat_lahir,
+            'tanggal_lahir'             => $this->tanggal_lahir,
+            'pendidikan_terakhir'       => $this->pendidikan_terakhir,
+            'alamat'                    => $this->alamat,
+            'rt_rw'                     => $rtRw,
+            'kecamatan'                 => $this->kecamatan,
+            'kabupaten'                 => $this->kabupaten,
+            'kota'                      => $this->kota,
+            'jumlah_anggota_keluarga'   => $this->jumlah_anggota_keluarga,
+            'jenis_kelamin'             => $this->jenis_kelamin,
         ];
 
         if ($this->foto_profil) {
@@ -138,8 +190,8 @@ class DataDiriForm extends Component
 
         return redirect(url('/pekebun/data-diri'))->with([
             'success' => [
-                'title' => 'Data diri berhasil diperbarui!'
-            ]
+                'title' => 'Data diri berhasil diperbarui!',
+            ],
         ]);
     }
 
@@ -155,8 +207,8 @@ class DataDiriForm extends Component
 
             return redirect(url('/pekebun/data-diri'))->with([
                 'success' => [
-                    'title' => 'Foto profil berhasil dihapus!'
-                ]
+                    'title' => 'Foto profil berhasil dihapus!',
+                ],
             ]);
         }
     }

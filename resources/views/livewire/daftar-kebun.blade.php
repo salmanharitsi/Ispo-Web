@@ -117,6 +117,24 @@
               @endif
             </div>
 
+            <!-- Status Kuisioner -->
+            <div class="flex items-center justify-between py-2 border-b border-gray-100">
+              <span class="text-gray-600 text-sm flex items-center">
+                <i class="fa-solid fa-sign-hanging w-5 h-5 mr-2 text-green-600"></i>
+                Pernyataan STDB
+              </span>
+              @if($kebun->pernyataan_stdb == true)
+                <span class="text-green-600 font-semibold text-sm flex items-center">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  Sudah
+                </span>
+              @else
+                <span class="text-gray-400 font-semibold text-sm">Belum</span>
+              @endif
+            </div>
+
             <!-- Status ISPO -->
             <div class="flex items-center justify-between py-2">
               <span class="text-gray-600 text-sm flex items-center">
@@ -184,19 +202,19 @@
     @endif
   @endif
 
-  <!-- Modal Tambah Kebun -->
+    <!-- Modal Tambah Kebun -->
   @if($showModal)
   <div class="fixed inset-0 z-50 flex items-center justify-center p-4" wire:click.self="closeModal">
     <div class="absolute inset-0 bg-black/50 z-0"></div>
     <div class="relative bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
       <!-- Modal Header -->
-      <div class="sticky top-0 bg-linear-to-r from-green-600 to-green-700 text-white p-6 rounded-t-2xl">
+      <div class="sticky top-0 bg-linear-to-r from-green-600 to-green-700 text-white p-6 rounded-t-2xl z-10">
         <div class="flex items-center justify-between">
           <div>
             <h3 class="text-2xl font-bold">Tambah Data Kebun</h3>
             <p class="text-green-100 text-sm mt-1">Lengkapi informasi kebun kelapa sawit Anda</p>
           </div>
-          <button wire:click="closeModal" class="text-white hover:bg-green-800 p-2 rounded-lg transition">
+          <button wire:click="closeModal" type="button" class="text-white hover:bg-green-800 p-2 rounded-lg transition">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -207,39 +225,40 @@
       <!-- Modal Body -->
       <form wire:submit.prevent="save" class="p-6">
         <div class="space-y-5">
-          <!-- Nama Kebun -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">
-              Nama Kebun <span class="text-red-500">*</span>
-            </label>
-            <input 
-              type="text" 
-              wire:model="nama_kebun"
-              class="w-full px-4 py-3 border @error('nama_kebun') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-              placeholder="Contoh: Kebun Sawit Makmur"
-            >
-            @error('nama_kebun')
-              <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <!-- Lokasi Kebun -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">
-              Lokasi Kebun <span class="text-red-500">*</span>
-            </label>
-            <input 
-              type="text" 
-              wire:model="lokasi_kebun"
-              class="w-full px-4 py-3 border @error('lokasi_kebun') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-              placeholder="Contoh: Jl. Raya Desa Sejahtera"
-            >
-            @error('lokasi_kebun')
-              <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-          </div>
-
+          {{-- Identitas Kebun --}}
           <div class="grid md:grid-cols-2 gap-5">
+            <!-- Nama Kebun -->
+            <div class="col-span-2">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Nama Kebun <span class="text-red-500">*</span>
+              </label>
+              <input 
+                type="text" 
+                wire:model="nama_kebun"
+                class="w-full px-4 py-3 border @error('nama_kebun') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="Contoh: Kebun Sawit Makmur"
+              >
+              @error('nama_kebun')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Lokasi Kebun -->
+            <div class="col-span-2">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Lokasi Kebun <span class="text-red-500">*</span>
+              </label>
+              <input 
+                type="text" 
+                wire:model="lokasi_kebun"
+                class="w-full px-4 py-3 border @error('lokasi_kebun') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="Contoh: Jl. Raya Desa Sejahtera"
+              >
+              @error('lokasi_kebun')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
             <!-- Desa -->
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">Desa/Kelurahan <span class="text-red-500">*</span></label>
@@ -269,27 +288,30 @@
             </div>
           </div>
 
-          <!-- Luas Lahan -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">
-              Luas Lahan (Hektar) <span class="text-red-500">*</span>
-            </label>
-            <input 
-              type="number" 
-              step="0.01"
-              wire:model="luas_lahan"
-              class="w-full px-4 py-3 border @error('luas_lahan') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-              placeholder="Contoh: 5.50"
-            >
-            @error('luas_lahan')
-              <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-          </div>
+          {{-- Luas & Tanaman --}}
+          <div class="grid md:grid-cols-3 gap-5">
+            <!-- Luas Lahan -->
+            <div class="md:col-span-1">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Luas Lahan (Hektar) <span class="text-red-500">*</span>
+              </label>
+              <input 
+                type="number" 
+                step="0.01"
+                wire:model="luas_lahan"
+                class="w-full px-4 py-3 border @error('luas_lahan') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="Contoh: 5.50"
+              >
+              @error('luas_lahan')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
 
-          <div class="grid md:grid-cols-2 gap-5">
             <!-- Tahun Tanam -->
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Tanam <span class="text-red-500">*</span></label>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Tahun Tanam <span class="text-red-500">*</span>
+              </label>
               <input 
                 type="number" 
                 wire:model="tahun_tanam"
@@ -301,53 +323,11 @@
               @enderror
             </div>
 
-            <!-- Tahun Tanam Pertama -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Tahun Tanam Pertama <span class="text-red-500">*</span></label>
-              <input 
-                type="number" 
-                wire:model="tahun_tanam_pertama"
-                class="w-full px-4 py-3 border @error('tahun_tanam_pertama') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-                placeholder="{{ date('Y') }}"
-              >
-              @error('tahun_tanam_pertama')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-              @enderror
-            </div>
-          </div>
-
-          <!-- Kondisi Tanah -->
-          <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Kondisi Tanah <span class="text-red-500">*</span></label>
-            <input 
-              type="text" 
-              wire:model="kondisi_tanah"
-              class="w-full px-4 py-3 border @error('kondisi_tanah') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-              placeholder="Contoh: Subur, berdrainase baik"
-            >
-            @error('kondisi_tanah')
-              <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <div class="grid md:grid-cols-2 gap-5">
-            <!-- Umur Tanaman -->
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Umur Tanaman (Tahun) <span class="text-red-500">*</span></label>
-              <input 
-                type="number" 
-                wire:model="umur_tanaman"
-                class="w-full px-4 py-3 border @error('umur_tanaman') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-                placeholder="Contoh: 8"
-              >
-              @error('umur_tanaman')
-                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-              @enderror
-            </div>
-
             <!-- Jumlah Pohon -->
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Pohon <span class="text-red-500">*</span></label>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Jumlah Pohon <span class="text-red-500">*</span>
+              </label>
               <input 
                 type="number" 
                 wire:model="jumlah_pohon"
@@ -355,6 +335,173 @@
                 placeholder="Contoh: 650"
               >
               @error('jumlah_pohon')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+          </div>
+
+          {{-- Info Lahan & Kepemilikan --}}
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- Jenis Tanah -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Jenis Tanah <span class="text-red-500">*</span>
+              </label>
+              <select
+                wire:model="jenis_tanah"
+                class="w-full px-4 py-3 border @error('jenis_tanah') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+              >
+                <option value="">Pilih jenis tanah</option>
+                <option value="mineral">Mineral</option>
+                <option value="gambut">Gambut</option>
+              </select>
+              @error('jenis_tanah')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Asal Lahan -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Asal Lahan <span class="text-red-500">*</span>
+              </label>
+              <select
+                wire:model="asal_lahan"
+                class="w-full px-4 py-3 border @error('asal_lahan') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+              >
+                <option value="">Pilih asal lahan</option>
+                <option value="bekas hutan">Bekas hutan</option>
+                <option value="bekas karet">Bekas karet</option>
+                <option value="ladang lama">Ladang lama</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+              @error('asal_lahan')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Status Lahan -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Status Lahan <span class="text-red-500">*</span>
+              </label>
+              <select
+                wire:model="status_lahan"
+                class="w-full px-4 py-3 border @error('status_lahan') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+              >
+                <option value="">Pilih status lahan</option>
+                <option value="milik sendiri">Milik sendiri</option>
+                <option value="sewa">Sewa</option>
+                <option value="warisan">Warisan</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+              @error('status_lahan')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Dokumen Kepemilikan Lahan -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Dokumen Kepemilikan Lahan <span class="text-red-500">*</span>
+              </label>
+              <select
+                wire:model="dokumen_kepemilikan_lahan"
+                class="w-full px-4 py-3 border @error('dokumen_kepemilikan_lahan') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+              >
+                <option value="">Pilih dokumen</option>
+                <option value="surat hak milik">Surat hak milik</option>
+                <option value="surat keterangan tanah/surat jual beli">Surat keterangan tanah / surat jual beli</option>
+                <option value="tidak punya dokumen">Tidak punya dokumen</option>
+              </select>
+              @error('dokumen_kepemilikan_lahan')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+          </div>
+
+          {{-- Tanaman & Produksi --}}
+          <div class="grid md:grid-cols-2 gap-5">
+            <!-- Jenis Bibit -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Jenis Bibit <span class="text-red-500">*</span>
+              </label>
+              <select
+                wire:model="jenis_bibit"
+                class="w-full px-4 py-3 border @error('jenis_bibit') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+              >
+                <option value="">Pilih jenis bibit</option>
+                <option value="bersertifikat">Bersertifikat</option>
+                <option value="tidak bersertifikat">Tidak bersertifikat</option>
+              </select>
+              @error('jenis_bibit')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Frekuensi Panen -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Frekuensi Panen (hari) <span class="text-red-500">*</span>
+              </label>
+              <input 
+                type="integer" 
+                wire:model="frekuensi_panen"
+                class="w-full px-4 py-3 border @error('frekuensi_panen') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="Contoh: 14 hari"
+              >
+              @error('frekuensi_panen')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Harga Jual TBS Terakhir -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Harga Jual TBS Terakhir (Rp/kg) <span class="text-red-500">*</span>
+              </label>
+              <input 
+                type="number" 
+                wire:model="harga_jual_tbs_terakhir"
+                class="w-full px-4 py-3 border @error('harga_jual_tbs_terakhir') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="Contoh: 2300"
+              >
+              @error('harga_jual_tbs_terakhir')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Pendapatan Bersih -->
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Pendapatan Bersih per Bulan (Rp) <span class="text-red-500">*</span>
+              </label>
+              <input 
+                type="number" 
+                wire:model="pendapatan_bersih"
+                class="w-full px-4 py-3 border @error('pendapatan_bersih') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="Contoh: 3000000"
+              >
+              @error('pendapatan_bersih')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
+            </div>
+
+            <!-- Kepada Siapa Hasil Panen Dijual -->
+            <div class="md:col-span-2">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">
+                Kepada Siapa Hasil Panen Dijual <span class="text-red-500">*</span>
+              </label>
+              <select
+                wire:model="kepada_siapa_hasil_panen_dijual"
+                class="w-full px-4 py-3 border @error('kepada_siapa_hasil_panen_dijual') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+              >
+                <option value="">Pilih tujuan penjualan</option>
+                <option value="RAM">RAM</option>
+                <option value="PKS langsung">PKS langsung</option>
+              </select>
+              @error('kepada_siapa_hasil_panen_dijual')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
               @enderror
             </div>
@@ -391,4 +538,5 @@
     </div>
   </div>
   @endif
+
 </div>

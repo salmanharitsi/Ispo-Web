@@ -7,11 +7,28 @@
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                         <i class="fas fa-search text-lg text-gray-500"></i>
                     </div>
-                    <input wire:model.live="search" type="text" id="simple-search"
+                    <input
+                        wire:model.live="search"
+                        type="text"
+                        id="simple-search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2"
-                        placeholder="cari berdasarkan nama, email, nik, atau nomor hp" required="">
+                        placeholder="cari berdasarkan nama, email, no hp, alamat, atau kecamatan"
+                    >
                 </div>
             </form>
+        </div>
+
+        <div class="flex items-center space-x-2 text-xs text-slate-500">
+            <span>Menampilkan</span>
+            <select
+                wire:model.live="perPage"
+                class="border border-slate-300 rounded-lg text-xs px-2 py-1 bg-white focus:ring-green-500 focus:border-green-500"
+            >
+                <option value="10">10 baris</option>
+                <option value="25">25 baris</option>
+                <option value="50">50 baris</option>
+            </select>
+            <span>per halaman</span>
         </div>
     </div>
 
@@ -36,14 +53,42 @@
                             <div class="font-semibold text-slate-900">
                                 {{ $user->name }}
                             </div>
+
+                            {{-- TTL & Pendidikan --}}
                             <div class="text-xs text-slate-500 mt-0.5">
-                                NIK: <span class="font-mono">{{ $user->nik ?? '-' }}</span>
+                                @php
+                                    $ttl = [];
+                                    if ($user->tempat_lahir) {
+                                        $ttl[] = $user->tempat_lahir;
+                                    }
+                                    if ($user->tanggal_lahir) {
+                                        $ttl[] = \Carbon\Carbon::parse($user->tanggal_lahir)->isoFormat('D MMMM YYYY');
+                                    }
+                                @endphp
+                                @if(count($ttl))
+                                    TTL: <span class="font-medium">{{ implode(', ', $ttl) }}</span>
+                                @else
+                                    TTL: <span class="font-medium">-</span>
+                                @endif
                             </div>
-                            <div class="mt-1 inline-flex items-center gap-1 rounded-full bg-slate-50 px-2 py-0.5 text-[10px] text-slate-500 border border-slate-200">
-                                <i class="fa-regular fa-user"></i>
-                                <span>{{ $user->jenis_kelamin }}</span>
+
+                            <div class="mt-1 inline-flex flex-wrap items-center gap-1 rounded-full bg-slate-50 px-2 py-0.5 text-[10px] text-slate-500 border border-slate-200">
+                                <i class="fa-solid fa-user"></i>
+                                @if($user->jenis_kelamin)
+                                    <span>{{ $user->jenis_kelamin }}</span>
+                                @endif
+                            </div>
+
+                            <div class="mt-1 inline-flex flex-wrap items-center gap-1 rounded-full bg-slate-50 px-2 py-0.5 text-[10px] text-slate-500 border border-slate-200">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                                @if($user->pendidikan_terakhir)
+                                    <span>Pend. {{ $user->pendidikan_terakhir }}</span>
+                                @endif
+                            </div>
+                            
+                            <div class="mt-1 inline-flex flex-wrap items-center gap-1 rounded-full bg-slate-50 px-2 py-0.5 text-[10px] text-slate-500 border border-slate-200">
+                                <i class="fa-solid fa-people-group"></i>
                                 @if($user->jumlah_anggota_keluarga)
-                                    <span class="mx-1 text-slate-300">•</span>
                                     <span>{{ $user->jumlah_anggota_keluarga }} anggota keluarga</span>
                                 @endif
                             </div>
@@ -61,11 +106,6 @@
                                     <span>{{ $user->no_hp }}</span>
                                 </div>
                             @endif
-                            @if($user->npwp)
-                                <div class="text-xs text-slate-500 mt-1">
-                                    NPWP: <span class="font-mono">{{ $user->npwp }}</span>
-                                </div>
-                            @endif
                         </td>
 
                         {{-- Domisili --}}
@@ -73,13 +113,21 @@
                             <div class="text-sm text-slate-700">
                                 {{ $user->alamat ?? '-' }}
                             </div>
-                            <div class="text-xs text-slate-500 mt-1">
-                                @if($user->desa)
-                                    Desa {{ $user->desa }},
+                            <div class="text-xs text-slate-500 mt-1 space-y-0.5">
+                                @if($user->rt_rw)
+                                    <div>RT/RW {{ $user->rt_rw }}</div>
                                 @endif
-                                @if($user->kecamatan)
-                                    Kec. {{ $user->kecamatan }}
-                                @endif
+                                <div>
+                                    @if($user->kecamatan)
+                                        Kec. {{ $user->kecamatan }}
+                                    @endif
+                                    @if($user->kabupaten)
+                                        {{ $user->kecamatan ? ' · ' : '' }}Kab. {{ $user->kabupaten }}
+                                    @endif
+                                    @if($user->kota)
+                                        {{ ($user->kecamatan || $user->kabupaten) ? ' · ' : '' }}Kota {{ $user->kota }}
+                                    @endif
+                                </div>
                             </div>
                         </td>
 
@@ -223,19 +271,37 @@
                                 {{ $detailUser->name }}
                             </div>
                             <div class="text-sm text-slate-500">
-                                NIK: <span class="font-mono">{{ $detailUser->nik ?? '-' }}</span>
+                                Tempat, tanggal lahir:
+                                @php
+                                    $ttlDetail = [];
+                                    if ($detailUser->tempat_lahir) {
+                                        $ttlDetail[] = $detailUser->tempat_lahir;
+                                    }
+                                    if ($detailUser->tanggal_lahir) {
+                                        $ttlDetail[] = \Carbon\Carbon::parse($detailUser->tanggal_lahir)->isoFormat('D MMMM YYYY');
+                                    }
+                                @endphp
+                                <span class="font-medium">
+                                    {{ count($ttlDetail) ? implode(', ', $ttlDetail) : '-' }}
+                                </span>
                             </div>
                             <div class="text-sm text-slate-500">
-                                NPWP: <span class="font-mono">{{ $detailUser->npwp ?? '-' }}</span>
+                                Pendidikan terakhir:
+                                <span class="font-medium">
+                                    {{ $detailUser->pendidikan_terakhir ?? '-' }}
+                                </span>
                             </div>
                             <div class="text-sm text-slate-500">
                                 Jenis kelamin:
                                 <span class="font-medium">
-                                    {{ $detailUser->jenis_kelamin }}
+                                    {{ $detailUser->jenis_kelamin ?? '-' }}
                                 </span>
                             </div>
                             <div class="text-sm text-slate-500">
-                                Anggota keluarga: <span class="font-medium">{{ $detailUser->jumlah_anggota_keluarga ?? '-' }}</span>
+                                Anggota keluarga:
+                                <span class="font-medium">
+                                    {{ $detailUser->jumlah_anggota_keluarga ?? '-' }}
+                                </span>
                             </div>
                         </div>
                         <div class="space-y-2">
@@ -254,12 +320,18 @@
                                 {{ $detailUser->alamat ?? '-' }}
                             </div>
                             <div class="text-sm text-slate-500">
-                                @if($detailUser->desa)
-                                    Desa {{ $detailUser->desa }},
+                                @if($detailUser->rt_rw)
+                                    RT/RW {{ $detailUser->rt_rw }}
                                 @endif
-                                @if($detailUser->kecamatan)
-                                    Kec. {{ $detailUser->kecamatan }}
-                                @endif
+                            </div>
+                            <div class="text-sm text-slate-500">
+                                @php
+                                    $domParts = [];
+                                    if ($detailUser->kecamatan) $domParts[] = 'Kec. '.$detailUser->kecamatan;
+                                    if ($detailUser->kabupaten) $domParts[] = 'Kab. '.$detailUser->kabupaten;
+                                    if ($detailUser->kota) $domParts[] = 'Kota '.$detailUser->kota;
+                                @endphp
+                                {{ count($domParts) ? implode(' · ', $domParts) : '' }}
                             </div>
                         </div>
                     </div>
@@ -273,7 +345,8 @@
                         <div>
                             <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Total Luas</p>
                             <p class="text-lg font-bold text-emerald-700">
-                                {{ number_format($detailUser->kebun->sum('luas_lahan'), 2, ',', '.') }} <span class="text-sm text-slate-500">Ha</span>
+                                {{ number_format($detailUser->kebun->sum('luas_lahan'), 2, ',', '.') }}
+                                <span class="text-sm text-slate-500">Ha</span>
                             </p>
                         </div>
                         <div>
@@ -307,6 +380,8 @@
                                                 {{ $kebun->kecamatan ? 'Kec. '.$kebun->kecamatan : '' }}
                                             @endif
                                         </p>
+
+                                        {{-- Ringkasan dasar: luas & jumlah pohon --}}
                                         <div class="mt-1 flex flex-wrap gap-2 text-xs">
                                             <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white text-slate-600 border border-slate-200">
                                                 <i class="fa-solid fa-ruler-combined text-[10px]"></i>
@@ -317,7 +392,84 @@
                                                 {{ $kebun->jumlah_pohon ?? '-' }} pohon
                                             </span>
                                         </div>
+
+                                        {{-- Info lahan & kepemilikan --}}
+                                        <div class="mt-2 flex flex-wrap gap-2 text-[11px] text-slate-600">
+                                            @if($kebun->jenis_tanah)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-mountain text-[10px]"></i>
+                                                    Jenis tanah: <span class="font-medium">{{ ucfirst($kebun->jenis_tanah) }}</span>
+                                                </span>
+                                            @endif
+
+                                            @if($kebun->asal_lahan)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-leaf text-[10px]"></i>
+                                                    Asal lahan: <span class="font-medium">{{ ucfirst($kebun->asal_lahan) }}</span>
+                                                </span>
+                                            @endif
+
+                                            @if($kebun->status_lahan)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-house-chimney text-[10px]"></i>
+                                                    Status: <span class="font-medium">{{ ucfirst($kebun->status_lahan) }}</span>
+                                                </span>
+                                            @endif
+
+                                            @if($kebun->dokumen_kepemilikan_lahan)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-file-contract text-[10px]"></i>
+                                                    Dokumen: <span class="font-medium">{{ $kebun->dokumen_kepemilikan_lahan }}</span>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        {{-- Info tanaman & ekonomi --}}
+                                        <div class="mt-2 flex flex-wrap gap-2 text-[11px] text-slate-600">
+                                            @if($kebun->jenis_bibit)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-seedling text-[10px]"></i>
+                                                    Bibit: <span class="font-medium">{{ ucfirst($kebun->jenis_bibit) }}</span>
+                                                </span>
+                                            @endif
+
+                                            @if(!is_null($kebun->frekuensi_panen))
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-clock-rotate-left text-[10px]"></i>
+                                                    Panen tiap <span class="font-medium">{{ $kebun->frekuensi_panen }}</span> hari
+                                                </span>
+                                            @endif
+
+                                            @if(!is_null($kebun->harga_jual_pds_terakhir))
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-coins text-[10px]"></i>
+                                                    Harga TBS: 
+                                                    <span class="font-medium">
+                                                        Rp {{ number_format($kebun->harga_jual_pds_terakhir, 0, ',', '.') }}/kg
+                                                    </span>
+                                                </span>
+                                            @endif
+
+                                            @if(!is_null($kebun->pendapatan_bersih))
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-money-bill-wave text-[10px]"></i>
+                                                    Pendapatan bersih:
+                                                    <span class="font-medium">
+                                                        Rp {{ number_format($kebun->pendapatan_bersih, 0, ',', '.') }}/bulan
+                                                    </span>
+                                                </span>
+                                            @endif
+
+                                            @if($kebun->kepada_siapa_hasil_panen_dijual)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200">
+                                                    <i class="fa-solid fa-industry text-[10px]"></i>
+                                                    Dijual ke:
+                                                    <span class="font-medium">{{ $kebun->kepada_siapa_hasil_panen_dijual }}</span>
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
+
                                     <div class="flex flex-col items-start sm:items-end gap-1 text-xs">
                                         <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full
                                             @if($kebun->polygon)
@@ -363,6 +515,7 @@
                             </p>
                         @endforelse
                     </div>
+
                 </div>
             </div>
         </div>

@@ -112,14 +112,70 @@
           <input 
             type="email" 
             wire:model.live="email"
-            class="w-full px-4 py-3 border @error('email') border-red-500 @else border-gray-300 @enderror rounded-lg bg-gray-200 transition"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-200 transition"
             placeholder="contoh@email.com"
             disabled
           >
         </div>
 
+        <!-- Tempat & Tanggal Lahir -->
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Tempat Lahir
+          </label>
+          <input 
+            type="text" 
+            wire:model.live="tempat_lahir"
+            class="w-full px-4 py-3 border @error('tempat_lahir') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+            placeholder="Contoh: Rokan Hulu"
+          >
+          @error('tempat_lahir')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
+        </div>
+
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Tanggal Lahir
+          </label>
+          <input 
+            type="date" 
+            wire:model.live="tanggal_lahir"
+            class="w-full px-4 py-3 border @error('tanggal_lahir') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+          >
+          @error('tanggal_lahir')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
+        </div>
+
+        <!-- Pendidikan & Jenis Kelamin -->
+        <div class="col-span-2 md:col-span-1">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Pendidikan Terakhir
+          </label>
+          <select
+            wire:model.live="pendidikan_terakhir"
+            class="w-full px-4 py-3 border @error('pendidikan_terakhir') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
+          >
+            <option value="">Pilih pendidikan terakhir</option>
+            <option value="SD">SD</option>
+            <option value="SMP">SMP</option>
+            <option value="SMA/SMK">SMA/SMK</option>
+            <option value="D1">Diploma 1 (D1)</option>
+            <option value="D2">Diploma 2 (D2)</option>
+            <option value="D3">Diploma 3 (D3)</option>
+            <option value="S1">Sarjana (S1)</option>
+            <option value="S2">Magister (S2)</option>
+            <option value="S3">Doktor (S3)</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+          @error('pendidikan_terakhir')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
+        </div>
+
         <!-- Jenis Kelamin -->
-        <div class="col-span-2">
+        <div class="col-span-2 md:col-span-1">
           <label class="block text-sm font-semibold text-gray-700 mb-2">
             Jenis Kelamin <span class="text-red-500">*</span>
           </label>
@@ -154,7 +210,7 @@
             Nomor HP <span class="text-red-500">*</span>
           </label>
           <input 
-            type="number" 
+            type="text" 
             wire:model.live="no_hp"
             class="w-full px-4 py-3 border @error('no_hp') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
             placeholder="08xxxxxxxxxx"
@@ -177,39 +233,6 @@
             placeholder="Contoh: 4"
           >
           @error('jumlah_anggota_keluarga')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-          @enderror
-        </div>
-
-        <!-- NIK -->
-        <div class="col-span-2 md:col-span-1">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
-            NIK (16 Digit) <span class="text-red-500">*</span>
-          </label>
-          <input 
-            type="number" 
-            wire:model.live="nik"
-            maxlength="16"
-            class="w-full px-4 py-3 border @error('nik') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-            placeholder="16 digit NIK"
-          >
-          @error('nik')
-            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-          @enderror
-        </div>
-
-        <!-- NPWP -->
-        <div class="col-span-2 md:col-span-1">
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
-            NPWP <span class="text-red-500">*</span>
-          </label>
-          <input 
-            type="number" 
-            wire:model.live="npwp"
-            class="w-full px-4 py-3 border @error('npwp') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-            placeholder="Nomor NPWP"
-          >
-          @error('npwp')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
           @enderror
         </div>
@@ -243,20 +266,36 @@
           @enderror
         </div>
 
-        <!-- Desa -->
+        <!-- RT / RW -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Desa/Kelurahan <span class="text-red-500">*</span>
+            RT / RW
           </label>
-          <input 
-            type="text" 
-            wire:model.live="desa"
-            class="w-full px-4 py-3 border @error('desa') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-            placeholder="Nama desa/kelurahan"
-          >
-          @error('desa')
+          <div class="flex gap-3">
+            <div class="w-1/2">
+              <input
+                type="text"
+                wire:model.live="rt"
+                class="w-full px-4 py-3 border @error('rt') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="RT (misal 002)"
+              >
+            </div>
+            <div class="w-1/2">
+              <input
+                type="text"
+                wire:model.live="rw"
+                class="w-full px-4 py-3 border @error('rw') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+                placeholder="RW (misal 005)"
+              >
+            </div>
+          </div>
+          @error('rt')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
           @enderror
+          @error('rw')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
+          <p class="text-xs text-gray-500 mt-1">Akan disimpan sebagai format: 002/005</p>
         </div>
 
         <!-- Kecamatan -->
@@ -271,6 +310,38 @@
             placeholder="Nama kecamatan"
           >
           @error('kecamatan')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
+        </div>
+
+        <!-- Kabupaten -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Kabupaten
+          </label>
+          <input 
+            type="text" 
+            wire:model.live="kabupaten"
+            class="w-full px-4 py-3 border @error('kabupaten') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+            placeholder="Nama kabupaten"
+          >
+          @error('kabupaten')
+            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+          @enderror
+        </div>
+
+        <!-- Kota -->
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Kota
+          </label>
+          <input 
+            type="text" 
+            wire:model.live="kota"
+            class="w-full px-4 py-3 border @error('kota') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
+            placeholder="Nama kota"
+          >
+          @error('kota')
             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
           @enderror
         </div>

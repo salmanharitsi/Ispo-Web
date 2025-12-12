@@ -71,10 +71,10 @@ class DaftarPekebun extends Component
         $this->detailUser = null;
 
         return redirect(url('/admin/daftar-pekebun'))->with([
-                'success' => [
-                    'title' => 'Akun pekebun dan seluruh data terkait berhasil dihapus.'
-                ]
-            ]);
+            'success' => [
+                'title' => 'Akun pekebun dan seluruh data terkait berhasil dihapus.'
+            ]
+        ]);
     }
 
     public function showDetail(string $userId)
@@ -130,10 +130,13 @@ class DaftarPekebun extends Component
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', $search)
                   ->orWhere('email', 'like', $search)
-                  ->orWhere('nik', 'like', $search)
                   ->orWhere('no_hp', 'like', $search)
-                  ->orWhere('desa', 'like', $search)
-                  ->orWhere('kecamatan', 'like', $search);
+                  ->orWhere('alamat', 'like', $search)
+                  ->orWhere('kecamatan', 'like', $search)
+                  ->orWhere('kabupaten', 'like', $search)
+                  ->orWhere('kota', 'like', $search)
+                  ->orWhere('pendidikan_terakhir', 'like', $search)
+                  ->orWhere('tempat_lahir', 'like', $search);
             });
         }
 

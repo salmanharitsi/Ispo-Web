@@ -20,61 +20,56 @@ return new class extends Migration {
 
             /**
              * PRINSIP 1 - Kepatuhan Terhadap Peraturan 
-             * (Legalitas + Tata Ruang) - 6 Pertanyaan
              */
-            $table->boolean('p1_dokumen_kepemilikan_sah')->default(false);
-            $table->boolean('p1_batas_lahan_jelas')->default(false);
-            $table->boolean('p1_di_luar_kawasan_hutan')->default(false);
-            $table->boolean('p1_memiliki_stdb')->default(false);
-            $table->boolean('p1_tidak_dalam_sengketa')->default(false);
-            $table->boolean('p1_tahu_aturan_pemerintah')->default(false);
+            $table->boolean('p1_q1_surat_kepemilikan_sah')->default(false);
+            $table->boolean('p1_q2_di_luar_kawasan_terlarang')->default(false);
+            $table->boolean('p1_q3_dokumen_penyelesaian_sengketa')->default(false);
+            $table->boolean('p1_q4_salinan_perjanjian_sengketa')->default(false);
+            $table->boolean('p1_q5_memiliki_stdb')->default(false);
+            $table->boolean('p1_q6_sedang_mengurus_stdb')->default(false);
+            $table->boolean('p1_q7_memiliki_izin_lingkungan')->default(false);
+            $table->boolean('p1_q8_catatan_pengelolaan_lingkungan')->default(false);
 
             /**
              * PRINSIP 2 - Penerapan Usaha Perkebunan
-             * (Budidaya, Bibit, Produksi) - 10 Pertanyaan
              */
-            $table->boolean('p2_bibit_bersertifikat')->default(false);
-            $table->boolean('p2_catatan_pemupukan')->default(false);
-            $table->boolean('p2_pemupukan_sesuai_kebutuhan')->default(false);
-            $table->boolean('p2_panen_rutin')->default(false);
-            $table->boolean('p2_rawat_piringan_tpt')->default(false); // TPT = tanaman penutup tanah
-            $table->boolean('p2_kendali_gulma_tanpa_bakar')->default(false);
-            $table->boolean('p2_pengendalian_hama_sesuai_anjuran')->default(false);
-            $table->boolean('p2_pestisida_sesuai_label')->default(false);
-            $table->boolean('p2_catatan_produksi_tbs')->default(false);
-            $table->boolean('p2_tahu_standar_mutu_tbs')->default(false);
+            $table->boolean('p2_q9_tergabung_kelompok_tani')->default(false);
+            $table->boolean('p2_q10_kelompok_memiliki_dokumen_resmi')->default(false);
+            $table->boolean('p2_q11_rencana_kerja_tertulis')->default(false);
+            $table->boolean('p2_q12_catatan_kegiatan_kebun')->default(false);
+            $table->boolean('p2_q13_buka_lahan_tanpa_bakar')->default(false); // TPT = tanaman penutup tanah
+            $table->boolean('p2_q14_bibit_dari_produsen_resmi')->default(false);
+            $table->boolean('p2_q15_catatan_asal_bibit')->default(false);
+            $table->boolean('p2_q16_tanam_sesuai_standar')->default(false);
+            $table->boolean('p2_q17_catatan_pelaksanaan_tanam')->default(false);
+            $table->boolean('p2_q18_panduan_lahan_gambut')->default(false);
+            $table->boolean('p2_q19_pemeliharaan_rutin')->default(false);
+            $table->boolean('p2_q20_catatan_pemupukan_pemeliharaan')->default(false);
+            $table->boolean('p2_q21_pengendalian_hama_sesuai_pht')->default(false);
+            $table->boolean('p2_q22_sarana_pengendalian_hama')->default(false);
+            $table->boolean('p2_q23_panen_buah_matang')->default(false);
+            $table->boolean('p2_q24_catatan_hasil_panen')->default(false);
+            $table->boolean('p2_q25_tbs_segera_diangkut')->default(false);
 
             /**
              * PRINSIP 3 - Pengelolaan & Pemantauan Lingkungan
-             * (AMDAL/SPPL) - 6 Pertanyaan
              */
-            $table->boolean('p3_memiliki_sppl')->default(false);
-            $table->boolean('p3_kelola_limbah_kebun_benar')->default(false);
-            $table->boolean('p3_hindari_bakar_lahan')->default(false);
-            $table->boolean('p3_jaga_sumber_air')->default(false);
-            $table->boolean('p3_hindari_pestisida_terlarang')->default(false);
-            $table->boolean('p3_area_konservasi_kecil')->default(false);
+            $table->boolean('p3_q26_upaya_mencegah_kebakaran')->default(false);
+            $table->boolean('p3_q27_mengetahui_satwa_tumbuhan')->default(false);
+            $table->boolean('p3_q28_mencatat_satwa_tumbuhan')->default(false);
 
             /**
              * PRINSIP 4 - Peningkatan Usaha
-             * (Kelembagaan, Pelatihan, Catatan Usaha) - 7 Pertanyaan
              */
-            $table->boolean('p4_tergabung_kelompok_tani')->default(false);
-            $table->boolean('p4_kelompok_aktif_pembinaan')->default(false);
-            $table->boolean('p4_pelatihan_budidaya_sawit')->default(false);
-            $table->boolean('p4_pelatihan_ispo')->default(false);
-            $table->boolean('p4_tahu_manfaat_ispo')->default(false);
-            $table->boolean('p4_catat_biaya_usaha')->default(false);
-            $table->boolean('p4_catat_pendapatan_tbs')->default(false);
+            $table->boolean('p4_q29_mendapat_info_resmi_harga')->default(false);
+            $table->boolean('p4_q30_catat_harga_dan_jumlah_tbs')->default(false);
+            $table->boolean('p4_q31_prosedur_pemberian_informasi')->default(false);
+            $table->boolean('p4_q32_pernah_menerima_info_resmi')->default(false);
 
             /**
              * PRINSIP 5 - Peningkatan Kesejahteraan Pekebun
-             * (Ekonomi & Keberlanjutan Usaha) - 4 Pertanyaan
              */
-            $table->boolean('p5_pendapatan_cukup')->default(false);
-            $table->boolean('p5_siap_sertifikasi_ispo')->default(false);
-            $table->boolean('p5_kesulitan_biaya_pemeliharaan')->default(false);
-            $table->boolean('p5_butuh_dukungan_pembiayaan')->default(false);
+            $table->boolean('p5_q33_rencana_perbaikan_usaha')->default(false);
 
             $table->timestamps();
         });

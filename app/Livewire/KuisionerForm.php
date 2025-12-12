@@ -14,47 +14,47 @@ class KuisionerForm extends Component
     public ?Kuisioner $kuisioner = null;
 
     // PRINSIP 1
-    public ?string $p1_dokumen_kepemilikan_sah = null;
-    public ?string $p1_batas_lahan_jelas = null;
-    public ?string $p1_di_luar_kawasan_hutan = null;
-    public ?string $p1_memiliki_stdb = null;
-    public ?string $p1_tidak_dalam_sengketa = null;
-    public ?string $p1_tahu_aturan_pemerintah = null;
+    public ?string $p1_q1_surat_kepemilikan_sah = null;
+    public ?string $p1_q2_di_luar_kawasan_terlarang = null;
+    public ?string $p1_q3_dokumen_penyelesaian_sengketa = null;
+    public ?string $p1_q4_salinan_perjanjian_sengketa = null;
+    public ?string $p1_q5_memiliki_stdb = null;
+    public ?string $p1_q6_sedang_mengurus_stdb = null;
+    public ?string $p1_q7_memiliki_izin_lingkungan = null;
+    public ?string $p1_q8_catatan_pengelolaan_lingkungan = null;
 
     // PRINSIP 2
-    public ?string $p2_bibit_bersertifikat = null;
-    public ?string $p2_catatan_pemupukan = null;
-    public ?string $p2_pemupukan_sesuai_kebutuhan = null;
-    public ?string $p2_panen_rutin = null;
-    public ?string $p2_rawat_piringan_tpt = null;
-    public ?string $p2_kendali_gulma_tanpa_bakar = null;
-    public ?string $p2_pengendalian_hama_sesuai_anjuran = null;
-    public ?string $p2_pestisida_sesuai_label = null;
-    public ?string $p2_catatan_produksi_tbs = null;
-    public ?string $p2_tahu_standar_mutu_tbs = null;
+    public ?string $p2_q9_tergabung_kelompok_tani = null;
+    public ?string $p2_q10_kelompok_memiliki_dokumen_resmi = null;
+    public ?string $p2_q11_rencana_kerja_tertulis = null;
+    public ?string $p2_q12_catatan_kegiatan_kebun = null;
+    public ?string $p2_q13_buka_lahan_tanpa_bakar = null;
+    public ?string $p2_q14_bibit_dari_produsen_resmi = null;
+    public ?string $p2_q15_catatan_asal_bibit = null;
+    public ?string $p2_q16_tanam_sesuai_standar = null;
+    public ?string $p2_q17_catatan_pelaksanaan_tanam = null;
+    public ?string $p2_q18_panduan_lahan_gambut = null;
+    public ?string $p2_q19_pemeliharaan_rutin = null;
+    public ?string $p2_q20_catatan_pemupukan_pemeliharaan = null;
+    public ?string $p2_q21_pengendalian_hama_sesuai_pht = null;
+    public ?string $p2_q22_sarana_pengendalian_hama = null;
+    public ?string $p2_q23_panen_buah_matang = null;
+    public ?string $p2_q24_catatan_hasil_panen = null;
+    public ?string $p2_q25_tbs_segera_diangkut = null;
 
     // PRINSIP 3
-    public ?string $p3_memiliki_sppl = null;
-    public ?string $p3_kelola_limbah_kebun_benar = null;
-    public ?string $p3_hindari_bakar_lahan = null;
-    public ?string $p3_jaga_sumber_air = null;
-    public ?string $p3_hindari_pestisida_terlarang = null;
-    public ?string $p3_area_konservasi_kecil = null;
+    public ?string $p3_q26_upaya_mencegah_kebakaran = null;
+    public ?string $p3_q27_mengetahui_satwa_tumbuhan = null;
+    public ?string $p3_q28_mencatat_satwa_tumbuhan = null;
 
     // PRINSIP 4
-    public ?string $p4_tergabung_kelompok_tani = null;
-    public ?string $p4_kelompok_aktif_pembinaan = null;
-    public ?string $p4_pelatihan_budidaya_sawit = null;
-    public ?string $p4_pelatihan_ispo = null;
-    public ?string $p4_tahu_manfaat_ispo = null;
-    public ?string $p4_catat_biaya_usaha = null;
-    public ?string $p4_catat_pendapatan_tbs = null;
+    public ?string $p4_q29_mendapat_info_resmi_harga = null;
+    public ?string $p4_q30_catat_harga_dan_jumlah_tbs = null;
+    public ?string $p4_q31_prosedur_pemberian_informasi = null;
+    public ?string $p4_q32_pernah_menerima_info_resmi = null;
 
     // PRINSIP 5
-    public ?string $p5_pendapatan_cukup = null;
-    public ?string $p5_siap_sertifikasi_ispo = null;
-    public ?string $p5_kesulitan_biaya_pemeliharaan = null;
-    public ?string $p5_butuh_dukungan_pembiayaan = null;
+    public ?string $p5_q33_rencana_perbaikan_usaha = null;
 
     protected function rules(): array
     {
@@ -62,47 +62,47 @@ class KuisionerForm extends Component
 
         return [
             // P1
-            'p1_dokumen_kepemilikan_sah' => $bool,
-            'p1_batas_lahan_jelas' => $bool,
-            'p1_di_luar_kawasan_hutan' => $bool,
-            'p1_memiliki_stdb' => $bool,
-            'p1_tidak_dalam_sengketa' => $bool,
-            'p1_tahu_aturan_pemerintah' => $bool,
+            'p1_q1_surat_kepemilikan_sah' => $bool,
+            'p1_q2_di_luar_kawasan_terlarang' => $bool,
+            'p1_q3_dokumen_penyelesaian_sengketa' => $bool,
+            'p1_q4_salinan_perjanjian_sengketa' => $bool,
+            'p1_q5_memiliki_stdb' => $bool,
+            'p1_q6_sedang_mengurus_stdb' => $bool,
+            'p1_q7_memiliki_izin_lingkungan' => $bool,
+            'p1_q8_catatan_pengelolaan_lingkungan' => $bool,
 
             // P2
-            'p2_bibit_bersertifikat' => $bool,
-            'p2_catatan_pemupukan' => $bool,
-            'p2_pemupukan_sesuai_kebutuhan' => $bool,
-            'p2_panen_rutin' => $bool,
-            'p2_rawat_piringan_tpt' => $bool,
-            'p2_kendali_gulma_tanpa_bakar' => $bool,
-            'p2_pengendalian_hama_sesuai_anjuran' => $bool,
-            'p2_pestisida_sesuai_label' => $bool,
-            'p2_catatan_produksi_tbs' => $bool,
-            'p2_tahu_standar_mutu_tbs' => $bool,
+            'p2_q9_tergabung_kelompok_tani' => $bool,
+            'p2_q10_kelompok_memiliki_dokumen_resmi' => $bool,
+            'p2_q11_rencana_kerja_tertulis' => $bool,
+            'p2_q12_catatan_kegiatan_kebun' => $bool,
+            'p2_q13_buka_lahan_tanpa_bakar' => $bool,
+            'p2_q14_bibit_dari_produsen_resmi' => $bool,
+            'p2_q15_catatan_asal_bibit' => $bool,
+            'p2_q16_tanam_sesuai_standar' => $bool,
+            'p2_q17_catatan_pelaksanaan_tanam' => $bool,
+            'p2_q18_panduan_lahan_gambut' => $bool,
+            'p2_q19_pemeliharaan_rutin' => $bool,
+            'p2_q20_catatan_pemupukan_pemeliharaan' => $bool,
+            'p2_q21_pengendalian_hama_sesuai_pht' => $bool,
+            'p2_q22_sarana_pengendalian_hama' => $bool,
+            'p2_q23_panen_buah_matang' => $bool,
+            'p2_q24_catatan_hasil_panen' => $bool,
+            'p2_q25_tbs_segera_diangkut' => $bool,
 
             // P3
-            'p3_memiliki_sppl' => $bool,
-            'p3_kelola_limbah_kebun_benar' => $bool,
-            'p3_hindari_bakar_lahan' => $bool,
-            'p3_jaga_sumber_air' => $bool,
-            'p3_hindari_pestisida_terlarang' => $bool,
-            'p3_area_konservasi_kecil' => $bool,
+            'p3_q26_upaya_mencegah_kebakaran' => $bool,
+            'p3_q27_mengetahui_satwa_tumbuhan' => $bool,
+            'p3_q28_mencatat_satwa_tumbuhan' => $bool,
 
             // P4
-            'p4_tergabung_kelompok_tani' => $bool,
-            'p4_kelompok_aktif_pembinaan' => $bool,
-            'p4_pelatihan_budidaya_sawit' => $bool,
-            'p4_pelatihan_ispo' => $bool,
-            'p4_tahu_manfaat_ispo' => $bool,
-            'p4_catat_biaya_usaha' => $bool,
-            'p4_catat_pendapatan_tbs' => $bool,
+            'p4_q29_mendapat_info_resmi_harga' => $bool,
+            'p4_q30_catat_harga_dan_jumlah_tbs' => $bool,
+            'p4_q31_prosedur_pemberian_informasi' => $bool,
+            'p4_q32_pernah_menerima_info_resmi' => $bool,
 
             // P5
-            'p5_pendapatan_cukup' => $bool,
-            'p5_siap_sertifikasi_ispo' => $bool,
-            'p5_kesulitan_biaya_pemeliharaan' => $bool,
-            'p5_butuh_dukungan_pembiayaan' => $bool,
+            'p5_q33_rencana_perbaikan_usaha' => $bool,
         ];
     }
 
@@ -130,47 +130,47 @@ class KuisionerForm extends Component
         $b = fn ($val) => $val ? '1' : '0';
 
         // P1
-        $this->p1_dokumen_kepemilikan_sah = $b($k->p1_dokumen_kepemilikan_sah);
-        $this->p1_batas_lahan_jelas = $b($k->p1_batas_lahan_jelas);
-        $this->p1_di_luar_kawasan_hutan = $b($k->p1_di_luar_kawasan_hutan);
-        $this->p1_memiliki_stdb = $b($k->p1_memiliki_stdb);
-        $this->p1_tidak_dalam_sengketa = $b($k->p1_tidak_dalam_sengketa);
-        $this->p1_tahu_aturan_pemerintah = $b($k->p1_tahu_aturan_pemerintah);
+        $this->p1_q1_surat_kepemilikan_sah = $b($k->p1_q1_surat_kepemilikan_sah);
+        $this->p1_q2_di_luar_kawasan_terlarang = $b($k->p1_q2_di_luar_kawasan_terlarang);
+        $this->p1_q3_dokumen_penyelesaian_sengketa = $b($k->p1_q3_dokumen_penyelesaian_sengketa);
+        $this->p1_q4_salinan_perjanjian_sengketa = $b($k->p1_q4_salinan_perjanjian_sengketa);
+        $this->p1_q5_memiliki_stdb = $b($k->p1_q5_memiliki_stdb);
+        $this->p1_q6_sedang_mengurus_stdb = $b($k->p1_q6_sedang_mengurus_stdb);
+        $this->p1_q7_memiliki_izin_lingkungan = $b($k->p1_q7_memiliki_izin_lingkungan);
+        $this->p1_q8_catatan_pengelolaan_lingkungan = $b($k->p1_q8_catatan_pengelolaan_lingkungan);
 
         // P2
-        $this->p2_bibit_bersertifikat = $b($k->p2_bibit_bersertifikat);
-        $this->p2_catatan_pemupukan = $b($k->p2_catatan_pemupukan);
-        $this->p2_pemupukan_sesuai_kebutuhan = $b($k->p2_pemupukan_sesuai_kebutuhan);
-        $this->p2_panen_rutin = $b($k->p2_panen_rutin);
-        $this->p2_rawat_piringan_tpt = $b($k->p2_rawat_piringan_tpt);
-        $this->p2_kendali_gulma_tanpa_bakar = $b($k->p2_kendali_gulma_tanpa_bakar);
-        $this->p2_pengendalian_hama_sesuai_anjuran = $b($k->p2_pengendalian_hama_sesuai_anjuran);
-        $this->p2_pestisida_sesuai_label = $b($k->p2_pestisida_sesuai_label);
-        $this->p2_catatan_produksi_tbs = $b($k->p2_catatan_produksi_tbs);
-        $this->p2_tahu_standar_mutu_tbs = $b($k->p2_tahu_standar_mutu_tbs);
+        $this->p2_q9_tergabung_kelompok_tani = $b($k->p2_q9_tergabung_kelompok_tani);
+        $this->p2_q10_kelompok_memiliki_dokumen_resmi = $b($k->p2_q10_kelompok_memiliki_dokumen_resmi);
+        $this->p2_q11_rencana_kerja_tertulis = $b($k->p2_q11_rencana_kerja_tertulis);
+        $this->p2_q12_catatan_kegiatan_kebun = $b($k->p2_q12_catatan_kegiatan_kebun);
+        $this->p2_q13_buka_lahan_tanpa_bakar = $b($k->p2_q13_buka_lahan_tanpa_bakar);
+        $this->p2_q14_bibit_dari_produsen_resmi = $b($k->p2_q14_bibit_dari_produsen_resmi);
+        $this->p2_q15_catatan_asal_bibit = $b($k->p2_q15_catatan_asal_bibit);
+        $this->p2_q16_tanam_sesuai_standar = $b($k->p2_q16_tanam_sesuai_standar);
+        $this->p2_q17_catatan_pelaksanaan_tanam = $b($k->p2_q17_catatan_pelaksanaan_tanam);
+        $this->p2_q18_panduan_lahan_gambut = $b($k->p2_q18_panduan_lahan_gambut);
+        $this->p2_q19_pemeliharaan_rutin = $b($k->p2_q19_pemeliharaan_rutin);
+        $this->p2_q20_catatan_pemupukan_pemeliharaan = $b($k->p2_q20_catatan_pemupukan_pemeliharaan);
+        $this->p2_q21_pengendalian_hama_sesuai_pht = $b($k->p2_q21_pengendalian_hama_sesuai_pht);
+        $this->p2_q22_sarana_pengendalian_hama = $b($k->p2_q22_sarana_pengendalian_hama);  
+        $this->p2_q23_panen_buah_matang = $b($k->p2_q23_panen_buah_matang);
+        $this->p2_q24_catatan_hasil_panen = $b($k->p2_q24_catatan_hasil_panen);
+        $this->p2_q25_tbs_segera_diangkut = $b($k->p2_q25_tbs_segera_diangkut);
 
         // P3
-        $this->p3_memiliki_sppl = $b($k->p3_memiliki_sppl);
-        $this->p3_kelola_limbah_kebun_benar = $b($k->p3_kelola_limbah_kebun_benar);
-        $this->p3_hindari_bakar_lahan = $b($k->p3_hindari_bakar_lahan);
-        $this->p3_jaga_sumber_air = $b($k->p3_jaga_sumber_air);
-        $this->p3_hindari_pestisida_terlarang = $b($k->p3_hindari_pestisida_terlarang);
-        $this->p3_area_konservasi_kecil = $b($k->p3_area_konservasi_kecil);
+        $this->p3_q26_upaya_mencegah_kebakaran = $b($k->p3_q26_upaya_mencegah_kebakaran);
+        $this->p3_q27_mengetahui_satwa_tumbuhan = $b($k->p3_q27_mengetahui_satwa_tumbuhan);
+        $this->p3_q28_mencatat_satwa_tumbuhan = $b($k->p3_q28_mencatat_satwa_tumbuhan);
 
         // P4
-        $this->p4_tergabung_kelompok_tani = $b($k->p4_tergabung_kelompok_tani);
-        $this->p4_kelompok_aktif_pembinaan = $b($k->p4_kelompok_aktif_pembinaan);
-        $this->p4_pelatihan_budidaya_sawit = $b($k->p4_pelatihan_budidaya_sawit);
-        $this->p4_pelatihan_ispo = $b($k->p4_pelatihan_ispo);
-        $this->p4_tahu_manfaat_ispo = $b($k->p4_tahu_manfaat_ispo);
-        $this->p4_catat_biaya_usaha = $b($k->p4_catat_biaya_usaha);
-        $this->p4_catat_pendapatan_tbs = $b($k->p4_catat_pendapatan_tbs);
+        $this->p4_q29_mendapat_info_resmi_harga = $b($k->p4_q29_mendapat_info_resmi_harga);
+        $this->p4_q30_catat_harga_dan_jumlah_tbs = $b($k->p4_q30_catat_harga_dan_jumlah_tbs);
+        $this->p4_q31_prosedur_pemberian_informasi = $b($k->p4_q31_prosedur_pemberian_informasi);
+        $this->p4_q32_pernah_menerima_info_resmi = $b($k->p4_q32_pernah_menerima_info_resmi);
 
         // P5
-        $this->p5_pendapatan_cukup = $b($k->p5_pendapatan_cukup);
-        $this->p5_siap_sertifikasi_ispo = $b($k->p5_siap_sertifikasi_ispo);
-        $this->p5_kesulitan_biaya_pemeliharaan = $b($k->p5_kesulitan_biaya_pemeliharaan);
-        $this->p5_butuh_dukungan_pembiayaan = $b($k->p5_butuh_dukungan_pembiayaan);
+        $this->p5_q33_rencana_perbaikan_usaha = $b($k->p5_q33_rencana_perbaikan_usaha);
     }
 
     public function save()
@@ -182,47 +182,47 @@ class KuisionerForm extends Component
             'kebun_id' => $this->kebun->id,
 
             // P1
-            'p1_dokumen_kepemilikan_sah' => $this->p1_dokumen_kepemilikan_sah === '1',
-            'p1_batas_lahan_jelas' => $this->p1_batas_lahan_jelas === '1',
-            'p1_di_luar_kawasan_hutan' => $this->p1_di_luar_kawasan_hutan === '1',
-            'p1_memiliki_stdb' => $this->p1_memiliki_stdb === '1',
-            'p1_tidak_dalam_sengketa' => $this->p1_tidak_dalam_sengketa === '1',
-            'p1_tahu_aturan_pemerintah' => $this->p1_tahu_aturan_pemerintah === '1',
+            'p1_q1_surat_kepemilikan_sah' => $this->p1_q1_surat_kepemilikan_sah === '1',
+            'p1_q2_di_luar_kawasan_terlarang' => $this->p1_q2_di_luar_kawasan_terlarang === '1',
+            'p1_q3_dokumen_penyelesaian_sengketa' => $this->p1_q3_dokumen_penyelesaian_sengketa === '1',
+            'p1_q4_salinan_perjanjian_sengketa' => $this->p1_q4_salinan_perjanjian_sengketa === '1',
+            'p1_q5_memiliki_stdb' => $this->p1_q5_memiliki_stdb === '1',
+            'p1_q6_sedang_mengurus_stdb' => $this->p1_q6_sedang_mengurus_stdb === '1',
+            'p1_q7_memiliki_izin_lingkungan' => $this->p1_q7_memiliki_izin_lingkungan === '1',
+            'p1_q8_catatan_pengelolaan_lingkungan' => $this->p1_q8_catatan_pengelolaan_lingkungan === '1',
 
             // P2
-            'p2_bibit_bersertifikat' => $this->p2_bibit_bersertifikat === '1',
-            'p2_catatan_pemupukan' => $this->p2_catatan_pemupukan === '1',
-            'p2_pemupukan_sesuai_kebutuhan' => $this->p2_pemupukan_sesuai_kebutuhan === '1',
-            'p2_panen_rutin' => $this->p2_panen_rutin === '1',
-            'p2_rawat_piringan_tpt' => $this->p2_rawat_piringan_tpt === '1',
-            'p2_kendali_gulma_tanpa_bakar' => $this->p2_kendali_gulma_tanpa_bakar === '1',
-            'p2_pengendalian_hama_sesuai_anjuran' => $this->p2_pengendalian_hama_sesuai_anjuran === '1',
-            'p2_pestisida_sesuai_label' => $this->p2_pestisida_sesuai_label === '1',
-            'p2_catatan_produksi_tbs' => $this->p2_catatan_produksi_tbs === '1',
-            'p2_tahu_standar_mutu_tbs' => $this->p2_tahu_standar_mutu_tbs === '1',
+            'p2_q9_tergabung_kelompok_tani' => $this->p2_q9_tergabung_kelompok_tani === '1',
+            'p2_q10_kelompok_memiliki_dokumen_resmi' => $this->p2_q10_kelompok_memiliki_dokumen_resmi === '1',
+            'p2_q11_rencana_kerja_tertulis' => $this->p2_q11_rencana_kerja_tertulis === '1',
+            'p2_q12_catatan_kegiatan_kebun' => $this->p2_q12_catatan_kegiatan_kebun === '1',
+            'p2_q13_buka_lahan_tanpa_bakar' => $this->p2_q13_buka_lahan_tanpa_bakar === '1',
+            'p2_q14_bibit_dari_produsen_resmi' => $this->p2_q14_bibit_dari_produsen_resmi === '1',
+            'p2_q15_catatan_asal_bibit' => $this->p2_q15_catatan_asal_bibit === '1',
+            'p2_q16_tanam_sesuai_standar' => $this->p2_q16_tanam_sesuai_standar === '1',
+            'p2_q17_catatan_pelaksanaan_tanam' => $this->p2_q17_catatan_pelaksanaan_tanam === '1',
+            'p2_q18_panduan_lahan_gambut' => $this->p2_q18_panduan_lahan_gambut === '1',
+            'p2_q19_pemeliharaan_rutin' => $this->p2_q19_pemeliharaan_rutin === '1',
+            'p2_q20_catatan_pemupukan_pemeliharaan' => $this->p2_q20_catatan_pemupukan_pemeliharaan === '1',
+            'p2_q21_pengendalian_hama_sesuai_pht' => $this->p2_q21_pengendalian_hama_sesuai_pht === '1',
+            'p2_q22_sarana_pengendalian_hama' => $this->p2_q22_sarana_pengendalian_hama === '1', 
+            'p2_q23_panen_buah_matang' => $this->p2_q23_panen_buah_matang === '1',
+            'p2_q24_catatan_hasil_panen' => $this->p2_q24_catatan_hasil_panen === '1',
+            'p2_q25_tbs_segera_diangkut' => $this->p2_q25_tbs_segera_diangkut === '1',
 
             // P3
-            'p3_memiliki_sppl' => $this->p3_memiliki_sppl === '1',
-            'p3_kelola_limbah_kebun_benar' => $this->p3_kelola_limbah_kebun_benar === '1',
-            'p3_hindari_bakar_lahan' => $this->p3_hindari_bakar_lahan === '1',
-            'p3_jaga_sumber_air' => $this->p3_jaga_sumber_air === '1',
-            'p3_hindari_pestisida_terlarang' => $this->p3_hindari_pestisida_terlarang === '1',
-            'p3_area_konservasi_kecil' => $this->p3_area_konservasi_kecil === '1',
+            'p3_q26_upaya_mencegah_kebakaran' => $this->p3_q26_upaya_mencegah_kebakaran === '1',
+            'p3_q27_mengetahui_satwa_tumbuhan' => $this->p3_q27_mengetahui_satwa_tumbuhan === '1',
+            'p3_q28_mencatat_satwa_tumbuhan' => $this->p3_q28_mencatat_satwa_tumbuhan === '1',
 
             // P4
-            'p4_tergabung_kelompok_tani' => $this->p4_tergabung_kelompok_tani === '1',
-            'p4_kelompok_aktif_pembinaan' => $this->p4_kelompok_aktif_pembinaan === '1',
-            'p4_pelatihan_budidaya_sawit' => $this->p4_pelatihan_budidaya_sawit === '1',
-            'p4_pelatihan_ispo' => $this->p4_pelatihan_ispo === '1',
-            'p4_tahu_manfaat_ispo' => $this->p4_tahu_manfaat_ispo === '1',
-            'p4_catat_biaya_usaha' => $this->p4_catat_biaya_usaha === '1',
-            'p4_catat_pendapatan_tbs' => $this->p4_catat_pendapatan_tbs === '1',
+            'p4_q29_mendapat_info_resmi_harga' => $this->p4_q29_mendapat_info_resmi_harga === '1',
+            'p4_q30_catat_harga_dan_jumlah_tbs' => $this->p4_q30_catat_harga_dan_jumlah_tbs === '1',
+            'p4_q31_prosedur_pemberian_informasi' => $this->p4_q31_prosedur_pemberian_informasi === '1',
+            'p4_q32_pernah_menerima_info_resmi' => $this->p4_q32_pernah_menerima_info_resmi === '1',
 
             // P5
-            'p5_pendapatan_cukup' => $this->p5_pendapatan_cukup === '1',
-            'p5_siap_sertifikasi_ispo' => $this->p5_siap_sertifikasi_ispo === '1',
-            'p5_kesulitan_biaya_pemeliharaan' => $this->p5_kesulitan_biaya_pemeliharaan === '1',
-            'p5_butuh_dukungan_pembiayaan' => $this->p5_butuh_dukungan_pembiayaan === '1',
+            'p5_q33_rencana_perbaikan_usaha' => $this->p5_q33_rencana_perbaikan_usaha === '1',
         ];
 
         $this->kuisioner = Kuisioner::updateOrCreate(
@@ -233,7 +233,7 @@ class KuisionerForm extends Component
             $data
         );
 
-        return redirect(url('/pekebun/daftar-pemetaan'))->with([
+        return redirect(url('/pekebun/daftar-kuisioner'))->with([
             'success' => [
                 'title' => 'Data kuisioner berhasil disimpan!',
             ],

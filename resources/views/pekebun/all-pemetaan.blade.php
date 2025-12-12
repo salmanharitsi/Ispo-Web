@@ -148,27 +148,6 @@
 </div>
 @endsection
 
-@push('styles')
-<style>
-  #map-all-kebun .leaflet-container {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  }
-
-  .kebun-marker-pin {
-    font-size: 22px;
-    text-shadow: 0 1px 3px rgba(15, 23, 42, 0.6);
-  }
-
-  .kebun-marker-pin--mine {
-    color: #16a34a; /* hijau */
-  }
-
-  .kebun-marker-pin--other {
-    color: #2563eb; /* biru */
-  }
-</style>
-@endpush
-
 @push('scripts')
 <script>
   const defaultLatAll = 0.8833;
@@ -177,20 +156,119 @@
   const allKebunAll = @json($allKebun ?? []);
 
   let mapAllInstance = null;
+  let distanceLabelsAll = [];
+  const MIN_ZOOM_FOR_LABELS_ALL = 14;
 
-  document.addEventListener('DOMContentLoaded', function () {
+  // === Util: hitung jarak (Haversine) ===
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371000; // meter
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+
+  // === Util: hitung bearing ===
+  function calculateBearing(lat1, lon1, lat2, lon2) {
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const y = Math.sin(dLon) * Math.cos(lat2 * Math.PI / 180);
+    const x =
+      Math.cos(lat1 * Math.PI / 180) * Math.sin(lat2 * Math.PI / 180) -
+      Math.sin(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.cos(dLon);
+    let bearing = (Math.atan2(y, x) * 180) / Math.PI;
+    return (bearing + 360) % 360;
+  }
+
+  // === Util: arah kompas dari bearing ===
+  function getCompassDirection(bearing) {
+    // U, TL, T, BD, S, BDy, B, BLy (sama seperti halaman pemetaan)
+    const directions = ["U", "TL", "T", "BD", "S", "BDy", "B", "BLy"];
+    const index = Math.round(bearing / 45) % 8;
+    return directions[index];
+  }
+
+  // === Tambah label jarak + bearing untuk satu polygon ===
+  function addDistanceLabelsForLayer(layer) {
+    const latlngs = layer.getLatLngs()[0];
+    if (!latlngs || latlngs.length < 2) return;
+
+    const currentZoom = mapAllInstance.getZoom();
+
+    for (let i = 0; i < latlngs.length; i++) {
+      const start = latlngs[i];
+      const end = latlngs[(i + 1) % latlngs.length];
+
+      const distance = calculateDistance(start.lat, start.lng, end.lat, end.lng);
+      const bearing = calculateBearing(start.lat, start.lng, end.lat, end.lng);
+      const direction = getCompassDirection(bearing);
+
+      // Titik tengah sisi
+      const midLat = (start.lat + end.lat) / 2;
+      const midLng = (start.lng + end.lng) / 2;
+
+      const labelHtml = `
+        <div class="distance-label">
+          <span class="distance">${distance.toFixed(2)} m</span>
+          <span class="bearing">${bearing.toFixed(1)}° (${direction})</span>
+        </div>
+      `;
+
+      const marker = L.marker([midLat, midLng], {
+        icon: L.divIcon({
+          className: "",
+          html: labelHtml,
+          iconSize: [80, 40],
+          iconAnchor: [40, 20],
+        }),
+      });
+
+      distanceLabelsAll.push(marker);
+
+      if (currentZoom >= MIN_ZOOM_FOR_LABELS_ALL) {
+        marker.addTo(mapAllInstance);
+      }
+    }
+  }
+
+  // === Show/hide label berdasarkan zoom ===
+  function toggleDistanceLabelsVisibilityAll() {
+    const currentZoom = mapAllInstance.getZoom();
+
+    distanceLabelsAll.forEach((label) => {
+      const isOnMap = mapAllInstance.hasLayer(label);
+
+      if (currentZoom < MIN_ZOOM_FOR_LABELS_ALL && isOnMap) {
+        mapAllInstance.removeLayer(label);
+      } else if (currentZoom >= MIN_ZOOM_FOR_LABELS_ALL && !isOnMap) {
+        label.addTo(mapAllInstance);
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
     initAllKebunMap();
     initAllKebunGeolocationButton();
   });
 
   function initAllKebunMap() {
-    const mapEl = document.getElementById('map-all-kebun');
+    const mapEl = document.getElementById("map-all-kebun");
     if (!mapEl) return;
 
-    mapAllInstance = L.map('map-all-kebun').setView([defaultLatAll, defaultLngAll], 10);
+    mapAllInstance = L.map("map-all-kebun").setView(
+      [defaultLatAll, defaultLngAll],
+      10
+    );
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors",
       maxZoom: 19,
     }).addTo(mapAllInstance);
 
@@ -200,7 +278,7 @@
       if (!item.polygon) return;
 
       const feature = {
-        type: 'Feature',
+        type: "Feature",
         geometry: item.polygon,
         properties: item,
       };
@@ -209,16 +287,16 @@
 
       const style = isMine
         ? {
-            color: '#16a34a',
+            color: "#16a34a",
             weight: 2,
-            fillColor: '#bbf7d0',
+            fillColor: "#bbf7d0",
             fillOpacity: 0.45,
           }
         : {
-            color: '#2563eb',
+            color: "#2563eb",
             weight: 1.5,
-            dashArray: '4 3',
-            fillColor: '#bfdbfe',
+            dashArray: "4 3",
+            fillColor: "#bfdbfe",
             fillOpacity: 0.25,
           };
 
@@ -233,15 +311,19 @@
           totalBounds.extend(bounds);
         }
 
-        // Hitung posisi pin (pakai centroid kalau ada, kalau tidak pakai center dari bounds)
+        // Marker (pakai centroid jika ada)
         let markerLat =
-          item.centroid && item.centroid[0] ? item.centroid[0] : bounds.getCenter().lat;
+          item.centroid && item.centroid[0]
+            ? item.centroid[0]
+            : bounds.getCenter().lat;
         let markerLng =
-          item.centroid && item.centroid[1] ? item.centroid[1] : bounds.getCenter().lng;
+          item.centroid && item.centroid[1]
+            ? item.centroid[1]
+            : bounds.getCenter().lng;
 
         const iconHtml = `
           <div class="kebun-marker-pin ${
-            isMine ? 'kebun-marker-pin--mine' : 'kebun-marker-pin--other'
+            isMine ? "kebun-marker-pin--mine" : "kebun-marker-pin--other"
           }">
             <i class="fa-solid fa-location-dot"></i>
           </div>
@@ -249,43 +331,50 @@
 
         const icon = L.divIcon({
           html: iconHtml,
-          className: '',
+          className: "",
           iconSize: [26, 26],
           iconAnchor: [13, 26],
         });
 
-        const marker = L.marker([markerLat, markerLng], { icon }).addTo(mapAllInstance);
+        const marker = L.marker([markerLat, markerLng], { icon }).addTo(
+          mapAllInstance
+        );
 
         const luas = item.luas_lahan
-          ? `${parseFloat(item.luas_lahan).toLocaleString('id-ID', {
+          ? `${parseFloat(item.luas_lahan).toLocaleString("id-ID", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })} Ha`
-          : '-';
+          : "-";
 
         const tooltipHtml = `
           <div class="text-[11px]">
-            <div class="font-semibold text-slate-800 mb-0.5">${
-              item.nama_kebun || 'Kebun Tanpa Nama'
-            }</div>
-            <div class="text-slate-500">Pemilik: <span class="font-medium">${
-              item.pemilik || '-'
-            }</span></div>
-            <div class="text-slate-500">Luas: <span class="font-medium">${luas}</span></div>
+            <div class="font-semibold text-slate-800 mb-0.5">
+              ${item.nama_kebun || "Kebun Tanpa Nama"}
+            </div>
+            <div class="text-slate-500">
+              Pemilik: <span class="font-medium">${item.pemilik || "-"}</span>
+            </div>
+            <div class="text-slate-500">
+              Luas: <span class="font-medium">${luas}</span>
+            </div>
             ${
               isMine
                 ? '<div class="mt-0.5 text-emerald-600 font-semibold">Kebun Anda</div>'
-                : ''
+                : ""
             }
           </div>
         `;
 
         marker.bindTooltip(tooltipHtml, {
-          direction: 'top',
+          direction: "top",
           offset: [0, -14],
           opacity: 0.95,
           sticky: false,
         });
+
+        // === Tambahkan label jarak + bearing di tiap sisi polygon ===
+        addDistanceLabelsForLayer(layer);
       });
 
       polyLayer.addTo(mapAllInstance);
@@ -294,15 +383,18 @@
     if (totalBounds) {
       mapAllInstance.fitBounds(totalBounds, { padding: [24, 24] });
     }
+
+    // Atur visibilitas label saat zoom berubah
+    mapAllInstance.on("zoomend", toggleDistanceLabelsVisibilityAll);
   }
 
   function initAllKebunGeolocationButton() {
-    const btn = document.getElementById('getCurrentLocation');
+    const btn = document.getElementById("getCurrentLocation");
     if (!btn) return;
 
-    btn.addEventListener('click', function () {
+    btn.addEventListener("click", function () {
       if (!navigator.geolocation) {
-        alert('Browser Anda tidak mendukung geolocation.');
+        alert("Browser Anda tidak mendukung geolocation.");
         return;
       }
 
@@ -325,9 +417,9 @@
         },
         function (error) {
           alert(
-            'Gagal mendapatkan lokasi: ' +
+            "Gagal mendapatkan lokasi: " +
               error.message +
-              '\nPastikan Anda mengizinkan akses lokasi di browser.'
+              "\nPastikan Anda mengizinkan akses lokasi di browser."
           );
           btn.disabled = false;
           btn.innerHTML = originalHtml;

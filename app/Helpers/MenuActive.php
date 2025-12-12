@@ -65,6 +65,13 @@ if (!function_exists('breadcrumb')) {
             'admin.daftar-pekebun'=> [
                 ['label' => 'Daftar Pekebun'],
             ],
+            'admin.pengajuan-ispo' => [
+                ['label'=> 'Pengajuan ISPO'],
+            ],
+            'admin.detail-pengajuan-ispo' => [
+                ['label'=> 'Pengajuan ISPO', 'route' => 'admin.pengajuan-ispo'],
+                ['label'=> 'Detail Pengajuan ISPO'],
+            ],
         ];
 
         return $breadcrumbs[$route] ?? [

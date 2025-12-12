@@ -35,8 +35,8 @@
             <div class="flex items-center justify-between px-6 py-[18px] border-b border-gray-100">
                 <div class="flex items-center space-x-3" id="logo-section">
                     <div
-                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg shrink-0">
-                        <i class="fas fa-seedling text-white text-lg shrink-0"></i>
+                        class="w-10 h-10 bg-linear-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shrink-0">
+                        <img src="{{ asset('images/ppsks-logo.jpg') }}" class="h-10 w-10" alt="PPSKS logo">
                     </div>
                     <div class="sidebar-text">
                         <h1 class="text-xl font-bold text-gray-800">SPK ISPO</h1>
@@ -80,10 +80,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/pekebun/daftar-pemetaan') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}">
+                            <a href="{{ url('/admin/pengajuan-ispo') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
                                 <i
-                                    class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}"></i>
+                                    class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
                                 <span class="sidebar-text font-medium">Pengajuan ISPO</span>
                             </a>
                         </li>
@@ -154,9 +154,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/pekebun/daftar-pemetaan') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}">
-                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['pekebun.daftar-pemetaan', 'pekebun.pemetaan-kebun', 'pekebun.allPemetaan']) }}"></i>
+                            <a href="{{ url('/admin/pengajuan-ispo') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
+                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
                                 <span class="font-medium">Pengajuan ISPO</span>
                             </a>
                         </li>
@@ -241,7 +241,7 @@
                                     <p class="text-sm font-semibold text-gray-800">
                                         {{ \Illuminate\Support\Str::limit(Auth::user()->name, 15) }}
                                     </p>
-                                    <p class="text-xs text-gray-500">Pekebun</p>
+                                    <p class="text-xs text-gray-500">Admin</p>
                                 </div>
                                 <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                             </button>
