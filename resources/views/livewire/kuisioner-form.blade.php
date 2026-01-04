@@ -398,7 +398,7 @@
         <div class="border-t border-slate-100 pt-4 mt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <p class="text-xs text-slate-500">
                 * Jawab seluruh pertanyaan sesuai kondisi sebenarnya. Data ini akan digunakan sebagai dasar
-                penilaian kesiapan sertifikasi ISPO.
+                penilaian kesiapan ISPO.
             </p>
             <button 
                 type="submit" 

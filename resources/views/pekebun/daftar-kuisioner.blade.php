@@ -25,7 +25,7 @@
             </svg>
             <div>
               <p class="text-sm font-medium text-green-800">Informasi</p>
-              <p class="text-sm text-green-700 mt-1">Lengkapi kuisioner kebun untuk melanjutkan proses sertifikasi ISPO. Pilih kebun yang ingin dilengkapi kuisionernya!</p>
+              <p class="text-sm text-green-700 mt-1">Lengkapi kuisioner kebun untuk melanjutkan proses penilaian kesiapan ISPO. Pilih kebun yang ingin dilengkapi kuisionernya!</p>
             </div>
           </div>
         </div>

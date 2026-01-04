@@ -38,7 +38,7 @@
               <div>
                 <p class="text-sm font-medium text-green-800">Informasi</p>
                 <p class="text-sm text-green-700 mt-1">Tambahkan minimal 1 kebun untuk melanjutkan proses
-                  sertifikasi ISPO. Pastikan data yang diisi akurat dan sesuai kondisi lapangan.</p>
+                  penilaian kesiapan ISPO. Pastikan data yang diisi akurat dan sesuai kondisi lapangan.</p>
               </div>
             </div>
           </div>

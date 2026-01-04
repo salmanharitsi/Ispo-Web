@@ -104,7 +104,7 @@
         @empty
           <tr>
             <td colspan="6" class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500">
-              Belum ada pengajuan ISPO dengan status <span class="font-semibold">final</span> &amp; <span class="font-semibold">proses sertifikasi</span>.
+              Belum ada pengajuan ISPO dengan status <span class="font-semibold">final</span> &amp; <span class="font-semibold">proses penilaian kesiapan</span>.
             </td>
           </tr>
         @endforelse

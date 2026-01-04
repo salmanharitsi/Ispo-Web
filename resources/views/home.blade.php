@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sertifikasi ISPO - Kabupaten Rokan Hulu</title>
+  <title>Penilaian Kesiapan ISPO - Kabupaten Rokan Hulu</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   @vite('resources/css/app.css')
@@ -34,19 +34,12 @@
     }
 
     @keyframes float {
-
-      0%,
-      100% {
+      0%, 100% {
         transform: translateY(0px);
       }
-
       50% {
         transform: translateY(-20px);
       }
-    }
-
-    .palm-leaf {
-      fill: #22c55e;
     }
   </style>
 </head>
@@ -57,15 +50,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <div class="flex items-center">
-          {{-- <svg class="h-10 w-10 text-green-700" viewBox="0 0 48 48" fill="none" stroke="currentColor">
+          <svg class="h-10 w-10 text-green-700" viewBox="0 0 48 48" fill="none" stroke="currentColor">
             <path d="M24 40 L24 20 M24 20 L16 12 M24 20 L32 12 M18 28 L12 22 M30 28 L36 22" stroke-width="2.5"
               stroke-linecap="round" />
             <circle cx="24" cy="40" r="3" fill="currentColor" />
-          </svg> --}}
-          <img src="{{ asset('images/ppsks-logo.jpg') }}" class="h-10 w-10" alt="PPSKS logo">
+          </svg>
           <div class="ml-3">
             <span class="text-xl font-bold text-gray-800">ISPO Rokan Hulu</span>
-            <p class="text-xs text-gray-600">Indonesian Sustainable Palm Oil</p>
+            <p class="text-xs text-gray-600">Penilaian Kesiapan Pekebun Swadaya</p>
           </div>
         </div>
         <div class="hidden md:flex space-x-8">
@@ -95,10 +87,13 @@
         <a href="#ispo" class="block py-2 text-gray-700 hover:text-green-700">Tentang ISPO</a>
         <a href="#manfaat" class="block py-2 text-gray-700 hover:text-green-700">Manfaat</a>
         <a href="#kontak" class="block py-2 text-gray-700 hover:text-green-700">Kontak</a>
-        <button
-          class="w-full bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition mt-2">
-          Masuk
-        </button>
+        <!-- <button class="w-full bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition mt-2">
+          <a href="{{ url('/login') }}" class="w-full">Masuk</a>
+        </button> -->
+        <a href="{{ url('/login') }}"
+          class="block w-full bg-green-700 text-white px-6 py-2 rounded-lg font-semibold text-center hover:bg-green-800 transition">
+            Masuk
+        </a>
       </div>
     </div>
   </nav>
@@ -110,22 +105,21 @@
     <div class="absolute inset-0 bg-black opacity-60"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="text-white">
+      <div class="grid md:grid-cols-3 gap-12 items-center">
+        <div class="text-white col-span-2">
           <div class="inline-block bg-green-700 bg-opacity-30 px-4 py-2 rounded-full mb-4">
             <span class="text-sm font-semibold">🌴 Indonesian Sustainable Palm Oil</span>
           </div>
           <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            Platform Sertifikasi ISPO Kabupaten Rokan Hulu
+            Platform Penilaian Kesiapan Pekebun Sawit Swadaya dalam Memenuhi Standar ISPO
           </h1>
           <p class="text-lg md:text-xl mb-8 text-green-50">
-            Tingkatkan daya saing perkebunan kelapa sawit Anda dengan sertifikasi ISPO yang diakui nasional
-            dan internasional. Proses mudah, cepat, dan terpercaya.
+            Ukur tingkat kesiapan kebun kelapa sawit Anda dalam menerapkan praktik perkebunan berkelanjutan sesuai standar ISPO. Platform ini membantu Anda memahami sejauh mana kebun Anda telah menerapkan prinsip-prinsip ISPO.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
             <a href="{{ url('/login') }}"
               class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg text-center">
-              Daftar Sertifikasi
+              Mulai Penilaian
             </a>
             <a href="#ispo"
               class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-700 transition text-center">
@@ -135,17 +129,13 @@
           <div class="mt-8 flex items-center space-x-6">
             <div class="flex items-center">
               <svg class="w-5 h-5 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                </path>
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
               </svg>
-              <span class="text-sm">Sertifikasi Wajib</span>
+              <span class="text-sm">Penilaian Mandiri</span>
             </div>
             <div class="flex items-center">
               <svg class="w-5 h-5 text-yellow-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
               <span class="text-sm">Standar Nasional</span>
             </div>
@@ -161,19 +151,19 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
           <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">850+</div>
-          <div class="text-gray-600">Perkebunan Tersertifikasi</div>
+          <div class="text-gray-600">Penilaian Dilakukan</div>
         </div>
         <div class="text-center">
           <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">12,000+</div>
-          <div class="text-gray-600">Hektar Sawit</div>
+          <div class="text-gray-600">Hektar Dinilai</div>
         </div>
         <div class="text-center">
           <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">95%</div>
-          <div class="text-gray-600">Tingkat Kepatuhan</div>
+          <div class="text-gray-600">Kepuasan Pengguna</div>
         </div>
         <div class="text-center">
           <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">24/7</div>
-          <div class="text-gray-600">Layanan Online</div>
+          <div class="text-gray-600">Akses Platform</div>
         </div>
       </div>
     </div>
@@ -186,10 +176,9 @@
         <div class="inline-block bg-green-700 text-white px-6 py-2 rounded-full mb-4 font-semibold">
           Indonesian Sustainable Palm Oil
         </div>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Apa itu Sertifikasi ISPO?</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Apa itu Penilaian Kesiapan ISPO?</h2>
         <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-          ISPO adalah standar sertifikasi wajib yang memastikan perkebunan kelapa sawit di Indonesia dikelola
-          secara berkelanjutan dan bertanggung jawab
+          Platform ini membantu pekebun sawit swadaya untuk menilai tingkat kesiapan kebun mereka dalam menerapkan standar dan praktik perkebunan berkelanjutan sesuai ISPO (Indonesian Sustainable Palm Oil)
         </p>
       </div>
 
@@ -198,18 +187,16 @@
           <div class="flex items-start mb-4">
             <div class="bg-green-100 p-3 rounded-lg mr-4">
               <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
             <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">Definisi ISPO</h3>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Apa itu Platform Ini?</h3>
               <p class="text-gray-600">
-                Sertifikasi ISPO adalah jaminan tertulis bahwa usaha perkebunan kelapa sawit telah
-                memenuhi prinsip dan kriteria keberlanjutan yang ditetapkan oleh pemerintah Indonesia.
-                Sertifikasi ini bersifat <strong>wajib</strong> bagi semua pelaku usaha kelapa sawit
-                untuk meningkatkan daya saing dan kredibilitas produk sawit di pasar nasional maupun
-                internasional.
+                Platform penilaian kesiapan ISPO adalah sistem digital yang membantu pekebun sawit swadaya
+                untuk <strong>mengukur seberapa siap</strong> kebun mereka dalam menerapkan standar ISPO. 
+                Dengan mengisi data kebun dan menjawab kuisioner, sistem akan memberikan <strong>penilaian tingkat kesiapan</strong> 
+                kebun Anda serta rekomendasi perbaikan untuk meningkatkan penerapan praktik perkebunan berkelanjutan.
               </p>
             </div>
           </div>
@@ -219,24 +206,27 @@
           <div class="flex items-start mb-4">
             <div class="bg-amber-100 p-3 rounded-lg mr-4">
               <svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
             <div>
-              <h3 class="text-xl font-bold text-gray-800 mb-2">Tujuan Sertifikasi</h3>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Tujuan Penilaian</h3>
               <ul class="space-y-2 text-gray-600">
                 <li class="flex items-start">
                   <span class="text-green-600 mr-2">•</span>
-                  <span>Memastikan pengelolaan perkebunan sesuai prinsip dan kriteria ISPO</span>
+                  <span>Menilai tingkat kesiapan pekebun dalam menerapkan standar ISPO</span>
                 </li>
                 <li class="flex items-start">
                   <span class="text-green-600 mr-2">•</span>
-                  <span>Meningkatkan daya saing produk sawit Indonesia di pasar global</span>
+                  <span>Mengidentifikasi gap antara kondisi saat ini dengan standar ISPO</span>
                 </li>
                 <li class="flex items-start">
                   <span class="text-green-600 mr-2">•</span>
-                  <span>Mempercepat penurunan emisi gas rumah kaca</span>
+                  <span>Memberikan rekomendasi perbaikan untuk meningkatkan praktik keberlanjutan</span>
+                </li>
+                <li class="flex items-start">
+                  <span class="text-green-600 mr-2">•</span>
+                  <span>Membantu pekebun memahami dan menerapkan prinsip-prinsip ISPO</span>
                 </li>
               </ul>
             </div>
@@ -288,86 +278,67 @@
 
       <!-- ISPO Principles -->
       <div>
-        <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">Prinsip dan Kriteria ISPO
-        </h3>
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8 text-center">Prinsip dan Kriteria ISPO</h3>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
             <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
             </div>
             <h4 class="font-bold text-lg text-gray-800 mb-3">Kepatuhan Hukum</h4>
-            <p class="text-gray-600 text-sm">Memastikan kepatuhan penuh terhadap semua peraturan
-              perundang-undangan yang berlaku di Indonesia terkait perkebunan kelapa sawit.</p>
+            <p class="text-gray-600 text-sm">Memastikan kepatuhan penuh terhadap semua peraturan perundang-undangan yang berlaku di Indonesia terkait perkebunan kelapa sawit.</p>
           </div>
 
           <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
             <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
             <h4 class="font-bold text-lg text-gray-800 mb-3">Pengelolaan Lingkungan</h4>
-            <p class="text-gray-600 text-sm">Konservasi sumber daya alam, keanekaragaman hayati, kesuburan
-              tanah, kualitas air, dan perlindungan ekosistem.</p>
+            <p class="text-gray-600 text-sm">Konservasi sumber daya alam, keanekaragaman hayati, kesuburan tanah, kualitas air, dan perlindungan ekosistem.</p>
           </div>
 
           <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
             <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
             <h4 class="font-bold text-lg text-gray-800 mb-3">Efisiensi & Emisi</h4>
-            <p class="text-gray-600 text-sm">Optimalisasi penggunaan energi, pengurangan emisi gas rumah
-              kaca, dan penerapan teknologi ramah lingkungan.</p>
+            <p class="text-gray-600 text-sm">Optimalisasi penggunaan energi, pengurangan emisi gas rumah kaca, dan penerapan teknologi ramah lingkungan.</p>
           </div>
 
           <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
             <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
             </div>
             <h4 class="font-bold text-lg text-gray-800 mb-3">Kesejahteraan Pekerja</h4>
-            <p class="text-gray-600 text-sm">Memastikan kondisi kerja yang layak, upah yang adil, kesehatan
-              dan keselamatan kerja, serta dampak sosial positif.</p>
+            <p class="text-gray-600 text-sm">Memastikan kondisi kerja yang layak, upah yang adil, kesehatan dan keselamatan kerja, serta dampak sosial positif.</p>
           </div>
 
           <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
             <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
               </svg>
             </div>
             <h4 class="font-bold text-lg text-gray-800 mb-3">Peningkatan Berkelanjutan</h4>
-            <p class="text-gray-600 text-sm">Penerapan praktik perkebunan yang baik secara berkelanjutan
-              dengan peningkatan terus-menerus.</p>
+            <p class="text-gray-600 text-sm">Penerapan praktik perkebunan yang baik secara berkelanjutan dengan peningkatan terus-menerus.</p>
           </div>
 
           <div class="bg-white rounded-xl shadow-lg p-6 hover-scale">
             <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
               <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
               </svg>
             </div>
             <h4 class="font-bold text-lg text-gray-800 mb-3">Transparansi</h4>
-            <p class="text-gray-600 text-sm">Pelaksanaan operasi yang transparan dan terbuka dengan
-              akuntabilitas penuh kepada stakeholder.</p>
+            <p class="text-gray-600 text-sm">Pelaksanaan operasi yang transparan dan terbuka dengan akuntabilitas penuh kepada stakeholder.</p>
           </div>
         </div>
       </div>
@@ -378,174 +349,135 @@
   <section id="manfaat" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Manfaat Sertifikasi ISPO</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Manfaat Penilaian Kesiapan</h2>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Dapatkan berbagai keuntungan dengan memiliki sertifikasi ISPO untuk perkebunan Anda
+          Pahami kondisi kebun Anda dan tingkatkan penerapan praktik perkebunan berkelanjutan
         </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 mb-12">
-        <!-- Benefits for Business -->
+        <!-- Benefits for Farmers -->
         <div class="bg-linear-to-br from-green-500 to-green-600 rounded-lg shadow-xl p-8 text-white">
-          <div
-            class="bg-linear-to-tr from-green-500 to-green-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+          <div class="bg-linear-to-tr from-green-500 to-green-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-              </path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold mb-4">Manfaat Bagi Pelaku Usaha</h3>
+          <h3 class="text-2xl font-bold mb-4">Manfaat Bagi Pekebun</h3>
           <ul class="space-y-3">
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Meningkatkan akses ke pasar nasional dan internasional</span>
+              <span>Mengetahui tingkat kesiapan dalam menerapkan standar ISPO</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Peningkatan produktivitas dan efisiensi operasional</span>
+              <span>Mendapatkan penilaian objektif terhadap praktik perkebunan saat ini</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Mendapatkan harga jual yang lebih kompetitif</span>
+              <span>Mengidentifikasi gap dan area yang perlu ditingkatkan</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Meningkatkan pendapatan dan kesejahteraan petani</span>
+              <span>Mendapat rekomendasi perbaikan yang spesifik dan terukur</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Memperkuat citra dan reputasi perusahaan</span>
+              <span>Meningkatkan pemahaman tentang praktik perkebunan berkelanjutan</span>
             </li>
           </ul>
         </div>
 
-        <!-- Benefits for Environment -->
+        <!-- Benefits for System -->
         <div class="bg-linear-to-br from-emerald-500 to-teal-600 rounded-lg shadow-xl p-8 text-white">
-          <div
-            class="bg-linear-to-tr from-emerald-500 to-teal-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+          <div class="bg-linear-to-tr from-emerald-500 to-teal-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-              </path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
-          <h3 class="text-2xl font-bold mb-4">Manfaat Bagi Lingkungan</h3>
+          <h3 class="text-2xl font-bold mb-4">Manfaat Bagi Sistem</h3>
           <ul class="space-y-3">
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Mengurangi dampak negatif terhadap lingkungan</span>
+              <span>Penilaian otomatis dan terstandar berdasarkan kriteria ISPO</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Menjaga kelestarian keanekaragaman hayati</span>
+              <span>Hasil penilaian yang objektif dan konsisten</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Konservasi tanah dan sumber daya air</span>
+              <span>Proses penilaian yang cepat dan efisien</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Pengurangan emisi gas rumah kaca secara signifikan</span>
+              <span>Dokumentasi digital yang tersimpan dengan aman</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Pengelolaan limbah yang lebih baik dan berkelanjutan</span>
+              <span>Akses 24/7 untuk penilaian kapan saja</span>
             </li>
           </ul>
         </div>
 
         <!-- Benefits for Government -->
         <div class="bg-linear-to-br from-blue-500 to-indigo-600 rounded-lg shadow-xl p-8 text-white">
-          <div
-            class="bg-linear-to-tr from-blue-500 to-indigo-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+          <div class="bg-linear-to-tr from-blue-500 to-indigo-600 bg-opacity-20 w-16 h-16 rounded-full flex items-center justify-center mb-6">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-              </path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
             </svg>
           </div>
           <h3 class="text-2xl font-bold mb-4">Manfaat Bagi Pemerintah</h3>
           <ul class="space-y-3">
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Memfasilitasi pemantauan dan evaluasi perkebunan</span>
+              <span>Memudahkan monitoring tingkat kesiapan pekebun di wilayah</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Memastikan penerapan standar keberlanjutan nasional</span>
+              <span>Database terpusat untuk data perkebunan dan tingkat kesiapan</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Meningkatkan kontribusi sektor sawit pada ekonomi</span>
+              <span>Meningkatkan efisiensi program pembinaan pekebun swadaya</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Memperkuat posisi Indonesia di pasar global</span>
+              <span>Mendorong peningkatan adopsi praktik berkelanjutan</span>
             </li>
             <li class="flex items-start">
               <svg class="w-5 h-5 mr-2 shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              <span>Mendukung target pengurangan emisi nasional</span>
+              <span>Mempercepat transformasi sektor perkebunan sawit berkelanjutan</span>
             </li>
           </ul>
         </div>
@@ -554,72 +486,57 @@
   </section>
 
   <!-- Process Section -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Proses Sertifikasi ISPO</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Proses Penilaian Kesiapan ISPO</h2>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Ikuti 6 langkah mudah untuk mendapatkan sertifikasi ISPO perkebunan kelapa sawit Anda
+          Ikuti 6 langkah mudah untuk menilai tingkat kesiapan kebun kelapa sawit Anda dalam menerapkan standar ISPO
         </p>
       </div>
       <div class="grid md:grid-cols-3 gap-8">
         <div class="text-center">
-          <div
-            class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-            1</div>
+          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">1</div>
           <h3 class="font-bold text-gray-800 mb-2 text-lg">Registrasi Akun</h3>
           <p class="text-gray-600 text-sm">Buat akun dan lengkapi profil perkebunan Anda di platform</p>
         </div>
         <div class="text-center">
-          <div
-            class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-            2</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Pengisian Data</h3>
-          <p class="text-gray-600 text-sm">Isi formulir data perkebunan dan upload dokumen pendukung</p>
+          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">2</div>
+          <h3 class="font-bold text-gray-800 mb-2 text-lg">Pengisian Data Kebun</h3>
+          <p class="text-gray-600 text-sm">Isi data lengkap kebun dan informasi pengelolaan</p>
         </div>
         <div class="text-center">
-          <div
-            class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-            3</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Verifikasi Dokumen</h3>
-          <p class="text-gray-600 text-sm">Tim kami melakukan verifikasi kelengkapan dokumen</p>
+          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">3</div>
+          <h3 class="font-bold text-gray-800 mb-2 text-lg">Pemetaan Kebun</h3>
+          <p class="text-gray-600 text-sm">Petakan lokasi kebun menggunakan polygon di peta</p>
         </div>
         <div class="text-center">
-          <div
-            class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-            4</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Audit Lapangan</h3>
-          <p class="text-gray-600 text-sm">Auditor bersertifikat melakukan pemeriksaan lapangan</p>
+          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">4</div>
+          <h3 class="font-bold text-gray-800 mb-2 text-lg">Isi Kuisioner</h3>
+          <p class="text-gray-600 text-sm">Jawab kuisioner terkait praktik pengelolaan kebun</p>
         </div>
         <div class="text-center">
-          <div
-            class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-            5</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Evaluasi & Perbaikan</h3>
-          <p class="text-gray-600 text-sm">Evaluasi hasil audit dan perbaikan jika diperlukan</p>
+          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">5</div>
+          <h3 class="font-bold text-gray-800 mb-2 text-lg">Isi Pernyataan STDB</h3>
+          <p class="text-gray-600 text-sm">Lengkapi pernyataan Surat Tanda Daftar Budidaya</p>
         </div>
         <div class="text-center">
-          <div
-            class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
-            6</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Penerbitan Sertifikat</h3>
-          <p class="text-gray-600 text-sm">Sertifikat ISPO resmi siap diunduh dan digunakan</p>
+          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">6</div>
+          <h3 class="font-bold text-gray-800 mb-2 text-lg">Hasil Penilaian</h3>
+          <p class="text-gray-600 text-sm">Dapatkan hasil tingkat kesiapan dan rekomendasi perbaikan</p>
         </div>
       </div>
 
-      <div class="mt-12 bg-green-50 rounded-lg p-8 border border-green-200">
+      <div class="mt-12 bg-amber-50 rounded-lg p-8 border border-amber-200">
         <div class="flex items-start">
-          <div class="bg-green-600 rounded-full p-3 mr-4">
+          <div class="bg-amber-600 rounded-full p-3 mr-4">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
           </div>
           <div>
-            <h4 class="font-bold text-gray-800 text-lg mb-2">Estimasi Waktu Proses</h4>
-            <p class="text-gray-600">Proses sertifikasi ISPO umumnya memakan waktu <strong>3-6
-                bulan</strong> tergantung kelengkapan dokumen dan kesiapan perkebunan. Dengan platform
-              digital kami, proses dapat dipercepat hingga <strong>30%</strong> lebih cepat.</p>
+            <h4 class="font-bold text-gray-800 text-lg mb-2">Catatan Penting</h4>
+            <p class="text-gray-600">Hasil penilaian ini adalah <strong>penilaian tingkat kesiapan mandiri</strong>, bukan sertifikasi resmi ISPO. Platform ini membantu Anda memahami sejauh mana kebun Anda telah menerapkan prinsip-prinsip ISPO dan memberikan panduan untuk peningkatan berkelanjutan. Untuk mendapatkan sertifikasi ISPO resmi, Anda tetap perlu mengajukan ke lembaga sertifikasi yang berwenang.</p>
           </div>
         </div>
       </div>
@@ -627,21 +544,19 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="kontak" class="py-16 bg-gray-50">
+  <section id="kontak" class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Hubungi Kami</h2>
         <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Punya pertanyaan tentang sertifikasi ISPO? Tim kami siap membantu Anda
+          Punya pertanyaan tentang penilaian kesiapan ISPO? Tim kami siap membantu Anda
         </p>
       </div>
       <div class="grid md:grid-cols-3 gap-8 mb-12">
         <div class="text-center p-6 bg-white rounded-xl shadow-md hover-scale">
           <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
-              </path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
             </svg>
           </div>
           <h3 class="font-bold text-gray-800 mb-2">Telepon</h3>
@@ -651,9 +566,7 @@
         <div class="text-center p-6 bg-white rounded-xl shadow-md hover-scale">
           <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-              </path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
             </svg>
           </div>
           <h3 class="font-bold text-gray-800 mb-2">Email</h3>
@@ -663,11 +576,8 @@
         <div class="text-center p-6 bg-white rounded-xl shadow-md hover-scale">
           <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
-              </path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
           </div>
           <h3 class="font-bold text-gray-800 mb-2">Alamat Kantor</h3>
@@ -678,16 +588,16 @@
 
       <div class="bg-gradient-secondary rounded-lg shadow-xl p-8 text-white text-center">
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-          Siap Mendapatkan Sertifikasi ISPO?
+          Siap Menilai Kesiapan Kebun Anda?
         </h2>
         <p class="text-xl text-green-50 mb-8">
-          Bergabunglah dengan ratusan pekebun kelapa sawit di Rokan Hulu yang telah tersertifikasi ISPO dan
-          tingkatkan daya saing produk Anda di pasar global
+          Bergabunglah dengan ratusan pekebun sawit swadaya di Rokan Hulu yang telah menggunakan platform ini untuk 
+          meningkatkan penerapan praktik perkebunan berkelanjutan sesuai standar ISPO
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="{{ url('/login') }}"
             class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg text-lg">
-            Daftar Sekarang
+            Mulai Penilaian
           </a>
         </div>
       </div>
@@ -701,18 +611,16 @@
         <div>
           <div class="flex items-center mb-4">
             <svg class="h-10 w-10 text-green-500" viewBox="0 0 48 48" fill="none" stroke="currentColor">
-              <path d="M24 40 L24 20 M24 20 L16 12 M24 20 L32 12 M18 28 L12 22 M30 28 L36 22" stroke-width="2.5"
-                stroke-linecap="round" />
+              <path d="M24 40 L24 20 M24 20 L16 12 M24 20 L32 12 M18 28 L12 22 M30 28 L36 22" stroke-width="2.5" stroke-linecap="round" />
               <circle cx="24" cy="40" r="3" fill="currentColor" />
             </svg>
             <div class="ml-3">
               <span class="text-xl font-bold">ISPO Rokan Hulu</span>
-              <p class="text-xs text-gray-400">Sertifikasi Sawit Berkelanjutan</p>
+              <p class="text-xs text-gray-400">Penilaian Kesiapan Pekebun Swadaya</p>
             </div>
           </div>
           <p class="text-gray-400 text-sm">
-            Platform resmi sertifikasi ISPO untuk perkebunan kelapa sawit berkelanjutan di Kabupaten Rokan
-            Hulu, Riau.
+            Platform penilaian kesiapan pekebun sawit swadaya dalam menerapkan standar ISPO di Kabupaten Rokan Hulu, Riau.
           </p>
         </div>
         <div>
@@ -725,7 +633,7 @@
           <div class="mt-4">
             <h4 class="font-semibold mb-2 text-sm">Jam Operasional:</h4>
             <p class="text-gray-400 text-xs">Senin - Jumat: 08:00 - 17:00 WIB</p>
-            <p class="text-gray-400 text-xs">Sabtu: 08:00 - 12:00 WIB</p>
+            <p class="text-gray-400 text-xs">Sabtu: 08:00 - 12:00
           </div>
         </div>
       </div>

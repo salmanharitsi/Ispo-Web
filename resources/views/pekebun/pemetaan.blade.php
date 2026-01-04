@@ -57,11 +57,33 @@
               batas lahan Anda. Jarak dan bearing akan ditampilkan otomatis.
             </p>
           </div>
-          <button type="button" id="getCurrentLocation"
-            class="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 transition">
-            <i class="fa-solid fa-location-crosshairs text-[11px]"></i>
-            <span>Gunakan lokasi saya</span>
-          </button>
+          <div class="flex items-center gap-2">
+            {{-- Button pilih jenis peta --}}
+            <div class="inline-flex rounded-lg border border-slate-200 bg-white p-1 shadow-sm">
+              <button
+                type="button"
+                id="btnMapTypeStreet"
+                class="map-type-btn inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition"
+              >
+                <i class="fa-solid fa-map text-[11px]"></i>
+                <span>Peta</span>
+              </button>
+              <button
+                type="button"
+                id="btnMapTypeSatellite"
+                class="map-type-btn active inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition"
+              >
+                <i class="fa-solid fa-satellite text-[11px]"></i>
+                <span>Satelit</span>
+              </button>
+            </div>
+
+            <button type="button" id="getCurrentLocation"
+              class="inline-flex items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 transition">
+              <i class="fa-solid fa-location-crosshairs text-[11px]"></i>
+              <span>Gunakan lokasi saya</span>
+            </button>
+          </div>
         </div>
 
         <div class="px-5 sm:px-5 pb-5">
@@ -188,6 +210,24 @@
     </div>
   </div>
 
+  <style>
+    .map-type-btn {
+      color: #64748b;
+      background-color: transparent;
+    }
+    
+    .map-type-btn:hover {
+      color: #334155;
+      background-color: #f1f5f9;
+    }
+    
+    .map-type-btn.active {
+      color: #059669;
+      background-color: #d1fae5;
+      font-weight: 600;
+    }
+  </style>
+
   <script>
     const defaultLat = 0.8833;
     const defaultLng = 100.4833;
@@ -207,7 +247,10 @@
     let drawnItems = null;
     let othersLayer = null;
     let distanceLabels = [];
-    const MIN_ZOOM_FOR_LABELS = 14; // Label muncul di zoom 14 ke atas
+    let currentBaseLayer = null;
+    let streetLayer = null;
+    let satelliteLayer = null;
+    const MIN_ZOOM_FOR_LABELS = 14;
 
     // Fungsi untuk menghitung jarak (Haversine formula)
     function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -299,12 +342,10 @@
       
       distanceLabels.forEach(label => {
         if (currentZoom < MIN_ZOOM_FOR_LABELS) {
-          // Sembunyikan label
           if (mapInstance.hasLayer(label)) {
             mapInstance.removeLayer(label);
           }
         } else {
-          // Tampilkan label
           if (!mapInstance.hasLayer(label)) {
             label.addTo(mapInstance);
           }
@@ -320,6 +361,36 @@
       }
     }
 
+    // === Initialize Map Type Toggle ===
+    function initMapTypeToggle() {
+      const btnStreet = document.getElementById("btnMapTypeStreet");
+      const btnSatellite = document.getElementById("btnMapTypeSatellite");
+
+      if (!btnStreet || !btnSatellite) return;
+
+      btnStreet.addEventListener("click", function () {
+        if (currentBaseLayer !== streetLayer) {
+          mapInstance.removeLayer(currentBaseLayer);
+          streetLayer.addTo(mapInstance);
+          currentBaseLayer = streetLayer;
+
+          btnStreet.classList.add("active");
+          btnSatellite.classList.remove("active");
+        }
+      });
+
+      btnSatellite.addEventListener("click", function () {
+        if (currentBaseLayer !== satelliteLayer) {
+          mapInstance.removeLayer(currentBaseLayer);
+          satelliteLayer.addTo(mapInstance);
+          currentBaseLayer = satelliteLayer;
+
+          btnSatellite.classList.add("active");
+          btnStreet.classList.remove("active");
+        }
+      });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
       initMap();
       initGeolocationButton();
@@ -331,10 +402,24 @@
 
       mapInstance = L.map('map').setView([defaultLat, defaultLng], 10);
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      // Layer OpenStreetMap (default)
+      streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',
         maxZoom: 19
-      }).addTo(mapInstance);
+      });
+
+      // Layer Satelit (Esri World Imagery)
+      satelliteLayer = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        {
+          attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+          maxZoom: 19,
+        }
+      );
+
+      // Set default layer
+      currentBaseLayer = satelliteLayer;
+      currentBaseLayer.addTo(mapInstance);
 
       drawnItems = new L.FeatureGroup();
       othersLayer = new L.FeatureGroup();
@@ -384,7 +469,7 @@
           if (isCurrent) {
             drawnItems.addLayer(layer);
             persistPolygon(layer);
-            addDistanceLabels(layer); // Tambahkan label untuk polygon yang ada
+            addDistanceLabels(layer);
           } else {
             othersLayer.addLayer(layer);
           }
@@ -504,6 +589,9 @@
         distanceLabels.forEach(label => mapInstance.removeLayer(label));
         distanceLabels = [];
       });
+
+      // Initialize map type toggle buttons
+      initMapTypeToggle();
     }
 
     function intersectsOtherKebun(newGeometry) {

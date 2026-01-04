@@ -33,7 +33,7 @@
             </svg>
             <div>
               <p class="text-sm font-medium text-green-800">Informasi</p>
-              <p class="text-sm text-green-700 mt-1">Petakan kebun untuk melanjutkan proses sertifikasi ISPO. Pilih kebun yang ingin dipetakan!</p>
+              <p class="text-sm text-green-700 mt-1">Petakan kebun untuk melanjutkan proses penilaian kesiapan ISPO. Pilih kebun yang ingin dipetakan!</p>
             </div>
           </div>
         </div>

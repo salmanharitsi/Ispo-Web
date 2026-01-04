@@ -110,11 +110,33 @@
     'longitude'      => $kebun->longitude,
   ];
 @endphp
+
+<style>
+  .map-type-btn-kebun {
+    color: #64748b;
+    background-color: transparent;
+  }
+  
+  .map-type-btn-kebun:hover {
+    color: #334155;
+    background-color: #f1f5f9;
+  }
+  
+  .map-type-btn-kebun.active {
+    color: #059669;
+    background-color: #d1fae5;
+    font-weight: 600;
+  }
+</style>
+
 <script>
   const kebunData = @json($kebunDataArray);
 
   let kebunMapInstance = null;
   let kebunDistanceLabels = [];
+  let currentBaseLayerKebun = null;
+  let streetLayerKebun = null;
+  let satelliteLayerKebun = null;
   const MIN_ZOOM_FOR_LABELS = 14;
 
   // === Util: hitung jarak (Haversine) ===
@@ -145,7 +167,7 @@
     return (bearing + 360) % 360;
   }
 
-  // === Util: arah kompas dari bearing (sama seperti halaman pemetaan) ===
+  // === Util: arah kompas dari bearing ===
   function getCompassDirection(bearing) {
     const directions = ['U', 'TL', 'T', 'BD', 'S', 'BDy', 'B', 'BLy'];
     const index = Math.round(bearing / 45) % 8;
@@ -220,6 +242,36 @@
     });
   }
 
+  // === Initialize Map Type Toggle ===
+  function initMapTypeToggleKebun() {
+    const btnStreet = document.getElementById("btnMapTypeStreetKebun");
+    const btnSatellite = document.getElementById("btnMapTypeSatelliteKebun");
+
+    if (!btnStreet || !btnSatellite || !kebunMapInstance) return;
+
+    btnStreet.addEventListener("click", function () {
+      if (currentBaseLayerKebun !== streetLayerKebun) {
+        kebunMapInstance.removeLayer(currentBaseLayerKebun);
+        streetLayerKebun.addTo(kebunMapInstance);
+        currentBaseLayerKebun = streetLayerKebun;
+
+        btnStreet.classList.add("active");
+        btnSatellite.classList.remove("active");
+      }
+    });
+
+    btnSatellite.addEventListener("click", function () {
+      if (currentBaseLayerKebun !== satelliteLayerKebun) {
+        kebunMapInstance.removeLayer(currentBaseLayerKebun);
+        satelliteLayerKebun.addTo(kebunMapInstance);
+        currentBaseLayerKebun = satelliteLayerKebun;
+
+        btnSatellite.classList.add("active");
+        btnStreet.classList.remove("active");
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initKebunMap();
   });
@@ -234,10 +286,24 @@
     kebunMapInstance = L.map('map-kebun').setView([defaultLat, defaultLng], 14);
     const map = kebunMapInstance;
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Layer OpenStreetMap
+    streetLayerKebun = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
       maxZoom: 19,
-    }).addTo(map);
+    });
+
+    // Layer Satelit (Esri World Imagery)
+    satelliteLayerKebun = L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        maxZoom: 19,
+      }
+    );
+
+    // Set default layer (SATELIT)
+    currentBaseLayerKebun = satelliteLayerKebun;
+    currentBaseLayerKebun.addTo(map);
 
     const feature = {
       type: 'Feature',
@@ -318,6 +384,9 @@
 
     // refresh visibilitas label saat zoom berubah
     map.on('zoomend', toggleKebunDistanceLabelsVisibility);
+
+    // Initialize map type toggle
+    initMapTypeToggleKebun();
   }
 </script>
 @endpush

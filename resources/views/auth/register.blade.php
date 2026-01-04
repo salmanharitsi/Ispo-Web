@@ -62,60 +62,9 @@
     <div class="absolute top-20 left-10 w-72 h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
     <div class="absolute bottom-20 right-10 w-72 h-72 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- Left Side - Information -->
-        <div class="text-white hidden md:block">
-          <div class="inline-block bg-green-700 bg-opacity-30 px-4 py-2 rounded-full mb-6">
-            <span class="text-sm font-semibold">🌴 Bergabung dengan ISPO</span>
-          </div>
-          <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-green-950">
-            Daftar dan Mulai Sertifikasi ISPO
-          </h1>
-          <p class="text-lg md:text-xl mb-8 text-green-900">
-            Bergabunglah dengan ratusan pekebun kelapa sawit di Rokan Hulu yang telah tersertifikasi ISPO dan tingkatkan daya saing produk Anda.
-          </p>
-          <div class="space-y-4">
-            <div class="flex items-start">
-              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4 shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-lg mb-1 text-green-950">Gratis Mendaftar</h3>
-                <p class="text-green-900 text-sm">Tidak ada biaya pendaftaran untuk membuat akun</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4 shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-lg mb-1 text-green-950">Aman & Terpercaya</h3>
-                <p class="text-green-900 text-sm">Data Anda dilindungi dengan enkripsi standar industri</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4 shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-lg mb-1 text-green-950">Dukungan Penuh</h3>
-                <p class="text-green-900 text-sm">Tim kami siap membantu proses sertifikasi Anda</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Side - Register Form Component -->
-        <div class="w-full">
-          @livewire('register-form')
-        </div>
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="w-full">
+        @livewire('register-form')
       </div>
     </div>
   </section>

@@ -44,14 +44,36 @@
             Arahkan kursor ke pin pada peta untuk melihat nama kebun, pemilik, dan luas lahannya.
           </p>
         </div>
-        <button
-          type="button"
-          id="getCurrentLocation"
-          class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 transition"
-        >
-          <i class="fa-solid fa-location-crosshairs text-[11px]"></i>
-          <span>Fokus ke lokasi saya</span>
-        </button>
+        <div class="flex items-center gap-2">
+          {{-- Button pilih jenis peta --}}
+          <div class="inline-flex rounded-lg border border-slate-200 bg-white p-1 shadow-sm">
+            <button
+              type="button"
+              id="btnMapTypeStreet"
+              class="map-type-btn inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition"
+            >
+              <i class="fa-solid fa-map text-[11px]"></i>
+              <span>Peta</span>
+            </button>
+            <button
+              type="button"
+              id="btnMapTypeSatellite"
+              class="map-type-btn active inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition"
+            >
+              <i class="fa-solid fa-satellite text-[11px]"></i>
+              <span>Satelit</span>
+            </button>
+          </div>
+          
+          <button
+            type="button"
+            id="getCurrentLocation"
+            class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-1 transition"
+          >
+            <i class="fa-solid fa-location-crosshairs text-[11px]"></i>
+            <span>Fokus ke lokasi saya</span>
+          </button>
+        </div>
       </div>
 
       <div class="px-5 pb-5">
@@ -149,6 +171,24 @@
 @endsection
 
 @push('scripts')
+<style>
+  .map-type-btn {
+    color: #64748b;
+    background-color: transparent;
+  }
+  
+  .map-type-btn:hover {
+    color: #334155;
+    background-color: #f1f5f9;
+  }
+  
+  .map-type-btn.active {
+    color: #059669;
+    background-color: #d1fae5;
+    font-weight: 600;
+  }
+</style>
+
 <script>
   const defaultLatAll = 0.8833;
   const defaultLngAll = 100.4833;
@@ -157,6 +197,9 @@
 
   let mapAllInstance = null;
   let distanceLabelsAll = [];
+  let currentBaseLayer = null;
+  let streetLayer = null;
+  let satelliteLayer = null;
   const MIN_ZOOM_FOR_LABELS_ALL = 14;
 
   // === Util: hitung jarak (Haversine) ===
@@ -189,7 +232,6 @@
 
   // === Util: arah kompas dari bearing ===
   function getCompassDirection(bearing) {
-    // U, TL, T, BD, S, BDy, B, BLy (sama seperti halaman pemetaan)
     const directions = ["U", "TL", "T", "BD", "S", "BDy", "B", "BLy"];
     const index = Math.round(bearing / 45) % 8;
     return directions[index];
@@ -253,6 +295,38 @@
     });
   }
 
+  // === Initialize Map Type Toggle ===
+  function initMapTypeToggle() {
+    const btnStreet = document.getElementById("btnMapTypeStreet");
+    const btnSatellite = document.getElementById("btnMapTypeSatellite");
+
+    if (!btnStreet || !btnSatellite) return;
+
+    btnStreet.addEventListener("click", function () {
+      if (currentBaseLayer !== streetLayer) {
+        mapAllInstance.removeLayer(currentBaseLayer);
+        streetLayer.addTo(mapAllInstance);
+        currentBaseLayer = streetLayer;
+
+        // Update button states
+        btnStreet.classList.add("active");
+        btnSatellite.classList.remove("active");
+      }
+    });
+
+    btnSatellite.addEventListener("click", function () {
+      if (currentBaseLayer !== satelliteLayer) {
+        mapAllInstance.removeLayer(currentBaseLayer);
+        satelliteLayer.addTo(mapAllInstance);
+        currentBaseLayer = satelliteLayer;
+
+        // Update button states
+        btnSatellite.classList.add("active");
+        btnStreet.classList.remove("active");
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     initAllKebunMap();
     initAllKebunGeolocationButton();
@@ -267,10 +341,24 @@
       10
     );
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    // Layer OpenStreetMap (default)
+    streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "&copy; OpenStreetMap contributors",
       maxZoom: 19,
-    }).addTo(mapAllInstance);
+    });
+
+    // Layer Satelit (Esri World Imagery)
+    satelliteLayer = L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        attribution: "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+        maxZoom: 19,
+      }
+    );
+
+    // Set default layer
+    currentBaseLayer = satelliteLayer;
+    currentBaseLayer.addTo(mapAllInstance);
 
     let totalBounds = null;
 
@@ -386,6 +474,9 @@
 
     // Atur visibilitas label saat zoom berubah
     mapAllInstance.on("zoomend", toggleDistanceLabelsVisibilityAll);
+
+    // Initialize map type toggle buttons
+    initMapTypeToggle();
   }
 
   function initAllKebunGeolocationButton() {

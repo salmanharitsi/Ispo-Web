@@ -22,7 +22,7 @@
           </svg>
           <div>
             <p class="text-sm font-medium text-green-800">Informasi Penting</p>
-            <p class="text-sm text-green-700 mt-1">Pastikan data yang Anda masukkan akurat dan sesuai dengan dokumen resmi. Data ini akan digunakan untuk proses sertifikasi ISPO.</p>
+            <p class="text-sm text-green-700 mt-1">Pastikan data yang Anda masukkan akurat dan sesuai dengan dokumen resmi. Data ini akan digunakan untuk proses penilaian kesiapan ISPO.</p>
           </div>
         </div>
       </div>

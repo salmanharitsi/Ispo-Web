@@ -62,60 +62,9 @@
     <div class="absolute top-20 left-10 w-72 h-72 bg-green-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float"></div>
     <div class="absolute bottom-20 right-10 w-72 h-72 bg-emerald-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- Left Side - Information -->
-        <div class="text-white hidden md:block">
-          <div class="inline-block bg-green-700 bg-opacity-30 px-4 py-2 rounded-full mb-6">
-            <span class="text-sm font-semibold">🌴 Platform Sertifikasi ISPO</span>
-          </div>
-          <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight text-green-950">
-            Selamat Datang Kembali
-          </h1>
-          <p class="text-lg md:text-xl mb-8 text-green-900">
-            Kelola proses sertifikasi ISPO perkebunan kelapa sawit Anda dengan mudah melalui platform digital kami.
-          </p>
-          <div class="space-y-4">
-            <div class="flex items-start">
-              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-lg mb-1 text-green-950">Proses Digital</h3>
-                <p class="text-green-900 text-sm">Ajukan dan pantau sertifikasi secara online 24/7</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-lg mb-1 text-green-950">Lebih Cepat</h3>
-                <p class="text-green-900 text-sm">Hemat waktu hingga 30% dengan sistem terintegrasi</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <div class="bg-green-600 bg-opacity-50 p-2 rounded-lg mr-4">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-semibold text-lg mb-1 text-green-950">Terpercaya</h3>
-                <p class="text-green-900 text-sm">Platform resmi dari Dinas Pertanian Rokan Hulu</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Side - Login Form Component -->
-        <div class="w-full">
-          @livewire('login-form')
-        </div>
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="w-full">
+        @livewire('login-form')
       </div>
     </div>
   </section>

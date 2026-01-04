@@ -11,12 +11,34 @@
         Menampilkan batas polygon lahan kebun berdasarkan hasil pemetaan.
       </p>
     </div>
-    <div class="text-[11px] text-slate-400">
-      @if($kebun->latitude && $kebun->longitude)
-        Koordinat pusat: {{ $kebun->latitude }}, {{ $kebun->longitude }}
-      @else
-        Koordinat belum tersedia
-      @endif
+    <div class="flex items-center gap-2">
+      {{-- Button pilih jenis peta --}}
+      <div class="inline-flex rounded-lg border border-slate-200 bg-white p-1 shadow-sm">
+        <button
+          type="button"
+          id="btnMapTypeStreetKebun"
+          class="map-type-btn-kebun inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition"
+        >
+          <i class="fa-solid fa-map text-[11px]"></i>
+          <span>Peta</span>
+        </button>
+        <button
+          type="button"
+          id="btnMapTypeSatelliteKebun"
+          class="map-type-btn-kebun active inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition"
+        >
+          <i class="fa-solid fa-satellite text-[11px]"></i>
+          <span>Satelit</span>
+        </button>
+      </div>
+      
+      <div class="text-[11px] text-slate-400">
+        @if($kebun->latitude && $kebun->longitude)
+          {{ $kebun->latitude }}, {{ $kebun->longitude }}
+        @else
+          Koordinat belum tersedia
+        @endif
+      </div>
     </div>
   </div>
 

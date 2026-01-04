@@ -14,7 +14,7 @@
             Selamat Datang, {{ $user->name }}! 👋
           </h1>
           <p class="text-green-100 text-lg">
-            Platform Sertifikasi ISPO Kabupaten Rokan Hulu
+            Platform Penilaian Kesiapan Pekebun Sawit Swadaya dalam Memenuhi Standar ISPO
           </p>
           <div class="mt-4 flex items-center text-sm">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,7 @@
         </div>
         <div>
           <h2 class="text-2xl font-bold text-gray-800">Kelengkapan Data</h2>
-          <p class="text-gray-600 mt-1">Lengkapi data berikut untuk melanjutkan proses sertifikasi ISPO</p>
+          <p class="text-gray-600 mt-1">Lengkapi data berikut untuk melanjutkan proses</p>
         </div>
       </div>
 
@@ -140,7 +140,7 @@
                   </svg>
                   <div class="flex-1">
                     <p class="text-amber-800 font-medium mb-2">Belum ada data kebun!</p>
-                    <p class="text-amber-700 text-sm mb-3">Tambahkan minimal 1 data kebun kelapa sawit untuk melanjutkan proses sertifikasi.</p>
+                    <p class="text-amber-700 text-sm mb-3">Tambahkan minimal 1 data kebun kelapa sawit untuk melanjutkan proses penilaian.</p>
                     <a href="{{ route('pekebun.daftar-kebun') }}" class="inline-flex items-center bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition text-sm font-semibold">
                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -336,7 +336,7 @@
             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
               <div>
                 <h3 class="text-lg font-semibold text-gray-800 mb-1">Finalisasi Data Kebun</h3>
-                <p class="text-gray-600 text-sm">Finalisasi minimal 1 kebun untuk penilaian ISPO</p>
+                <p class="text-gray-600 text-sm">Finalisasi minimal 1 kebun untuk penilaian kesiapan</p>
               </div>
               @if($hasFinalisasi)
                 <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
@@ -356,7 +356,7 @@
                   </svg>
                   <div class="flex-1">
                     <p class="text-amber-800 font-medium mb-2">Data kebun belum difinalisasi!</p>
-                    <p class="text-amber-700 text-sm mb-3">Finalisasi minimal 1 kebun yang sudah lengkap datanya (data kebun, pemetaan, kuisioner, dan pernyataan STDB) agar dapat dinilai oleh admin untuk sertifikasi ISPO.</p>
+                    <p class="text-amber-700 text-sm mb-3">Finalisasi minimal 1 kebun yang sudah lengkap datanya (data kebun, pemetaan, kuisioner, dan pernyataan STDB) agar dapat dinilai oleh admin untuk penilaian kesiapan.</p>
                     <a href="{{ route('pekebun.daftar-kebun') }}" class="inline-flex items-center bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition text-sm font-semibold">
                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -426,7 +426,7 @@
             </svg>
           </div>
         </div>
-        <h3 class="text-gray-600 text-sm font-medium mb-1">Kebun Difinalisasi</h3>
+        <h3 class="text-gray-600 text-sm font-medium mb-1">Kebun Dinilai</h3>
         <p class="text-3xl font-bold text-gray-800">{{ $jumlahKebunFinalisasi }}</p>
         <p class="text-sm text-gray-500 mt-2">Proses pengecekan</p>
       </div>
@@ -472,7 +472,7 @@
             </svg>
           </div>
           <h3 class="font-semibold text-gray-800 mb-2 group-hover:text-green-600 transition">Kuisioner</h3>
-          <p class="text-sm text-gray-600">Isi kuisioner untuk proses sertifikasi</p>
+          <p class="text-sm text-gray-600">Isi kuisioner untuk data kebun anda</p>
         </a>
       </div>
     </div>
@@ -483,31 +483,31 @@
         <div class="mb-6 md:mb-0">
           <h2 class="text-2xl font-bold text-gray-800 mb-3 flex items-center">
             <svg class="w-7 h-7 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
-            Tentang Sertifikasi ISPO
+            Penilaian Kesiapan Mandiri ISPO
           </h2>
           <p class="text-gray-700 max-w-2xl">
-            Indonesian Sustainable Palm Oil (ISPO) adalah standar sertifikasi wajib yang memastikan perkebunan kelapa sawit dikelola secara berkelanjutan dan bertanggung jawab.
+            Platform ini membantu pekebun sawit swadaya mengukur tingkat kesiapan dalam menerapkan standar ISPO. Dapatkan penilaian objektif dan rekomendasi peningkatan untuk kebun Anda.
           </p>
           <div class="mt-4 flex flex-wrap gap-4">
             <div class="flex items-center text-sm text-gray-600">
               <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              Meningkatkan daya saing
+              Penilaian terstandar
             </div>
             <div class="flex items-center text-sm text-gray-600">
               <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              Akses pasar internasional
+              Rekomendasi perbaikan
             </div>
             <div class="flex items-center text-sm text-gray-600">
               <svg class="w-5 h-5 text-green-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
               </svg>
-              Pengelolaan berkelanjutan
+              Mudah & gratis
             </div>
           </div>
         </div>

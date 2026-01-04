@@ -7,7 +7,7 @@
       </svg>
     </div>
     <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Masuk ke Akun Anda</h2>
-    <p class="text-gray-600">Kelola sertifikasi ISPO perkebunan Anda</p>
+    <p class="text-gray-600">Kelola penilaian kesiapan ISPO perkebunan Anda</p>
   </div>
 
   <!-- Login Form -->

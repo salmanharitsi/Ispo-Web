@@ -134,7 +134,7 @@
         </div>
         <h3 class="text-2xl font-bold text-gray-800 mb-3">Belum Ada Data Kebun</h3>
         <p class="text-gray-600 max-w-md mx-auto">
-        Anda belum memiliki data kebun. Tambahkan data kebun kelapa sawit Anda untuk memulai proses sertifikasi ISPO.
+        Anda belum memiliki data kebun. Tambahkan data kebun kelapa sawit Anda untuk memulai proses penilaian kesiapan ISPO.
         </p>
     </div>
   @endif
