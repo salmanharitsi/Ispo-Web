@@ -72,6 +72,13 @@
                     </h2>
                     <ul class="space-y-2">
                         <li>
+                            <a href="{{ url('/pekebun/data-diri') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.data-diri') }}">
+                                <i class="fas fa-user-circle text-lg w-5 shrink-0 {{ iconColor('pekebun.data-diri') }}"></i>
+                                <span class="sidebar-text font-medium">Data Diri</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/pekebun/daftar-kebun') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
                                 <i
@@ -101,13 +108,6 @@
                                 <i
                                     class="fas fa-chart-line text-lg w-5 shrink-0 {{ iconColor('riwayat-presensi-guru') }}"></i>
                                 <span class="sidebar-text font-medium">Hasil SPK</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/pekebun/data-diri') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.data-diri') }}">
-                                <i class="fas fa-user-circle text-lg w-5 shrink-0 {{ iconColor('pekebun.data-diri') }}"></i>
-                                <span class="sidebar-text font-medium">Data Diri</span>
                             </a>
                         </li>
                     </ul>
@@ -162,6 +162,13 @@
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">Menu</h2>
                     <ul class="space-y-2">
                         <li>
+                            <a href="{{ url('/pekebun/data-diri') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.data-diri') }}">
+                                <i class="fas fa-user-circle text-lg w-5 {{ iconColor('pekebun.data-diri') }}"></i>
+                                <span class="font-medium">Data Diri</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/pekebun/daftar-kebun') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}">
                                 <i class="fas fa-list-check text-lg w-5 {{ iconColor(['pekebun.daftar-kebun', 'pekebun.detail-data-kebun']) }}"></i>
@@ -187,13 +194,6 @@
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
                                 <i class="fas fa-chart-line text-lg w-5 {{ iconColor('riwayat-presensi-guru') }}"></i>
                                 <span class="font-medium">Hasil SPK</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/pekebun/data-diri') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.data-diri') }}">
-                                <i class="fas fa-user-circle text-lg w-5 {{ iconColor('pekebun.data-diri') }}"></i>
-                                <span class="font-medium">Data Diri</span>
                             </a>
                         </li>
                     </ul>

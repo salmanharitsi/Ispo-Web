@@ -84,14 +84,34 @@
           ></div>
 
           {{-- Legenda --}}
-          <div class="absolute bottom-3 right-3 z-10 bg-white/90 backdrop-blur-sm shadow-md rounded-lg px-3 py-2 text-[11px] text-slate-600 space-y-1 border border-slate-100">
-            <div class="flex items-center gap-2">
-              <span class="inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
-              <span>Kebun milik Anda</span>
+          <div class="absolute bottom-3 right-3 z-10 bg-white/90 backdrop-blur-sm shadow-md rounded-lg px-3 py-2 text-[11px] text-slate-600 border border-slate-100 space-y-2">
+            {{-- Status ISPO --}}
+            <p class="text-[10px] uppercase tracking-wide text-slate-400 font-semibold pb-1 border-b border-slate-100">Status Penilaian</p>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex h-3 w-5 rounded-sm bg-red-300 border border-red-600"></span>
+                <span>Belum dinilai</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex h-3 w-5 rounded-sm bg-amber-200 border border-amber-500"></span>
+                <span>Proses penilaian</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex h-3 w-5 rounded-sm bg-emerald-300 border border-emerald-600"></span>
+                <span>Sudah dinilai</span>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-              <span class="inline-flex h-3 w-3 rounded-full bg-blue-500"></span>
-              <span>Kebun pekebun lain</span>
+            {{-- Kepemilikan --}}
+            <p class="text-[10px] uppercase tracking-wide text-slate-400 font-semibold pt-1 pb-1 border-t border-slate-100">Kepemilikan</p>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
+                <span>Kebun milik Anda</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex h-3 w-3 rounded-full bg-blue-500"></span>
+                <span>Kebun pekebun lain</span>
+              </div>
             </div>
           </div>
         </div>
@@ -374,19 +394,29 @@
 
       const isMine = !!item.is_current_user;
 
+      // Warna area berdasarkan status ISPO
+      const statusStyle = {
+        belum: { fillColor: "#fca5a5", color: "#dc2626" },   // merah
+        proses: { fillColor: "#fde68a", color: "#d97706" },  // kuning
+        sudah: { fillColor: "#6ee7b7", color: "#059669" },   // hijau
+      };
+
+      const status = item.status_ispo || 'belum';
+      const { fillColor, color: borderColor } = statusStyle[status] ?? statusStyle['belum'];
+
       const style = isMine
         ? {
-            color: "#16a34a",
-            weight: 2,
-            fillColor: "#bbf7d0",
-            fillOpacity: 0.45,
+            color: borderColor,
+            weight: 2.5,
+            fillColor: fillColor,
+            fillOpacity: 0.55,
           }
         : {
-            color: "#2563eb",
+            color: borderColor,
             weight: 1.5,
             dashArray: "4 3",
-            fillColor: "#bfdbfe",
-            fillOpacity: 0.25,
+            fillColor: fillColor,
+            fillOpacity: 0.30,
           };
 
       const polyLayer = L.geoJSON(feature, { style });

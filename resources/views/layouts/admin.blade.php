@@ -88,7 +88,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/pekebun/daftar-kuisioner') }}"
+                            <a href="{{ url('/admin/pengajuan-ispo') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}">
                                 <i
                                     class="fas fa-map text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}"></i>
@@ -161,7 +161,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/pekebun/daftar-kuisioner') }}"
+                            <a href="{{ url('/admin/pengajuan-ispo') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}">
                                 <i class="fas fa-map text-lg w-5 {{ iconColor(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}"></i>
                                 <span class="font-medium">Daftar Kebun</span>

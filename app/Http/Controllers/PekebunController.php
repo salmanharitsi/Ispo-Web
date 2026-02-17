@@ -28,6 +28,7 @@ class PekebunController extends Controller
                         $kebun->longitude,
                     ],
                     'is_current_user' => $kebun->user_id === $currentUserId,
+                    'status_ispo'     => $kebun->status_ispo ?? 'belum',
                 ];
             })
             ->values()

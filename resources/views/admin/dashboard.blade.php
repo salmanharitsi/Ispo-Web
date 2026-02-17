@@ -75,7 +75,7 @@
           <i class="fas fa-star text-blue-600"></i>
         </div>
         <div>
-          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Tersertifikasi ISPO</p>
+          <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Kebun Layak ISPO</p>
           <p class="text-xl font-bold text-slate-900">
             {{ $ispoSudah }}
           </p>
@@ -152,15 +152,15 @@
         </div>
       </div>
 
-      {{-- Chart: Status Sertifikasi ISPO --}}
+      {{-- Chart: Status Kelayakan ISPO --}}
       <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-6">
         <div class="flex items-center justify-between mb-4">
           <div>
             <h3 class="text-base font-semibold text-slate-900">
-              Status Sertifikasi ISPO
+              Status Kelayakan ISPO
             </h3>
             <p class="text-xs text-slate-500">
-              Distribusi kebun berdasarkan status sertifikasi ISPO
+              Distribusi kebun berdasarkan status kelayakan ISPO
             </p>
           </div>
         </div>
@@ -172,15 +172,15 @@
         <div class="mt-4 flex flex-wrap gap-4 text-xs">
           <div class="flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:#E5E7EB;"></span>
-            <span>Belum Sertifikasi ({{ $ispoBelum }})</span>
+            <span>Belum Layak ({{ $ispoBelum }})</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:#FACC15;"></span>
-            <span>Proses Sertifikasi ({{ $ispoProses }})</span>
+            <span>Proses Penilaian ({{ $ispoProses }})</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:#22C55E;"></span>
-            <span>Sudah Sertifikasi ({{ $ispoSudah }})</span>
+            <span>Layak ({{ $ispoSudah }})</span>
           </div>
         </div>
       </div>

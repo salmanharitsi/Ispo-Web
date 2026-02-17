@@ -4,9 +4,9 @@
 
 @section('content')
   <div class="min-h-screen bg-gray-50 py-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 px-4 sm:px-6 lg:px-8">
       <!-- Header Section -->
-      <div class="mb-6">
+      <div class="col-span-4">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
           <div class="mb-4 md:mb-0">
             <h1 class="text-3xl font-bold text-gray-800 flex items-center">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="col-span-4">
         @livewire('daftar-pengajuan-ispo')
       </div>
     </div>

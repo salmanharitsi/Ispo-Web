@@ -1,4 +1,4 @@
-<div class="bg-white rounded-2xl shadow-sm border border-slate-100">
+<div class="relative overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-100">
   {{-- Header & Search --}}
   <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
     <div class="w-full md:w-1/3">

@@ -44,7 +44,7 @@
           </svg>
           <div class="flex-1">
             <h3 class="text-yellow-800 font-semibold mb-1">Kebun Belum Dipetakan</h3>
-            <p class="text-yellow-700 text-sm mb-3">Pemetaan kebun diperlukan untuk proses sertifikasi ISPO. Silakan lakukan pemetaan lokasi kebun Anda.</p>
+            <p class="text-yellow-700 text-sm mb-3">Pemetaan kebun diperlukan untuk penilaian kelayakan ISPO. Silakan lakukan pemetaan lokasi kebun Anda.</p>
             <a href="{{ url('/pekebun/daftar-pemetaan', $kebun->id) }}" class="inline-flex items-center px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-semibold rounded-lg transition">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
@@ -65,7 +65,7 @@
           </svg>
           <div class="flex-1">
             <h3 class="text-blue-800 font-semibold mb-1">Kuisioner Belum Diisi</h3>
-            <p class="text-blue-700 text-sm mb-3">Lengkapi kuisioner untuk melengkapi data kebun dan persyaratan sertifikasi ISPO.</p>
+            <p class="text-blue-700 text-sm mb-3">Lengkapi kuisioner untuk melengkapi data kebun dan persyaratan penilaian kelayakan ISPO.</p>
             <a href="{{ url('/pekebun/daftar-kuisioner', $kebun->id) }}" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -432,9 +432,9 @@
               @endif
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-green-100">Status ISPO</span>
+              <span class="text-green-100">Status kelayakan ISPO</span>
               @if($kebun->status_ispo == 'sudah')
-                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Tersertifikasi</span>
+                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Layak</span>
               @elseif($kebun->status_ispo == 'proses')
                 <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">Proses</span>
               @else
@@ -621,7 +621,7 @@
 
       <p class="text-gray-600 text-sm mb-5 text-left">
         Saya memahami bahwa data dan pernyataan yang saya sampaikan akan digunakan dalam proses
-        verifikasi dan sertifikasi, serta dapat dicek kebenarannya oleh pihak yang berwenang.
+        verifikasi dan penilaian kelayakan ISPO, serta dapat dicek kebenarannya oleh pihak yang berwenang.
       </p>
 
       <div class="bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-3 mb-5 text-left flex items-start gap-3">

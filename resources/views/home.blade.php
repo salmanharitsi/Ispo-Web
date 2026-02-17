@@ -169,6 +169,174 @@
     </div>
   </section>
 
+  <!-- Map Feature Section -->
+  <section class="py-16 bg-gray-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="inline-block bg-green-100 text-green-700 px-6 py-2 rounded-full mb-4 font-semibold text-sm">
+          🗺️ Fitur Pemetaan Digital
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Petakan Lahan Kebun Anda Secara Digital</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          Gunakan fitur polygon interaktif untuk menggambar batas lahan kebun Anda langsung di atas citra satelit. 
+          Sistem secara otomatis menghitung luas area, keliling, dan mendeteksi apabila terjadi tumpang tindih dengan lahan pekebun lain.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <!-- Left: Visual mockup / illustration -->
+        <div class="relative">
+          <div class="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
+            <!-- Fake browser bar -->
+            <div class="bg-gray-800 px-4 py-3 flex items-center gap-2 border-b border-gray-700">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div class="flex-1 bg-gray-700 rounded-md text-gray-400 text-xs px-3 py-1 ml-2 font-mono">
+                ispo.rokanhulu.go.id/pemetaan-kebun
+              </div>
+            </div>
+            <!-- Map placeholder with overlay info -->
+            <div class="relative bg-green-900" style="height: 400px; background: linear-gradient(135deg, #1a4a2e 0%, #2d6a4f 40%, #1b4332 100%);">
+              <!-- Simulated satellite texture -->
+              <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px), repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px);"></div>
+              
+              <!-- Simulated polygon shape -->
+              <svg class="absolute inset-0 w-full h-full" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid meet">
+                <!-- Other farmer polygon (blue) -->
+                <polygon points="380,60 480,80 490,180 370,170 360,90" 
+                  fill="rgba(59,130,246,0.35)" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,3"/>
+                <!-- Main polygon (green) -->
+                <polygon points="150,50 320,40 350,140 280,220 140,200 110,120" 
+                  fill="rgba(34,197,94,0.4)" stroke="#22c55e" stroke-width="2.5"/>
+                <!-- Edge labels -->
+                <rect x="205" y="18" width="100" height="28" rx="4" fill="#22c55e"/>
+                <text x="255" y="36" text-anchor="middle" fill="white" font-size="11" font-weight="bold">138.62 m</text>
+                <text x="255" y="48" text-anchor="middle" fill="#d1fae5" font-size="8.5">105.5° (T)</text>
+                <rect x="95" y="100" width="100" height="28" rx="4" fill="#22c55e"/>
+                <text x="145" y="118" text-anchor="middle" fill="white" font-size="11" font-weight="bold">174.50 m</text>
+                <text x="145" y="130" text-anchor="middle" fill="#d1fae5" font-size="8.5">15.5° (U)</text>
+                <!-- Centroid marker -->
+                <circle cx="235" cy="130" r="10" fill="#15803d" stroke="white" stroke-width="2"/>
+                <text x="235" y="134" text-anchor="middle" fill="white" font-size="9" font-weight="bold">✓</text>
+              </svg>
+
+              <!-- Popup info card -->
+              <div class="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-3 text-xs min-w-[140px]">
+                <p class="font-bold text-gray-800 text-sm">kebun sawit makmur</p>
+                <p class="text-gray-500">Pemilik: John Doe</p>
+                <p class="text-gray-500">Luas: <span class="font-semibold text-green-700">5.00 Ha</span></p>
+                <span class="inline-block mt-1 text-green-700 font-semibold text-xs">● Kebun Anda</span>
+              </div>
+
+              <!-- Legend -->
+              <div class="absolute bottom-3 right-3 bg-white bg-opacity-95 rounded-lg shadow px-3 py-2 text-xs">
+                <div class="flex items-center gap-2 mb-1">
+                  <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                  <span class="text-gray-700">Lahan Anda</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                  <span class="text-gray-700">Lahan pekebun lain</span>
+                </div>
+              </div>
+
+              <!-- Map type buttons -->
+              <div class="absolute top-3 left-3 flex gap-2">
+                <button class="bg-white bg-opacity-90 text-gray-700 text-xs px-2 py-1 rounded font-medium shadow">🗺 Peta</button>
+                <button class="bg-green-600 text-white text-xs px-2 py-1 rounded font-medium shadow">🛰 Satelit</button>
+              </div>
+            </div>
+
+            <!-- Stats bar below map -->
+            <div class="bg-gray-800 px-4 py-3 grid grid-cols-2 gap-2 text-xs">
+              <div class="bg-gray-700 rounded px-3 py-2">
+                <span class="text-gray-400">LUAS AREA</span>
+                <p class="text-green-400 font-mono font-bold mt-0.5">27503.16 m² (2.75 Ha)</p>
+              </div>
+              <div class="bg-gray-700 rounded px-3 py-2">
+                <span class="text-gray-400">KELILING</span>
+                <p class="text-yellow-400 font-mono font-bold mt-0.5">690.48 m</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decorative glow -->
+          <div class="absolute -bottom-4 -right-4 w-48 h-48 bg-green-400 rounded-full opacity-10 blur-3xl pointer-events-none"></div>
+        </div>
+
+        <!-- Right: Feature highlights -->
+        <div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6">Fitur Pemetaan Interaktif</h3>
+          <div class="space-y-5">
+
+            <div class="flex items-start gap-4">
+              <div class="bg-green-100 p-3 rounded-xl shrink-0">
+                <svg class="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-1">Gambar Polygon di Citra Satelit</h4>
+                <p class="text-gray-600 text-sm">Tandai batas lahan kebun Anda titik demi titik langsung di atas foto satelit resolusi tinggi. Jarak dan arah setiap sisi ditampilkan secara otomatis.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-100 p-3 rounded-xl shrink-0">
+                <svg class="w-6 h-6 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-1">Kalkulasi Otomatis Luas & Keliling</h4>
+                <p class="text-gray-600 text-sm">Sistem langsung menghitung luas area (m² / Ha), keliling (m), koordinat centroid, dan jumlah sisi saat Anda selesai menggambar polygon.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="bg-red-100 p-3 rounded-xl shrink-0">
+                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-1">Deteksi Tumpang Tindih Lahan</h4>
+                <p class="text-gray-600 text-sm">Sistem secara otomatis mendeteksi apabila area yang Anda gambar tumpang tindih dengan lahan pekebun lain yang sudah terdaftar dan memberi peringatan.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="bg-amber-100 p-3 rounded-xl shrink-0">
+                <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-800 mb-1">Peta Sebaran Seluruh Lahan</h4>
+                <p class="text-gray-600 text-sm">Lihat sebaran semua lahan kebun terdaftar di Kabupaten Rokan Hulu dalam satu peta. Lahan milik Anda ditandai dengan warna hijau untuk mudah dikenali.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-8">
+            <a href="{{ url('/login') }}"
+              class="inline-flex items-center gap-2 bg-green-700 text-white px-7 py-3 rounded-lg font-semibold hover:bg-green-800 transition shadow-lg">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              Mulai Pemetaan Kebun
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- What is ISPO Section -->
   <section id="ispo" class="py-16 bg-linear-to-br from-green-50 to-emerald-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
