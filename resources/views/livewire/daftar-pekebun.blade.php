@@ -234,7 +234,7 @@
                             wire:click="deleteUser"
                             class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold transition"
                         >
-                            Ya, Hapus Semua
+                            Ya, Hapus
                         </button>
                     </div>
                 </div>
