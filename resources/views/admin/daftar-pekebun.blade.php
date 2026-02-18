@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin Kelola Pekebun')
+@section('title', 'Admin Daftar Pekebun')
 
 @section('content')
   <div class="min-h-screen bg-gray-50 py-6">

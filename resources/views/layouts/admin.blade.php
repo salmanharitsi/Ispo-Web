@@ -76,7 +76,7 @@
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun']) }}">
                                 <i
                                     class="fas fa-users text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-pekebun']) }}"></i>
-                                <span class="sidebar-text font-medium">Kelola Pekebun</span>
+                                <span class="sidebar-text font-medium">Daftar Pekebun</span>
                             </a>
                         </li>
                         <li>
@@ -150,7 +150,7 @@
                             <a href="{{ url('/admin/daftar-pekebun') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun']) }}">
                                 <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.daftar-pekebun']) }}"></i>
-                                <span class="font-medium">Kelola Pekebun</span>
+                                <span class="font-medium">Daftar Pekebun</span>
                             </a>
                         </li>
                         <li>
