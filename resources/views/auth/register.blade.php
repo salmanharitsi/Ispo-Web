@@ -49,7 +49,7 @@
         </a>
         <div class="hidden md:block">
           <a href="{{ url('/') }}" class="bg-green-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-800 transition">
-            Kembali ke Beranda
+            Kembali
           </a>
         </div>
       </div>

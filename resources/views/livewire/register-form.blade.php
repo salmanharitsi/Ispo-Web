@@ -44,7 +44,7 @@
     <!-- Email Input -->
     <div>
       <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
-        Email <span class="text-red-500">*</span>
+        Email/No.Hp <span class="text-red-500">*</span>
       </label>
       <div class="relative">
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -57,7 +57,7 @@
           id="email" 
           wire:model.live="email"
           class="block w-full pl-10 pr-3 py-3 border @error('email') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition"
-          placeholder="contoh@email.com"
+          placeholder="masukkan Email/No.Hp"
         >
       </div>
       @error('email')
@@ -143,7 +143,7 @@
       class="w-full m-0 bg-green-700 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
     >
       <span wire:loading.remove wire:target="register">
-        Daftar Sekarang
+        Register
       </span>
 
       <span wire:loading wire:target="register" class="inline-flex items-center justify-center gap-2">
@@ -166,7 +166,7 @@
       href="/login" 
       class="block w-full text-center border-2 border-green-700 text-green-700 py-3 px-4 rounded-lg font-semibold hover:bg-green-50 transition"
     >
-      Masuk ke Akun
+      Login
     </a>
   </form>
 
