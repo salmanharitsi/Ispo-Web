@@ -144,7 +144,7 @@
                             </div>
                             <div class="mt-1 flex flex-col gap-0.5 text-[10px] text-slate-500">
                                 <span>{{ $user->kebun_mapped_count }} terpetakan</span>
-                                <span>{{ $user->kebun_kuisioner_count }} isi kuisioner</span>
+                                <span class="whitespace-nowrap">{{ $user->kebun_kuisioner_count }} isi kuisioner</span>
                             </div>
                         </td>
 
@@ -247,7 +247,7 @@
         <div class="fixed inset-0 z-40 flex items-center justify-center p-4">
             <div class="absolute inset-0 bg-black/40" wire:click="closeDetail"></div>
             <div class="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white">
                     <div>
                         <h3 class="text-lg font-bold text-slate-900">Detail Pekebun</h3>
                         <p class="text-sm text-slate-500">
@@ -471,7 +471,7 @@
                                     </div>
 
                                     <div class="flex flex-col items-start sm:items-end gap-1 text-xs">
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full whitespace-nowrap
                                             @if($kebun->polygon)
                                                 bg-emerald-50 text-emerald-700 border border-emerald-100
                                             @else
@@ -480,7 +480,7 @@
                                             <i class="fa-solid fa-map-location-dot text-[10px]"></i>
                                             {{ $kebun->polygon ? 'Sudah dipetakan' : 'Belum dipetakan' }}
                                         </span>
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full whitespace-nowrap
                                             @if($kebun->kuisioner)
                                                 bg-blue-50 text-blue-700 border border-blue-100
                                             @else
@@ -489,7 +489,7 @@
                                             <i class="fa-regular fa-clipboard text-[10px]"></i>
                                             {{ $kebun->kuisioner ? 'Kuisioner terisi' : 'Kuisioner belum diisi' }}
                                         </span>
-                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full whitespace-nowrap
                                             @if($kebun->status_ispo === 'sudah')
                                                 bg-emerald-50 text-emerald-700 border border-emerald-100
                                             @elseif($kebun->status_ispo === 'proses')

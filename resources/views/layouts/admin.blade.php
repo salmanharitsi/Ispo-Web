@@ -80,19 +80,19 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ url('/admin/daftar-kebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-kebun','admin.all-pemetaan', 'admin.peta-kebun', ]) }}">
+                                <i
+                                    class="fas fa-map text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun']) }}"></i>
+                                <span class="sidebar-text font-medium">Daftar Kebun</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/admin/pengajuan-ispo') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
                                 <i
                                     class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
                                 <span class="sidebar-text font-medium">Pengajuan ISPO</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/admin/pengajuan-ispo') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}">
-                                <i
-                                    class="fas fa-map text-lg w-5 shrink-0 {{ iconColor(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}"></i>
-                                <span class="sidebar-text font-medium">Daftar Kebun</span>
                             </a>
                         </li>
                     </ul>
@@ -154,17 +154,17 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/admin/pengajuan-ispo') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
-                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
-                                <span class="font-medium">Pengajuan ISPO</span>
+                            <a href="{{ url('/admin/daftar-kebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun']) }}">
+                                <i class="fas fa-map text-lg w-5 {{ iconColor(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun']) }}"></i>
+                                <span class="font-medium">Daftar Kebun</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url('/admin/pengajuan-ispo') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}">
-                                <i class="fas fa-map text-lg w-5 {{ iconColor(['pekebun.daftar-kuisioner', 'pekebun.kuisioner-kebun']) }}"></i>
-                                <span class="font-medium">Daftar Kebun</span>
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
+                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
+                                <span class="font-medium">Pengajuan ISPO</span>
                             </a>
                         </li>
                     </ul>

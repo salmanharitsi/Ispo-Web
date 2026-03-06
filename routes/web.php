@@ -21,6 +21,9 @@ Route::group(['middleware' => ['admin', 'no-cache']], function () {
     Route::get('/admin/daftar-pekebun', [AdminController::class,'get_daftar_pekebun'])->name('admin.daftar-pekebun');
     Route::get('/admin/pengajuan-ispo', [AdminController::class,'get_pengajuan_ispo'])->name('admin.pengajuan-ispo');
     Route::get('/admin/pengajuan-ispo/{id}', [AdminController::class,'get_detail_pengajuan_ispo'])->name('admin.detail-pengajuan-ispo');
+    Route::get('/admin/daftar-kebun', [AdminController::class, 'get_daftar_kebun'])->name('admin.daftar-kebun');
+    Route::get('/admin/daftar-kebun/semua-pemetaan', [AdminController::class, 'get_all_pemetaan'])->name('admin.all-pemetaan');
+    Route::get('/admin/daftar-kebun/{id}/peta', [AdminController::class, 'get_peta_kebun'])->name('admin.peta-kebun');
 });
 
 // Pekebun Routes

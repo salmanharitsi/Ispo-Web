@@ -1,6 +1,6 @@
-@extends('layouts.pekebun')
+@extends('layouts.admin')
 
-@section('title', 'Peta Semua Kebun')
+@section('title', 'Admin Peta Semua Kebun')
 
 @section('content')
 <div class="min-h-screen bg-gray-50 py-6">
@@ -12,21 +12,19 @@
           Peta Semua Lahan Kebun
         </p>
         <h1 class="text-2xl md:text-3xl font-bold text-slate-900">
-          Sebaran Lahan Pekebun
+          Sebaran Lahan Seluruh Pekebun
         </h1>
         <p class="text-sm text-slate-500 mt-1">
-          Menampilkan seluruh lahan kebun yang sudah dipetakan di Kabupaten Rokan Hulu. 
-          Lahan milik Anda akan ditandai dengan <span class="font-bold text-green-700">warna hijau</span>.
+          Menampilkan seluruh lahan kebun yang sudah dipetakan di Kabupaten Rokan Hulu.
+          Warna area menunjukkan status penilaian ISPO.
         </p>
       </div>
       <div class="flex flex-col items-start md:items-end gap-2">
-        <div class="inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-3 py-1.5 shadow-sm">
-          <i class="fa-regular fa-user text-slate-400 text-xs"></i>
-          <span class="text-xs text-slate-500">
-            Login sebagai:
-            <span class="font-semibold text-slate-700">{{ $user->name ?? 'Pekebun' }}</span>
-          </span>
-        </div>
+        <a href="{{ url('/admin/daftar-kebun') }}"
+          class="inline-flex items-center gap-2 rounded-lg bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition shadow-sm">
+          <i class="fa-solid fa-arrow-left text-xs"></i>
+          <span>Kembali ke Daftar Kebun</span>
+        </a>
       </div>
     </div>
 
@@ -101,18 +99,6 @@
                 <span>Sudah dinilai</span>
               </div>
             </div>
-            {{-- Kepemilikan --}}
-            <p class="text-[10px] uppercase tracking-wide text-slate-400 font-semibold pt-1 pb-1 border-t border-slate-100">Kepemilikan</p>
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <span class="inline-flex h-3 w-3 rounded-full bg-emerald-500"></span>
-                <span>Kebun milik Anda</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="inline-flex h-3 w-3 rounded-full bg-blue-500"></span>
-                <span>Kebun pekebun lain</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -127,11 +113,6 @@
         <p class="text-xs text-slate-400">
           Total kebun dipetakan:
           <span class="font-semibold text-slate-700">{{ count($allKebun) }}</span>
-          &middot;
-          Kebun milik Anda:
-          <span class="font-semibold text-emerald-600">
-            {{ collect($allKebun)->where('is_current_user', true)->count() }}
-          </span>
         </p>
       </div>
 
@@ -142,12 +123,12 @@
               <th class="py-2 pr-4">Nama Kebun</th>
               <th class="py-2 pr-4">Pemilik</th>
               <th class="py-2 pr-4">Luas (Ha)</th>
-              <th class="py-2">Status</th>
+              <th class="py-2">Status ISPO</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
             @forelse($allKebun as $row)
-              <tr class="{{ $row['is_current_user'] ? 'bg-emerald-50/40' : '' }}">
+              <tr>
                 <td class="py-2 pr-4 text-slate-800 font-medium">
                   {{ $row['nama_kebun'] ?? 'Kebun tanpa nama' }}
                 </td>
@@ -162,15 +143,21 @@
                   @endif
                 </td>
                 <td class="py-2">
-                  @if($row['is_current_user'])
+                  @php $status = $row['status_ispo'] ?? 'belum'; @endphp
+                  @if($status === 'sudah')
                     <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[11px] font-medium">
-                      <i class="fa-solid fa-user-check text-[10px]"></i>
-                      Kebun Anda
+                      <i class="fa-solid fa-award text-[10px]"></i>
+                      Sudah ISPO
+                    </span>
+                  @elseif($status === 'proses')
+                    <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-[11px] font-medium">
+                      <i class="fa-solid fa-clock text-[10px]"></i>
+                      Proses
                     </span>
                   @else
                     <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-600 px-2 py-0.5 text-[11px] font-medium">
-                      <i class="fa-regular fa-user text-[10px]"></i>
-                      Pekebun lain
+                      <i class="fa-regular fa-circle text-[10px]"></i>
+                      Belum
                     </span>
                   @endif
                 </td>
@@ -222,9 +209,8 @@
   let satelliteLayer = null;
   const MIN_ZOOM_FOR_LABELS_ALL = 14;
 
-  // === Util: hitung jarak (Haversine) ===
   function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371000; // meter
+    const R = 6371000;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const a =
@@ -237,7 +223,6 @@
     return R * c;
   }
 
-  // === Util: hitung bearing ===
   function calculateBearing(lat1, lon1, lat2, lon2) {
     const dLon = (lon2 - lon1) * Math.PI / 180;
     const y = Math.sin(dLon) * Math.cos(lat2 * Math.PI / 180);
@@ -250,14 +235,12 @@
     return (bearing + 360) % 360;
   }
 
-  // === Util: arah kompas dari bearing ===
   function getCompassDirection(bearing) {
     const directions = ["U", "TL", "T", "BD", "S", "BDy", "B", "BLy"];
     const index = Math.round(bearing / 45) % 8;
     return directions[index];
   }
 
-  // === Tambah label jarak + bearing untuk satu polygon ===
   function addDistanceLabelsForLayer(layer) {
     const latlngs = layer.getLatLngs()[0];
     if (!latlngs || latlngs.length < 2) return;
@@ -272,7 +255,6 @@
       const bearing = calculateBearing(start.lat, start.lng, end.lat, end.lng);
       const direction = getCompassDirection(bearing);
 
-      // Titik tengah sisi
       const midLat = (start.lat + end.lat) / 2;
       const midLng = (start.lng + end.lng) / 2;
 
@@ -300,7 +282,6 @@
     }
   }
 
-  // === Show/hide label berdasarkan zoom ===
   function toggleDistanceLabelsVisibilityAll() {
     const currentZoom = mapAllInstance.getZoom();
 
@@ -315,7 +296,6 @@
     });
   }
 
-  // === Initialize Map Type Toggle ===
   function initMapTypeToggle() {
     const btnStreet = document.getElementById("btnMapTypeStreet");
     const btnSatellite = document.getElementById("btnMapTypeSatellite");
@@ -328,7 +308,6 @@
         streetLayer.addTo(mapAllInstance);
         currentBaseLayer = streetLayer;
 
-        // Update button states
         btnStreet.classList.add("active");
         btnSatellite.classList.remove("active");
       }
@@ -340,7 +319,6 @@
         satelliteLayer.addTo(mapAllInstance);
         currentBaseLayer = satelliteLayer;
 
-        // Update button states
         btnSatellite.classList.add("active");
         btnStreet.classList.remove("active");
       }
@@ -373,13 +351,11 @@
     });
     mapAllInstance.addControl(new CompassControl());
 
-    // Layer OpenStreetMap (default)
     streetLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: "&copy; OpenStreetMap contributors",
       maxZoom: 19,
     });
 
-    // Layer Satelit (Google Satellite)
     satelliteLayer = L.tileLayer(
       'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
       {
@@ -389,7 +365,6 @@
       }
     );
 
-    // Set default layer
     currentBaseLayer = satelliteLayer;
     currentBaseLayer.addTo(mapAllInstance);
 
@@ -404,32 +379,22 @@
         properties: item,
       };
 
-      const isMine = !!item.is_current_user;
-
       // Warna area berdasarkan status ISPO
       const statusStyle = {
-        belum: { fillColor: "#fca5a5", color: "#dc2626" },   // merah
-        proses: { fillColor: "#fde68a", color: "#d97706" },  // kuning
-        sudah: { fillColor: "#6ee7b7", color: "#059669" },   // hijau
+        belum: { fillColor: "#fca5a5", color: "#dc2626" },
+        proses: { fillColor: "#fde68a", color: "#d97706" },
+        sudah: { fillColor: "#6ee7b7", color: "#059669" },
       };
 
       const status = item.status_ispo || 'belum';
       const { fillColor, color: borderColor } = statusStyle[status] ?? statusStyle['belum'];
 
-      const style = isMine
-        ? {
-            color: borderColor,
-            weight: 2.5,
-            fillColor: fillColor,
-            fillOpacity: 0.55,
-          }
-        : {
-            color: borderColor,
-            weight: 1.5,
-            dashArray: "4 3",
-            fillColor: fillColor,
-            fillOpacity: 0.30,
-          };
+      const style = {
+        color: borderColor,
+        weight: 2,
+        fillColor: fillColor,
+        fillOpacity: 0.45,
+      };
 
       const polyLayer = L.geoJSON(feature, { style });
 
@@ -442,7 +407,6 @@
           totalBounds.extend(bounds);
         }
 
-        // Marker (pakai centroid jika ada)
         let markerLat =
           item.centroid && item.centroid[0]
             ? item.centroid[0]
@@ -453,9 +417,7 @@
             : bounds.getCenter().lng;
 
         const iconHtml = `
-          <div class="kebun-marker-pin ${
-            isMine ? "kebun-marker-pin--mine" : "kebun-marker-pin--other"
-          }">
+          <div class="kebun-marker-pin kebun-marker-pin--mine">
             <i class="fa-solid fa-location-dot"></i>
           </div>
         `;
@@ -489,11 +451,6 @@
             <div class="text-slate-500">
               Luas: <span class="font-medium">${luas}</span>
             </div>
-            ${
-              isMine
-                ? '<div class="mt-0.5 text-emerald-600 font-semibold">Kebun Anda</div>'
-                : ""
-            }
           </div>
         `;
 
@@ -504,7 +461,6 @@
           sticky: false,
         });
 
-        // === Tambahkan label jarak + bearing di tiap sisi polygon ===
         addDistanceLabelsForLayer(layer);
       });
 
@@ -515,10 +471,8 @@
       mapAllInstance.fitBounds(totalBounds, { padding: [24, 24] });
     }
 
-    // Atur visibilitas label saat zoom berubah
     mapAllInstance.on("zoomend", toggleDistanceLabelsVisibilityAll);
 
-    // Initialize map type toggle buttons
     initMapTypeToggle();
   }
 

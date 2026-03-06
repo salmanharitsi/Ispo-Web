@@ -422,6 +422,18 @@
 
       mapInstance = L.map('map').setView([defaultLat, defaultLng], 10);
 
+      // Compass rose control
+      const CompassControl = L.Control.extend({
+        options: { position: 'topright' },
+        onAdd: function () {
+          const container = L.DomUtil.create('div', 'leaflet-compass-rose');
+          container.innerHTML = '<img src="/images/arah-mata-angin.png" alt="Arah Mata Angin" style="width:90px;height:90px;opacity:0.85;pointer-events:none;">';
+          container.style.cssText = 'background:transparent;border:none;box-shadow:none;';
+          return container;
+        }
+      });
+      mapInstance.addControl(new CompassControl());
+
       // Layer OpenStreetMap (default)
       streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors',

@@ -66,6 +66,45 @@ class AdminController extends Controller
         return view('admin.pengajuan-ispo');
     }
 
+    public function get_daftar_kebun()
+    {
+        return view('admin.daftar-kebun');
+    }
+
+    public function get_all_pemetaan()
+    {
+        $allKebun = Kebun::with('user')
+            ->whereNotNull('polygon')
+            ->get()
+            ->map(function (Kebun $kebun) {
+                return [
+                    'id'              => $kebun->id,
+                    'nama_kebun'      => $kebun->nama_kebun,
+                    'pemilik'         => optional($kebun->user)->name,
+                    'luas_lahan'      => $kebun->luas_lahan,
+                    'polygon'         => $kebun->polygon,
+                    'centroid'        => [$kebun->latitude, $kebun->longitude],
+                    'is_current_user' => false,
+                    'status_ispo'     => $kebun->status_ispo ?? 'belum',
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        return view('admin.all-pemetaan', [
+            'allKebun' => $allKebun,
+        ]);
+    }
+
+    public function get_peta_kebun($id)
+    {
+        $kebun = Kebun::with('user')->findOrFail($id);
+
+        return view('admin.peta-kebun', [
+            'kebun' => $kebun,
+        ]);
+    }
+
     public function get_detail_pengajuan_ispo($id)
     {
         $kebun = Kebun::with(['user', 'kuisioner'])->findOrFail($id);

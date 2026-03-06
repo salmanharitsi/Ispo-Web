@@ -66,11 +66,22 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Daftar Pekebun'],
             ],
             'admin.pengajuan-ispo' => [
-                ['label'=> 'Pengajuan ISPO'],
+                ['label' => 'Pengajuan ISPO'],
             ],
             'admin.detail-pengajuan-ispo' => [
-                ['label'=> 'Pengajuan ISPO', 'route' => 'admin.pengajuan-ispo'],
-                ['label'=> 'Detail Pengajuan ISPO'],
+                ['label' => 'Pengajuan ISPO', 'route' => 'admin.pengajuan-ispo'],
+                ['label' => 'Detail Pengajuan ISPO'],
+            ],
+            'admin.daftar-kebun' => [
+                ['label' => 'Daftar Kebun']
+            ],
+            'admin.all-pemetaan' => [
+                ['label' => 'Daftar Kebun', 'route' => 'admin.daftar-kebun'],
+                ['label' => 'Semua Pemetaan'],
+            ],
+            'admin.peta-kebun' => [
+                ['label' => 'Daftar Kebun', 'route' => 'admin.daftar-kebun'],
+                ['label' => 'Peta Kebun'],
             ],
         ];
 
