@@ -26,10 +26,10 @@
                 wire:model.live="filterStatusIspo"
                 class="border border-slate-300 rounded-lg text-xs px-2 py-1 bg-white focus:ring-green-500 focus:border-green-500"
             >
-                <option value="">Semua ISPO</option>
-                <option value="belum">Belum sertifikasi</option>
-                <option value="proses">Proses sertifikasi</option>
-                <option value="sudah">Sudah sertifikasi</option>
+                <option value="">Semua Status Kelayakan</option>
+                <option value="belum">Belum Layak ISPO</option>
+                <option value="proses">Proses Kelayakan ISPO</option>
+                <option value="sudah">Layak ISPO</option>
             </select>
 
             {{-- Status Finalisasi --}}
@@ -187,11 +187,11 @@
                                             : 'bg-slate-50 text-slate-500 border-slate-200') }}">
                                     <i class="fa-solid fa-award"></i>
                                     @if($k->status_ispo === 'sudah')
-                                        Sudah ISPO
+                                        Layak ISPO
                                     @elseif($k->status_ispo === 'proses')
-                                        Proses ISPO
+                                        Proses Kelayakan ISPO
                                     @else
-                                        Belum ISPO
+                                        Belum Layak ISPO
                                     @endif
                                 </span>
 
@@ -434,9 +434,9 @@
                                     ? 'bg-amber-50 text-amber-700 border-amber-100'
                                     : 'bg-slate-50 text-slate-500 border-slate-200') }}">
                             <i class="fa-solid fa-award"></i>
-                            @if($detailKebun->status_ispo === 'sudah') Sudah sertifikasi ISPO
-                            @elseif($detailKebun->status_ispo === 'proses') Proses sertifikasi ISPO
-                            @else Belum sertifikasi ISPO
+                            @if($detailKebun->status_ispo === 'sudah') Layak ISPO
+                            @elseif($detailKebun->status_ispo === 'proses') Proses Kelayakan ISPO
+                            @else Belum Layak ISPO
                             @endif
                         </span>
 

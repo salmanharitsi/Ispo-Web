@@ -159,7 +159,7 @@
                                 <span class="text-sm font-semibold text-emerald-600">
                                     {{ $sudah }} / {{ $user->kebun_count }}
                                 </span>
-                                <span class="text-xs text-slate-500">Sudah sertifikasi</span>
+                                <span class="text-xs text-slate-500">Layak ISPO</span>
                                 <div class="w-20 h-1.5 bg-slate-100 rounded-full overflow-hidden mt-1">
                                     <div
                                         class="h-full bg-emerald-500 rounded-full"
@@ -353,7 +353,7 @@
                             @php
                                 $sudahIspo = $detailUser->kebun->where('status_ispo', 'sudah')->count();
                             @endphp
-                            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Sertifikasi ISPO</p>
+                            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Status Kelayakan ISPO</p>
                             <p class="text-lg font-bold text-emerald-700">
                                 {{ $sudahIspo }} / {{ $detailUser->kebun->count() }}
                             </p>
@@ -499,11 +499,11 @@
                                             @endif">
                                             <i class="fa-solid fa-award text-[10px]"></i>
                                             @if($kebun->status_ispo === 'sudah')
-                                                Sudah sertifikasi ISPO
+                                                Layak ISPO
                                             @elseif($kebun->status_ispo === 'proses')
-                                                Proses sertifikasi ISPO
+                                                Proses Kelayakan ISPO
                                             @else
-                                                Belum sertifikasi ISPO
+                                                Belum Layak ISPO
                                             @endif
                                         </span>
                                     </div>

@@ -123,7 +123,7 @@
               <th class="py-2 pr-4">Nama Kebun</th>
               <th class="py-2 pr-4">Pemilik</th>
               <th class="py-2 pr-4">Luas (Ha)</th>
-              <th class="py-2">Status ISPO</th>
+              <th class="py-2">Status Kelayakan ISPO</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">

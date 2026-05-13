@@ -259,7 +259,7 @@
       new Chart(ispoCtx, {
         type: 'doughnut',
         data: {
-          labels: ['Belum Sertifikasi', 'Proses Sertifikasi', 'Sudah Sertifikasi'],
+          labels: ['Belum Layak ISPO', 'Proses Kelayakan ISPO', 'Layak ISPO'],
           datasets: [{
             data: [ispoBelum, ispoProses, ispoSudah],
             backgroundColor: ['#E5E7EB', '#FACC15', '#22C55E'],

@@ -44,7 +44,7 @@
             @endif">
             <i class="fa-solid fa-certificate text-[10px]"></i>
             <span>
-              Status ISPO:
+              Status Kelayakan ISPO:
               @switch($kebun->status_ispo)
                 @case('sudah') Sudah tersertifikasi @break
                 @case('proses') Dalam proses @break
