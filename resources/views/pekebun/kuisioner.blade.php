@@ -32,7 +32,7 @@
               <p class="text-sm font-medium text-green-800">Panduan Pengisian Kuisioner</p>
               <p class="text-sm text-green-700 mt-1">
                 1. Baca setiap pertanyaan dengan saksama, lalu pilih jawaban <strong>Ya</strong> atau <strong>Tidak</strong> sesuai kondisi kebun Anda.<br>
-                2. Jawablah secara <strong>jujur</strong>, karena data ini digunakan sebagai dasar penilaian kesiapan sertifikasi ISPO.<br>
+                2. Jawablah secara <strong>jujur</strong>, karena data ini digunakan sebagai dasar penilaian kelayakan sertifikasi ISPO.<br>
                 3. Anda dapat memperbarui jawaban kuisioner di kemudian hari jika terdapat perubahan kondisi kebun.<br>
                 4. Setelah semua pertanyaan terisi, klik tombol <strong>Simpan Kuisioner</strong> di bagian bawah halaman.
               </p>

@@ -118,33 +118,33 @@ class AdminController extends Controller
             'p1_q3_dokumen_penyelesaian_sengketa',
             'p1_q4_salinan_perjanjian_sengketa',
             'p1_q5_memiliki_stdb',
-            'p1_q6_sedang_mengurus_stdb',
-            'p1_q7_memiliki_izin_lingkungan',
-            'p1_q8_catatan_pengelolaan_lingkungan',
+            'p1_q6_memiliki_izin_lingkungan',
+            'p1_q7_catatan_pengelolaan_lingkungan',
         ];
 
         $p2Fields = [
-            'p2_q9_tergabung_kelompok_tani',
-            'p2_q10_kelompok_memiliki_dokumen_resmi',
-            'p2_q11_rencana_kerja_tertulis',
-            'p2_q12_catatan_kegiatan_kebun',
-            'p2_q13_buka_lahan_tanpa_bakar',
-            'p2_q14_bibit_dari_produsen_resmi',
-            'p2_q15_catatan_asal_bibit',
-            'p2_q16_tanam_sesuai_standar',
-            'p2_q17_catatan_pelaksanaan_tanam',
-            'p2_q18_panduan_lahan_gambut',
-            'p2_q19_pemeliharaan_rutin',
-            'p2_q20_catatan_pemupukan_pemeliharaan',
-            'p2_q21_pengendalian_hama_sesuai_pht',
-            'p2_q22_sarana_pengendalian_hama',
-            'p2_q23_panen_buah_matang',
-            'p2_q24_catatan_hasil_panen',
-            'p2_q25_tbs_segera_diangkut',
+            'p2_q8_tergabung_kelompok_tani',
+            'p2_q9_kelompok_memiliki_dokumen_resmi',
+            'p2_q10_rencana_kerja_tertulis',
+            'p2_q11_catatan_kegiatan_kebun',
+            'p2_q12_buka_lahan_tanpa_bakar',
+            'p2_q13_bibit_dari_produsen_resmi',
+            'p2_q14_catatan_asal_bibit',
+            'p2_q15_tanam_sesuai_standar',
+            'p2_q16_catatan_pelaksanaan_tanam',
+            'p2_q17_panduan_lahan_gambut',
+            'p2_q18_pemeliharaan_rutin',
+            'p2_q19_catatan_pemupukan_pemeliharaan',
+            'p2_q20_pengendalian_hama_sesuai_pht',
+            'p2_q21_sarana_pengendalian_hama',
+            'p2_q22_panen_buah_matang',
+            'p2_q23_catatan_hasil_panen',
+            'p2_q24_tbs_segera_diangkut',
         ];
 
         $p3Fields = [
-            'p3_q26_upaya_mencegah_kebakaran',
+            'p3_q25_upaya_mencegah_kebakaran',
+            'p3_q26_memiliki_alat_pemadam',
             'p3_q27_mengetahui_satwa_tumbuhan',
             'p3_q28_mencatat_satwa_tumbuhan',
         ];
@@ -166,7 +166,8 @@ class AdminController extends Controller
 
             if ($kuisioner) {
                 foreach ($fields as $field) {
-                    if ($kuisioner->$field) {
+                    // Cek jika field bernilai truthy (1, 0.5, 2, 3, 4 dsb dihitung sebagai 'Ya' untuk statistik umum)
+                    if ($kuisioner->$field > 0) {
                         $yes++;
                     }
                 }
@@ -187,7 +188,7 @@ class AdminController extends Controller
                     'kode' => 'P1',
                     'nama' => 'Kepatuhan terhadap Peraturan & Legalitas',
                     'bobotPerSoal' => 6.425,
-                    'jumlahSoal' => 8,
+                    'jumlahSoal' => 7,
                 ],
                 $computeStats($p1Fields, 6.425)
             ),
@@ -205,7 +206,7 @@ class AdminController extends Controller
                     'kode' => 'P3',
                     'nama' => 'Lingkungan & Keanekaragaman Hayati',
                     'bobotPerSoal' => 1.528,
-                    'jumlahSoal' => 3,
+                    'jumlahSoal' => 4,
                 ],
                 $computeStats($p3Fields, 1.528)
             ),
@@ -367,5 +368,20 @@ class AdminController extends Controller
         $kebun->save();
 
         return redirect()->route('admin.pengajuan-ispo')->with('success', 'Sertifikasi berhasil disetujui');
+    }
+
+    public function ahp_prinsip()
+    {
+        return view('admin.ahp.prinsip');
+    }
+
+    public function ahp_kriteria()
+    {
+        return view('admin.ahp.kriteria');
+    }
+
+    public function ahp_final()
+    {
+        return view('admin.ahp.final');
     }
 }

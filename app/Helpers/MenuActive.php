@@ -83,6 +83,18 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Daftar Kebun', 'route' => 'admin.daftar-kebun'],
                 ['label' => 'Peta Kebun'],
             ],
+            'admin.ahp.prinsip' => [
+                ['label' => 'Perhitungan AHP'],
+                ['label' => 'Pembobotan Prinsip'],
+            ],
+            'admin.ahp.kriteria' => [
+                ['label' => 'Perhitungan AHP'],
+                ['label' => 'Pembobotan Kriteria'],
+            ],
+            'admin.ahp.final' => [
+                ['label' => 'Perhitungan AHP'],
+                ['label' => 'Pembobotan Final'],
+            ],
         ];
 
         return $breadcrumbs[$route] ?? [
