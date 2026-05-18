@@ -63,7 +63,8 @@ class AdminController extends Controller
 
     public function get_pengajuan_ispo()
     {
-        return view('admin.pengajuan-ispo');
+        return back()->with('info', 'fitur ini dalam pengembangan');
+        // return view('admin.pengajuan-ispo');
     }
 
     public function get_daftar_kebun()

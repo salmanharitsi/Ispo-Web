@@ -18,7 +18,7 @@
       </div>
 
       <div class="col-span-4">
-        <!-- livewire -->
+        @livewire('admin.ahp.final-table')
       </div>
     </div>
   </div>

@@ -196,11 +196,61 @@
                                 <td class="px-4 py-3 border border-gray-300 font-bold text-gray-900 text-center">{{ strtoupper($rowKey) }}</td>
                                 <td class="px-4 py-3 border border-gray-300 text-center">{{ number_format($jumlah_baris[$rowKey], 4, ',', '.') }}</td>
                                 <td class="px-4 py-3 border border-gray-300 text-center">{{ number_format($bobot[$rowKey], 4, ',', '.') }}</td>
-                                <td class="px-4 py-3 border border-gray-300 text-center font-bold">{{ number_format($cv[$rowKey], 3, ',', '.') }}</td>
+                                <td class="px-4 py-3 border border-gray-300 text-center font-bold">{{ number_format($cv[$rowKey], 4, ',', '.') }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Consistency Calculation Block -->
+            <div class="mt-8 bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-6 text-gray-800">
+                @php
+                    $n = count($cols);
+                    $sumCv = array_sum($cv);
+                @endphp
+                
+                <div>
+                    <h4 class="font-bold mb-2 flex items-center text-gray-900">
+                        Hitung &lambda; maks:
+                    </h4>
+                    <div class="mt-1 space-y-1 font-mono text-sm bg-gray-50 py-2 px-4 rounded-lg border border-gray-100 inline-block text-gray-700">
+                        <div>&lambda; maks = ({{ implode(' + ', array_map(function($val) { return number_format($val, 4, ',', '.'); }, $cv)) }}) / {{ $n }}</div>
+                        <div><span class="inline-block text-right mr-2">=</span>{{ number_format($sumCv, 4, ',', '.') }} / {{ $n }} = <strong class="text-blue-700 text-base">{{ number_format($lambda_max, 4, ',', '.') }}</strong></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-2 flex items-center text-gray-900">
+                        Hitung Consistency Index (CI):
+                    </h4>
+                    <div class="mt-1 space-y-1 font-mono text-sm bg-gray-50 py-2 px-4 rounded-lg border border-gray-100 inline-block text-gray-700">
+                        <div>CI = (&lambda; maks - n) / (n - 1) = ({{ number_format($lambda_max, 4, ',', '.') }} - {{ $n }}) / ({{ $n }} - 1)</div>
+                        <div><span class="inline-block text-right mr-2">=</span>{{ number_format($lambda_max - $n, 4, ',', '.') }} / {{ $n - 1 }} = <strong class="text-blue-700 text-base">{{ number_format($ci, 4, ',', '.') }}</strong></div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-2 flex items-center text-gray-900">
+                        Hitung Consistency Ratio (CR):
+                    </h4>
+                    <div>
+                        <div class="mb-2 text-sm text-gray-600">Nilai Random Index (RI) untuk matriks berordo {{ $n }} = <strong>{{ number_format($ri_values[$n] ?? 1.12, 2, ',', '.') }}</strong></div>
+                        <div class="font-mono text-sm bg-gray-50 py-2 px-4 rounded-lg border border-gray-100 inline-block text-gray-700">
+                            CR = CI / RI = {{ number_format($ci, 4, ',', '.') }} / {{ number_format($ri_values[$n] ?? 1.12, 2, ',', '.') }} = <strong class="text-blue-700 text-base">{{ number_format($cr, 4, ',', '.') }}</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 rounded-lg border {{ $isConsistent ? 'bg-green-50 border-green-400 text-green-800' : 'bg-red-50 border-red-400 text-red-800' }} flex items-start shadow-sm">
+                    <div class="mr-3 mt-0.5">
+                        <i class="fas {{ $isConsistent ? 'fa-check-circle text-green-500' : 'fa-exclamation-triangle text-red-500' }} text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold mb-1">Kesimpulan:</p>
+                        <p class="text-sm">Karena nilai CR = <strong>{{ number_format($cr, 4, ',', '.') }}</strong> {{ $isConsistent ? '<' : '>=' }} 0,1 maka matriks perbandingan berpasangan prinsip dinyatakan <strong>{{ $isConsistent ? 'KONSISTEN' : 'TIDAK KONSISTEN' }}</strong>{{ $isConsistent ? ' dan dapat digunakan pada proses selanjutnya.' : '.' }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

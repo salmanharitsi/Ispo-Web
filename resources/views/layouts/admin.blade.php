@@ -87,14 +87,14 @@
                                 <span class="sidebar-text font-medium">Daftar Kebun</span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="{{ url('/admin/pengajuan-ispo') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
                                 <i
                                     class="fas fa-list-check text-lg w-5 shrink-0 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
                                 <span class="sidebar-text font-medium">Pengajuan ISPO</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <button type="button" onclick="document.getElementById('ahp-submenu').classList.toggle('hidden'); document.getElementById('ahp-icon').classList.toggle('rotate-90')" class="w-full menu-item flex items-center justify-between px-4 py-3 rounded-lg {{ menuActive(['admin.ahp.prinsip', 'admin.ahp.kriteria', 'admin.ahp.final']) }}">
                                 <div class="flex items-center space-x-3">
@@ -107,19 +107,19 @@
                                 <li>
                                     <a href="{{ url('/admin/ahp/prinsip') }}" class="menu-item flex items-center space-x-3 px-4 py-2 rounded-lg {{ menuActive(['admin.ahp.prinsip']) }}">
                                         <i class="fas fa-circle text-[8px] w-5 shrink-0 {{ iconColor(['admin.ahp.prinsip']) }}"></i>
-                                        <span class="sidebar-text font-medium text-sm">Pembobotan Prinsip</span>
+                                        <span class="sidebar-text font-medium text-sm">Lv1 - Pembobotan Prinsip</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/admin/ahp/kriteria') }}" class="menu-item flex items-center space-x-3 px-4 py-2 rounded-lg {{ menuActive(['admin.ahp.kriteria']) }}">
                                         <i class="fas fa-circle text-[8px] w-5 shrink-0 {{ iconColor(['admin.ahp.kriteria']) }}"></i>
-                                        <span class="sidebar-text font-medium text-sm">Pembobotan Kriteria</span>
+                                        <span class="sidebar-text font-medium text-sm">Lv2 - Pembobotan Kriteria</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/admin/ahp/final') }}" class="menu-item flex items-center space-x-3 px-4 py-2 rounded-lg {{ menuActive(['admin.ahp.final']) }}">
                                         <i class="fas fa-circle text-[8px] w-5 shrink-0 {{ iconColor(['admin.ahp.final']) }}"></i>
-                                        <span class="sidebar-text font-medium text-sm">Pembobotan Final</span>
+                                        <span class="sidebar-text font-medium text-sm">Lv3 - Pembobotan Final</span>
                                     </a>
                                 </li>
                             </ul>
@@ -189,13 +189,13 @@
                                 <span class="font-medium">Daftar Kebun</span>
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="{{ url('/admin/pengajuan-ispo') }}"
                                 class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}">
                                 <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.pengajuan-ispo', 'admin.detail-pengajuan-ispo']) }}"></i>
                                 <span class="font-medium">Pengajuan ISPO</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <button type="button" onclick="document.getElementById('ahp-submenu-mobile').classList.toggle('hidden'); document.getElementById('ahp-icon-mobile').classList.toggle('rotate-90')" class="w-full menu-item flex items-center justify-between px-4 py-3 rounded-lg {{ menuActive(['admin.ahp.prinsip', 'admin.ahp.kriteria', 'admin.ahp.final']) }}">
                                 <div class="flex items-center space-x-3">
@@ -209,19 +209,19 @@
                                 <li>
                                     <a href="{{ url('/admin/ahp/prinsip') }}" class="menu-item flex items-center space-x-3 px-4 py-2 rounded-lg {{ menuActive(['admin.ahp.prinsip']) }}">
                                         <i class="fas fa-circle text-[8px] w-5 {{ iconColor(['admin.ahp.prinsip']) }}"></i>
-                                        <span class="font-medium text-sm">Pembobotan Prinsip</span>
+                                        <span class="font-medium text-sm">Lv1 - Pembobotan Prinsip</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/admin/ahp/kriteria') }}" class="menu-item flex items-center space-x-3 px-4 py-2 rounded-lg {{ menuActive(['admin.ahp.kriteria']) }}">
                                         <i class="fas fa-circle text-[8px] w-5 {{ iconColor(['admin.ahp.kriteria']) }}"></i>
-                                        <span class="font-medium text-sm">Pembobotan Kriteria</span>
+                                        <span class="font-medium text-sm">Lv2 - Pembobotan Kriteria</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ url('/admin/ahp/final') }}" class="menu-item flex items-center space-x-3 px-4 py-2 rounded-lg {{ menuActive(['admin.ahp.final']) }}">
                                         <i class="fas fa-circle text-[8px] w-5 {{ iconColor(['admin.ahp.final']) }}"></i>
-                                        <span class="font-medium text-sm">Pembobotan Final</span>
+                                        <span class="font-medium text-sm">Lv3 - Pembobotan Final</span>
                                     </a>
                                 </li>
                             </ul>

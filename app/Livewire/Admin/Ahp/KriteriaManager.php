@@ -65,9 +65,18 @@ class KriteriaManager extends Component
     public $justGenerated = false;
     public $generationId = 0;
 
+    public $lambda_max = 0;
+    public $ci = 0;
+    public $cr = 0;
+    public $isConsistent = false;
+    public $ri_values = [1 => 0.00, 2 => 0.00, 3 => 0.58, 4 => 0.90, 5 => 1.12];
+
     public $completedTabs = [];
 
     public function mount() {
+        if (session()->has('activeTab')) {
+            $this->activeTab = session('activeTab');
+        }
         $this->loadCompletedTabs();
         $this->loadTabData($this->activeTab);
     }
@@ -146,6 +155,7 @@ class KriteriaManager extends Component
             $this->checkMatrixSavedAndComplete();
             if ($this->isGenerated) {
                 $this->calculateNormJumlah();
+                $this->calculateConsistency();
             }
         }
     }
@@ -213,6 +223,23 @@ class KriteriaManager extends Component
         }
     }
 
+    public function calculateConsistency() {
+        $cols = array_keys($this->prinsipData[$this->activeTab]['criteria']);
+        $n = count($cols);
+        $sumCv = 0;
+        foreach ($cols as $row) {
+            $sumCv += $this->cv[$row] ?? 0;
+        }
+        
+        if ($n > 0) {
+            $this->lambda_max = $sumCv / $n;
+            $this->ci = ($n > 1) ? ($this->lambda_max - $n) / ($n - 1) : 0;
+            $ri = $this->ri_values[$n] ?? 1.12;
+            $this->cr = ($ri > 0) ? $this->ci / $ri : 0;
+            $this->isConsistent = ($n <= 2) ? true : ($this->cr <= 0.1);
+        }
+    }
+
     public function save() {
         $cols = array_keys($this->prinsipData[$this->activeTab]['criteria']);
         $data = ['prinsip_code' => $this->activeTab];
@@ -249,6 +276,8 @@ class KriteriaManager extends Component
         $this->loadCompletedTabs();
         $this->checkMatrixSavedAndComplete();
 
+        session()->flash('activeTab', $this->activeTab);
+        
         return redirect(url('/admin/ahp/kriteria'))->with([
             'success' => [
                 'title' => 'Data kriteria untuk ' . $this->prinsipData[$this->activeTab]['name'] . ' berhasil disimpan.'
@@ -299,6 +328,8 @@ class KriteriaManager extends Component
         $this->isGenerated = true;
         $this->justGenerated = true;
         $this->generationId++;
+        
+        $this->calculateConsistency();
 
         $data = [];
         foreach ($cols as $row) {
