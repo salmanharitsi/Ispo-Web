@@ -448,17 +448,6 @@
                             <i class="fa-solid fa-circle-check"></i>
                             {{ $detailKebun->status_finalisasi === 'final' ? 'Data sudah final' : 'Belum final' }}
                         </span>
-
-                        {{-- STDB --}}
-                        @if(!is_null($detailKebun->pernyataan_stdb))
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border
-                                {{ $detailKebun->pernyataan_stdb
-                                    ? 'bg-teal-50 text-teal-700 border-teal-100'
-                                    : 'bg-slate-50 text-slate-500 border-slate-200' }}">
-                                <i class="fa-solid fa-file-shield"></i>
-                                {{ $detailKebun->pernyataan_stdb ? 'Pernyataan STDB: Ya' : 'Pernyataan STDB: Tidak' }}
-                            </span>
-                        @endif
                     </div>
 
                     {{-- Detail lahan & kepemilikan --}}

@@ -108,20 +108,6 @@
         @endif
       </dd>
     </div>
-    <div>
-      <dt class="text-slate-500">Pernyataan STDB</dt>
-      <dd class="font-medium text-slate-800">
-        @if($kebun->pernyataan_stdb)
-          <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[11px] font-medium">
-            <i class="fa-solid fa-check text-[10px]"></i> Sudah menyatakan memiliki STDB
-          </span>
-        @else
-          <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-600 px-2 py-0.5 text-[11px] font-medium">
-            <i class="fa-solid fa-xmark text-[10px]"></i> Belum ada pernyataan STDB
-          </span>
-        @endif
-      </dd>
-    </div>
   </dl>
 
   @if($kebun->catatan_pengecekan)

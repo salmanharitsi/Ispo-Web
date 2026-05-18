@@ -44,7 +44,6 @@ return new class extends Migration
             $table->string('kepada_siapa_hasil_panen_dijual')->nullable(); 
             $table->integer('harga_jual_tbs_terakhir')->nullable(); 
             $table->integer('pendapatan_bersih')->nullable(); 
-            $table->boolean('pernyataan_stdb')->nullable()->default(false);
 
             $table->timestamps();
         });

@@ -117,24 +117,6 @@
               @endif
             </div>
 
-            <!-- Status Kuisioner -->
-            <div class="flex items-center justify-between py-2 border-b border-gray-100">
-              <span class="text-gray-600 text-sm flex items-center">
-                <i class="fa-solid fa-sign-hanging w-5 h-5 mr-2 text-green-600"></i>
-                Pernyataan STDB
-              </span>
-              @if($kebun->pernyataan_stdb == true)
-                <span class="text-green-600 font-semibold text-sm flex items-center">
-                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  Sudah
-                </span>
-              @else
-                <span class="text-gray-400 font-semibold text-sm">Belum</span>
-              @endif
-            </div>
-
             <!-- Status ISPO -->
             <div class="flex items-center justify-between py-2">
               <span class="text-gray-600 text-sm flex items-center">

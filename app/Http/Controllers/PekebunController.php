@@ -62,16 +62,12 @@ class PekebunController extends Controller
         $hasKuisioner = $user->kebun()->whereHas('kuisioner')->exists();
         $jumlahKuisionerSelesai = $user->kebun()->whereHas('kuisioner')->count();
 
-        // Check Step 5: Kuisioner (minimal 1 kebun yang sudah ada kuisionernya)
-        $hasPernyataanStdb = $user->kebun()->where('pernyataan_stdb', true)->exists();
-        $jumlahPernyataanStdb = $user->kebun()->where('pernyataan_stdb', true)->count();
-
-        // Check Step 6: Finalisasi (minimal 1 kebun yang sudah difinalisasi)
+        // Check Step 5: Finalisasi (minimal 1 kebun yang sudah difinalisasi)
         $hasFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->exists();
         $jumlahKebunFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->count();
 
         // Check if all steps complete
-        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasPernyataanStdb && $hasFinalisasi;
+        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasFinalisasi;
 
         return view('pekebun.dashboard', compact(
             'user',
@@ -82,8 +78,6 @@ class PekebunController extends Controller
             'jumlahKebunTerpetakan',
             'hasKuisioner',
             'jumlahKuisionerSelesai',
-            'hasPernyataanStdb',
-            'jumlahPernyataanStdb',
             'hasFinalisasi',
             'jumlahKebunFinalisasi',
             'allStepsComplete'
@@ -109,23 +103,15 @@ class PekebunController extends Controller
             }
         }
 
-        $needSTDB = $user->kebun()
-            ->where('polygon', '!=', null)
-            ->whereHas('kuisioner')
-            ->where('pernyataan_stdb','=', false)
-            ->count();
-
         $needFinalisasi = $user->kebun()
             ->where('status_finalisasi', '=','belum')
             ->where('polygon', '!=', null)
-            ->where('pernyataan_stdb','=', true)
             ->whereHas('kuisioner')
             ->count();
 
         return view('pekebun.daftar-kebun', [
             'isDataDiriComplete' => $isDataDiriComplete,
             'needFinalisasi' => $needFinalisasi,
-            'needSTDB'=> $needSTDB,
         ]);
     }
 
@@ -273,10 +259,10 @@ class PekebunController extends Controller
         }
 
         // Optional: pastikan data lengkap dulu
-        if (!$kebun->polygon || !$kebun->kuisioner || $kebun->pernyataan_stdb == false) {
+        if (!$kebun->polygon || !$kebun->kuisioner) {
             return redirect(url('/pekebun/daftar-kebun'))->with([
                 'error' => [
-                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan, kuisioner, dan pernyataan STDB sebelum finalisasi.",
+                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan dan kuisioner sebelum finalisasi.",
                 ]
             ]);
         }
@@ -288,42 +274,6 @@ class PekebunController extends Controller
         return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
             'success' => [
                 "title" => "Data kebun berhasil difinalisasi. Data tidak dapat diubah lagi.",
-            ]
-        ]);
-    }
-
-    public function post_pernyataanStdb(string $id)
-    {
-        $user = Auth::user();
-
-        $kebun = Kebun::where('id', $id)
-            ->where('user_id', $user->id)
-            ->firstOrFail();
-
-        // Optional: cegah finalisasi ulang
-        if ($kebun->pernyataan_stdb === true) {
-            return redirect(url('/pekebun/daftar-kebun'))->with([
-                'error' => [
-                    "title" => "Data kebun ini sudah memiliki pernyataan STDB.",
-                ]
-            ]);
-        }
-
-        // Optional: pastikan data lengkap dulu
-        if (!$kebun->polygon || !$kebun->kuisioner) {
-            return redirect(url('/pekebun/daftar-kebun'))->with([
-                'error' => [
-                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan dan kuisioner sebelum finalisasi.",
-                ]
-            ]);
-        }
-
-        $kebun->pernyataan_stdb = true;
-        $kebun->save();
-
-        return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
-            'success' => [
-                "title" => "Berhasil mengisi pernyataan STDB untuk kebun ini.",
             ]
         ]);
     }
