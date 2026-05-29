@@ -125,9 +125,17 @@
                 </svg>
                 Penilaian Kelayakan ISPO
               </span>
-              @if($kebun->status_ispo == 'sudah')
+              @if($kebun->status_ispo == 'sudah-layak')
                 <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
-                  Layak
+                  Sudah Layak
+                </span>
+              @elseif($kebun->status_ispo == 'cukup-layak')
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">
+                  Cukup Layak
+                </span>
+              @elseif($kebun->status_ispo == 'belum-layak')
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">
+                  Belum Layak
                 </span>
               @elseif($kebun->status_ispo == 'proses')
                 <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">
@@ -135,7 +143,7 @@
                 </span>
               @else
                 <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold">
-                  Belum
+                  Belum Diajukan
                 </span>
               @endif
             </div>

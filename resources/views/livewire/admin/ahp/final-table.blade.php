@@ -43,7 +43,7 @@
             <button 
                 wire:click="generateFinalWeights" 
                 @if(!$canGenerate) disabled @endif
-                class="mt-4 sm:mt-0 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed bg-green-800 hover:bg-green-950 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 flex items-center justify-center w-full sm:w-auto min-w-[160px]">
+                class="mt-4 sm:mt-0 disabled:bg-gray-400 disabled:text-gray-200 disabled:cursor-not-allowed bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 flex items-center justify-center w-full sm:w-auto min-w-[160px]">
                 
                 <span wire:loading.remove wire:target="generateFinalWeights">
                     <i class="fas fa-sync-alt mr-2"></i> {{ $isGenerated ? 'Regenerate Bobot' : 'Generate Bobot' }}

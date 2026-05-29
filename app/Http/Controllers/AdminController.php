@@ -24,9 +24,11 @@ class AdminController extends Controller
         $kebunLengkap     = Kebun::whereNotNull('polygon')->has('kuisioner')->count();
         $kebunFinal       = Kebun::where('status_finalisasi', 'final')->count();
 
-        $ispoBelum    = Kebun::where('status_ispo', 'belum')->count();
+        $ispoBelum    = Kebun::where('status_ispo', 'belum-pengajuan')->count();
         $ispoProses   = Kebun::where('status_ispo', 'proses')->count();
-        $ispoSudah    = Kebun::where('status_ispo', 'sudah')->count();
+        $ispoSudah    = Kebun::where('status_ispo', 'sudah-layak')->count();
+        $ispoCukupLayak = Kebun::where('status_ispo', 'cukup-layak')->count();
+        $ispoBelumLayak = Kebun::where('status_ispo', 'belum-layak')->count();
 
         // Kebun per kecamatan (top 6)
         $kecamatanData = Kebun::select('kecamatan', DB::raw('COUNT(*) as total'))
@@ -53,6 +55,8 @@ class AdminController extends Controller
             'ispoBelum',
             'ispoProses',
             'ispoSudah',
+            'ispoCukupLayak',
+            'ispoBelumLayak',
         ));
     }
 
@@ -86,7 +90,7 @@ class AdminController extends Controller
                     'polygon'         => $kebun->polygon,
                     'centroid'        => [$kebun->latitude, $kebun->longitude],
                     'is_current_user' => false,
-                    'status_ispo'     => $kebun->status_ispo ?? 'belum',
+                    'status_ispo'     => $kebun->status_ispo ?? 'belum-pengajuan',
                 ];
             })
             ->values()
@@ -355,7 +359,7 @@ class AdminController extends Controller
         ]);
 
         $kebun = Kebun::findOrFail($id);
-        $kebun->status_ispo = 'belum';
+        $kebun->status_ispo = 'belum-pengajuan';
         $kebun->komentar_tolak = $request->komentar_tolak;
         $kebun->save();
 
@@ -365,7 +369,7 @@ class AdminController extends Controller
     public function setujui_sertifikasi($id)
     {
         $kebun = Kebun::findOrFail($id);
-        $kebun->status_ispo = 'sudah';
+        $kebun->status_ispo = 'sudah-layak';
         $kebun->save();
 
         return redirect()->route('admin.pengajuan-ispo')->with('success', 'Sertifikasi berhasil disetujui');
@@ -384,5 +388,10 @@ class AdminController extends Controller
     public function ahp_final()
     {
         return view('admin.ahp.final');
+    }
+
+    public function topsis_index()
+    {
+        return view('admin.topsis.index');
     }
 }

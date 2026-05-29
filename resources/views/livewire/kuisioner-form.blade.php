@@ -1,4 +1,4 @@
-<div class="p-4 sm:p-6 space-y-6">
+<div class="p-4 sm:p-6 space-y-6" x-data="scrollToError">
     <form wire:submit.prevent="save" class="space-y-8">
         
         {{-- PRINSIP 1 --}}

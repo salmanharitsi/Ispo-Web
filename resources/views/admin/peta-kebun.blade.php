@@ -59,13 +59,13 @@
           {{-- Status ISPO --}}
           <div class="pt-1">
             <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium border
-              {{ $kebun->status_ispo === 'sudah'
+              {{ $kebun->status_ispo === 'sudah-layak'
                   ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
                   : ($kebun->status_ispo === 'proses'
                       ? 'bg-amber-50 text-amber-700 border-amber-100'
                       : 'bg-slate-50 text-slate-500 border-slate-200') }}">
               <i class="fa-solid fa-award"></i>
-              @if($kebun->status_ispo === 'sudah')
+              @if($kebun->status_ispo === 'sudah-layak')
                 Sudah layak
               @elseif($kebun->status_ispo === 'proses')
                 Proses penilaian

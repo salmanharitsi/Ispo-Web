@@ -27,6 +27,7 @@ Route::group(['middleware' => ['admin', 'no-cache']], function () {
     Route::get('/admin/ahp/prinsip', [AdminController::class, 'ahp_prinsip'])->name('admin.ahp.prinsip');
     Route::get('/admin/ahp/kriteria', [AdminController::class, 'ahp_kriteria'])->name('admin.ahp.kriteria');
     Route::get('/admin/ahp/final', [AdminController::class, 'ahp_final'])->name('admin.ahp.final');
+    Route::get('/admin/topsis', [AdminController::class, 'topsis_index'])->name('admin.topsis.index');
 });
 
 // Pekebun Routes
@@ -43,5 +44,6 @@ Route::group(['middleware' => ['pekebun', 'no-cache']], function () {
     Route::post('/pekebun/daftar-pemetaan/{id}', [PekebunController::class, 'post_pemetaan_kebun'])->name('pekebun.pemetaan.simpan');
     Route::get('/pekebun/daftar-kuisioner', [PekebunController::class, 'get_daftar_kuisioner_kebun'])->name('pekebun.daftar-kuisioner');
     Route::get('/pekebun/daftar-kuisioner/{id}', [PekebunController::class, 'get_kuisioner_kebun'])->name('pekebun.kuisioner-kebun');
+    Route::get('/pekebun/hasil-spk', [PekebunController::class, 'get_hasil_spk'])->name('pekebun.hasil-spk');
 });
 

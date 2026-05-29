@@ -124,6 +124,14 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="{{ url('/admin/topsis') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.topsis.index']) }}">
+                                <i
+                                    class="fas fa-trophy text-lg w-5 shrink-0 {{ iconColor(['admin.topsis.index']) }}"></i>
+                                <span class="sidebar-text font-medium">Perhitungan TOPSIS</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -225,6 +233,13 @@
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="{{ url('/admin/topsis') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.topsis.index']) }}">
+                                <i class="fas fa-trophy text-lg w-5 {{ iconColor(['admin.topsis.index']) }}"></i>
+                                <span class="font-medium">Perhitungan TOPSIS</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

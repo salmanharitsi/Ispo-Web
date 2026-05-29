@@ -98,12 +98,12 @@
             </div>
           </div>
 
-          @if ($kebun->status_finalisasi == "belum" && $kebun->polygon)
+          @if ($kebun->status_finalisasi != "final" && $kebun->polygon)
             <a href="{{ url('/pekebun/daftar-kuisioner/' . $kebun->id) }}" class="w-full flex gap-2 items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors mt-4">
-              <i class="fas fa-list text-lg w-5"></i>
-              Isi Kuisioner
+              <i class="fas {{ $kebun->status_finalisasi == 'belum' ? 'fa-list' : 'fa-edit' }} text-lg w-5"></i>
+              {{ $kebun->status_finalisasi == 'belum' ? 'Isi Kuisioner' : 'Edit Kuisioner' }}
             </a>
-          @elseif ($kebun->status_finalisasi == "belum" && !$kebun->polygon)
+          @elseif ($kebun->status_finalisasi != "final" && !$kebun->polygon)
             <div>
                 <div class="p-3 bg-red-50 border border-red-400 rounded-lg text-center">
                   <p class="text-xs text-red-600 font-semibold">Anda perlu memetakan area kebun terlebih dahulu sebelum mengisi kuisioner.</p>

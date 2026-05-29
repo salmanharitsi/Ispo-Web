@@ -22,9 +22,10 @@ return new class extends Migration
             $table->string('kecamatan')->nullable();
             $table->integer('tahun_tanam')->nullable();
             $table->integer('jumlah_pohon')->nullable();
-            $table->enum('status_ispo', ['belum', 'proses', 'sudah'])->default('belum');
-            $table->enum('status_finalisasi', ['belum', 'final'])->default('belum');
+            $table->enum('status_ispo', ['belum-pengajuan', 'proses', 'sudah-layak', 'cukup-layak', 'belum-layak'])->default('belum-pengajuan');
+            $table->enum('status_finalisasi', ['belum', 'final', 'tolak', 'revisi', 'perankingan'])->default('belum');
             $table->text('catatan_pengecekan')->nullable();
+            $table->text('komentar_penolakan')->nullable();
 
             $table->json('polygon')->nullable();
             $table->json('polygon_sides')->nullable();

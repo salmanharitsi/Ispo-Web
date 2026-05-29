@@ -127,8 +127,9 @@ class KuisionerForm extends Component
         $k = $this->kuisioner;
 
         // helper: true → '1', false → '0', or direct value for non-bool
-        $v = fn ($val) => (string) $val;
-        $b = fn ($val) => $val ? '1' : '0';
+        // float cast is used to correctly parse decimal strings from db (e.g., "0.0000" -> 0.0)
+        $v = fn ($val) => (string) (float) $val;
+        $b = fn ($val) => (float) $val > 0 ? '1' : '0';
 
         // P1
         $this->p1_q1_surat_kepemilikan_sah = $v($k->p1_q1_surat_kepemilikan_sah);
@@ -233,6 +234,14 @@ class KuisionerForm extends Component
             ],
             $data
         );
+
+        if ($this->kebun->status_finalisasi === 'perankingan') {
+            $this->kebun->status_finalisasi = 'revisi';
+            $this->kebun->status_ispo = 'belum-pengajuan';
+            $this->kebun->catatan_pengecekan = 'Data kuisioner telah diubah. Silakan ajukan ulang agar dapat diperiksa kembali oleh Admin.';
+            $this->kebun->save();
+            \App\Models\TopsisRanking::where('kebun_id', $this->kebun->id)->delete();
+        }
 
         return redirect(url('/pekebun/daftar-kuisioner'))->with([
             'success' => [

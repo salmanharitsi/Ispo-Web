@@ -310,3 +310,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize
     console.log('Sidebar initialized successfully');
 });
+
+// Register global Alpine component for scrolling to validation errors
+document.addEventListener('alpine:init', () => {
+    Alpine.data('scrollToError', () => ({
+        init() {
+            if (typeof Livewire !== 'undefined') {
+                Livewire.hook('commit', ({ component, succeed }) => {
+                    if (component.el === this.$el) {
+                        succeed(() => {
+                            setTimeout(() => {
+                                const firstError = this.$el.querySelector('.text-rose-500, .text-red-600, .border-red-500');
+                                if (firstError) {
+                                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }, 50);
+                        });
+                    }
+                });
+            }
+        }
+    }));
+});

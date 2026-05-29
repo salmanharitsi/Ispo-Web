@@ -57,6 +57,9 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Daftar Kuisioner', 'route' => 'pekebun.daftar-kuisioner'],
                 ['label' => 'Kuisioner Kebun'],
             ],
+            'pekebun.hasil-spk' => [
+                ['label' => 'Hasil SPK'],
+            ],
 
             // Admin Breadcrumbs
             'admin' => [

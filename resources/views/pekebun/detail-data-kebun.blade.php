@@ -399,12 +399,16 @@
             </div>
             <div class="flex items-center justify-between">
               <span class="text-green-100">Status kelayakan ISPO</span>
-              @if($kebun->status_ispo == 'sudah')
-                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Layak</span>
+              @if($kebun->status_ispo == 'sudah-layak')
+                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Sudah Layak</span>
+              @elseif($kebun->status_ispo == 'cukup-layak')
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">Cukup Layak</span>
+              @elseif($kebun->status_ispo == 'belum-layak')
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">Belum Layak</span>
               @elseif($kebun->status_ispo == 'proses')
                 <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">Proses</span>
               @else
-                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">Belum</span>
+                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">Belum Diajukan</span>
               @endif
             </div>
           </div>

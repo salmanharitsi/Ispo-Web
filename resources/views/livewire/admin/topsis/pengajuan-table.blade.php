@@ -1,236 +1,90 @@
 <div class="relative overflow-hidden rounded-2xl shadow-sm bg-white border border-slate-100">
-
-    {{-- Toolbar --}}
-    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 p-4">
-
-        {{-- Search --}}
+    @php
+        $ahpFinalExists = \App\Models\AhpFinal::first() !== null;
+    @endphp
+    <!-- Action Bar -->
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
         <div class="w-full md:w-1/3">
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <i class="fas fa-search text-lg text-gray-500"></i>
                 </div>
                 <input
-                    wire:model.live="search"
+                    wire:model.live.debounce.300ms="search"
                     type="text"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2"
-                    placeholder="cari nama kebun, lokasi, pemilik..."
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2"
+                    placeholder="Cari nama pekebun atau kebun..."
                 >
             </div>
         </div>
 
-        {{-- Filters --}}
-        <div class="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-
-            {{-- Status ISPO --}}
-            <select
-                wire:model.live="filterStatusIspo"
-                class="border border-slate-300 rounded-lg text-xs px-2 py-1 bg-white focus:ring-green-500 focus:border-green-500"
-            >
-                <option value="">Semua Status Kelayakan</option>
-                <option value="belum">Belum Layak ISPO</option>
-                <option value="proses">Proses Kelayakan ISPO</option>
-                <option value="sudah">Layak ISPO</option>
-            </select>
-
-            {{-- Status Finalisasi --}}
-            <select
-                wire:model.live="filterStatusFinalisasi"
-                class="border border-slate-300 rounded-lg text-xs px-2 py-1 bg-white focus:ring-green-500 focus:border-green-500"
-            >
-                <option value="">Semua finalisasi</option>
-                <option value="belum">Belum final</option>
-                <option value="final">Sudah final</option>
-            </select>
-
-            {{-- Status Pemetaan --}}
-            <select
-                wire:model.live="filterPetakan"
-                class="border border-slate-300 rounded-lg text-xs px-2 py-1 bg-white focus:ring-green-500 focus:border-green-500"
-            >
-                <option value="">Semua pemetaan</option>
-                <option value="sudah">Sudah dipetakan</option>
-                <option value="belum">Belum dipetakan</option>
-            </select>
-
-            {{-- Per page --}}
-            <div class="flex items-center gap-1">
-                <span>Tampil</span>
-                <select
-                    wire:model.live="perPage"
-                    class="border border-slate-300 rounded-lg text-xs px-2 py-1 bg-white focus:ring-green-500 focus:border-green-500"
-                >
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50">50</option>
-                </select>
-                <span>baris</span>
-            </div>
+        <div class="flex items-center space-x-2">
+            @if(count($selectedKebun) > 0)
+                <span class="text-xs text-slate-500 mr-2">{{ count($selectedKebun) }} dipilih</span>
+                <button wire:click="openSetujuModal" @if(!$ahpFinalExists) disabled @endif class="px-3 py-1.5 {{ $ahpFinalExists ? 'bg-green-600 hover:bg-green-700' : 'bg-slate-400 cursor-not-allowed' }} text-white rounded-lg text-sm transition font-semibold">
+                    <i class="fa-solid fa-check mr-1"></i> Setujui
+                </button>
+                <button wire:click="openTolakModal" class="px-3 py-1.5 bg-rose-600 text-white rounded-lg text-sm hover:bg-rose-700 transition font-semibold">
+                    <i class="fa-solid fa-xmark mr-1"></i> Tolak
+                </button>
+            @endif
         </div>
     </div>
 
-    {{-- Table --}}
+    <!-- Table -->
     <div class="overflow-x-auto">
         <table class="min-w-full text-left text-slate-700">
             <thead class="bg-slate-50 text-sm uppercase text-slate-700 border-b border-slate-100">
                 <tr>
-                    <th class="px-4 sm:px-6 py-3">Kebun</th>
-                    <th class="px-4 sm:px-6 py-3">Pemilik</th>
-                    <th class="px-4 sm:px-6 py-3">Lokasi</th>
-                    <th class="px-4 sm:px-6 py-3 text-center">Lahan</th>
-                    <th class="px-4 sm:px-6 py-3 text-center">Status</th>
-                    <th class="px-4 sm:px-6 py-3 text-center">Aksi</th>
+                    <th scope="col" class="px-4 sm:px-6 py-3 w-4">
+                        <input wire:model.live="selectAll" type="checkbox" class="w-4 h-4 text-green-600 bg-slate-50 border-slate-300 rounded focus:ring-green-500">
+                    </th>
+                    <th scope="col" class="px-4 sm:px-6 py-3">Nama Pekebun</th>
+                    <th scope="col" class="px-4 sm:px-6 py-3">Nama Kebun</th>
+                    <th scope="col" class="px-4 sm:px-6 py-3">Lokasi</th>
+                    <th scope="col" class="px-4 sm:px-6 py-3">Luas Lahan</th>
+                    <th scope="col" class="px-4 sm:px-6 py-3 text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
-                @forelse ($kebun as $k)
+                @forelse($kebuns as $kebun)
                     <tr class="hover:bg-slate-50/60">
-
-                        {{-- Kebun --}}
                         <td class="px-4 sm:px-6 py-3 align-middle">
-                            <div class="font-semibold text-slate-900">{{ $k->nama_kebun }}</div>
-
-                            @if($k->tahun_tanam)
-                                <div class="text-xs text-slate-500 mt-0.5">
-                                    Tahun tanam: <span class="font-medium">{{ $k->tahun_tanam }}</span>
-                                </div>
-                            @endif
-
-                            <div class="mt-1 flex flex-wrap gap-1">
-                                {{-- Pemetaan --}}
-                                <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] border
-                                    {{ $k->polygon
-                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
-                                        : 'bg-slate-50 text-slate-500 border-slate-200' }}">
-                                    <i class="fa-solid fa-map-location-dot"></i>
-                                    {{ $k->polygon ? 'Terpetakan' : 'Belum dipetakan' }}
-                                </span>
-
-                                {{-- Kuisioner --}}
-                                <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] border
-                                    {{ $k->kuisioner_exists
-                                        ? 'bg-blue-50 text-blue-700 border-blue-100'
-                                        : 'bg-slate-50 text-slate-500 border-slate-200' }}">
-                                    <i class="fa-regular fa-clipboard"></i>
-                                    {{ $k->kuisioner_exists ? 'Kuisioner terisi' : 'Belum isi kuisioner' }}
-                                </span>
-                            </div>
+                            <input wire:model.live="selectedKebun" value="{{ $kebun->id }}" type="checkbox" class="w-4 h-4 text-green-600 bg-slate-50 border-slate-300 rounded focus:ring-green-500">
                         </td>
-
-                        {{-- Pemilik --}}
                         <td class="px-4 sm:px-6 py-3 align-middle">
-                            @if($k->user)
-                                <div class="font-semibold text-slate-900 text-sm">{{ $k->user->name }}</div>
-                                <div class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                                    <i class="fa-regular fa-envelope text-slate-400"></i>
-                                    {{ $k->user->email }}
-                                </div>
-                                @if($k->user->no_hp)
-                                    <div class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                                        <i class="fa-solid fa-phone text-slate-400"></i>
-                                        {{ $k->user->no_hp }}
-                                    </div>
-                                @endif
-                            @else
-                                <span class="text-xs text-slate-400">-</span>
-                            @endif
+                            <div class="font-semibold text-slate-900">
+                                {{ $kebun->user->name ?? 'User terhapus' }}
+                            </div>
                         </td>
-
-                        {{-- Lokasi --}}
                         <td class="px-4 sm:px-6 py-3 align-middle">
-                            <div class="text-sm text-slate-700">{{ $k->lokasi_kebun }}</div>
-                            <div class="text-xs text-slate-500 mt-0.5">
-                                @if($k->desa)
-                                    Desa {{ $k->desa }}
-                                @endif
-                                @if($k->desa && $k->kecamatan)
-                                    ·
-                                @endif
-                                @if($k->kecamatan)
-                                    Kec. {{ $k->kecamatan }}
-                                @endif
-                            </div>
-                            @if($k->latitude && $k->longitude)
-                                <div class="text-[10px] text-slate-400 mt-1 font-mono">
-                                    {{ number_format($k->latitude, 6) }}, {{ number_format($k->longitude, 6) }}
-                                </div>
-                            @endif
-                        </td>
-
-                        {{-- Lahan --}}
-                        <td class="px-4 sm:px-6 py-3 align-middle text-center">
-                            <div class="text-base font-semibold text-emerald-700">
-                                {{ number_format($k->luas_lahan, 2, ',', '.') }}
-                                <span class="text-xs text-slate-500 font-normal">Ha</span>
-                            </div>
-                            @if($k->area_hectare)
-                                <div class="text-[10px] text-slate-400 mt-0.5">
-                                    GPS: {{ number_format($k->area_hectare, 4, ',', '.') }} Ha
-                                </div>
-                            @endif
-                            @if($k->jumlah_pohon)
-                                <div class="text-xs text-slate-500 mt-1 flex items-center justify-center gap-1">
-                                    <i class="fa-solid fa-tree text-[10px]"></i>
-                                    {{ number_format($k->jumlah_pohon) }} pohon
-                                </div>
-                            @endif
-                        </td>
-
-                        {{-- Status --}}
-                        <td class="px-4 sm:px-6 py-3 align-middle text-center">
-                            <div class="flex flex-col items-center gap-1.5">
-                                {{-- ISPO --}}
-                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] border whitespace-nowrap
-                                    {{ $k->status_ispo === 'sudah-layak'
-                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
-                                        : ($k->status_ispo === 'proses'
-                                            ? 'bg-amber-50 text-amber-700 border-amber-100'
-                                            : 'bg-slate-50 text-slate-500 border-slate-200') }}">
-                                    <i class="fa-solid fa-award"></i>
-                                    @if($k->status_ispo === 'sudah-layak')
-                                        Layak ISPO
-                                    @elseif($k->status_ispo === 'proses')
-                                        Proses Kelayakan ISPO
-                                    @else
-                                        Belum Layak ISPO
-                                    @endif
-                                </span>
-
-                                {{-- Finalisasi --}}
-                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] border whitespace-nowrap
-                                    {{ $k->status_finalisasi === 'final'
-                                        ? 'bg-violet-50 text-violet-700 border-violet-100'
-                                        : 'bg-slate-50 text-slate-500 border-slate-200' }}">
-                                    <i class="fa-solid fa-circle-check"></i>
-                                    {{ $k->status_finalisasi === 'final' ? 'Final' : 'Belum final' }}
-                                </span>
+                            <div class="text-sm text-slate-700">
+                                {{ $kebun->nama_kebun }}
                             </div>
                         </td>
-
-                        {{-- Aksi --}}
+                        <td class="px-4 sm:px-6 py-3 align-middle">
+                            <div class="text-sm text-slate-700">
+                                {{ $kebun->desa ?? '-' }}
+                            </div>
+                            <div class="text-xs text-slate-500 mt-1">
+                                {{ $kebun->kecamatan ? 'Kec. '.$kebun->kecamatan : '-' }}
+                            </div>
+                        </td>
+                        <td class="px-4 sm:px-6 py-3 align-middle">
+                            <div class="text-sm text-emerald-700 font-medium">
+                                {{ number_format($kebun->luas_lahan, 2, ',', '.') }} Ha
+                            </div>
+                        </td>
                         <td class="px-4 sm:px-6 py-3 align-middle text-center">
                             <div class="inline-flex items-center gap-2">
-                                <button
-                                    wire:click="showDetail('{{ $k->id }}')"
-                                    class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-green-600 text-white bg-green-600 hover:bg-white hover:text-green-600 transition cursor-pointer"
-                                    title="Lihat detail kebun"
-                                >
-                                    <i class="fa-regular fa-eye text-[13px]"></i>
+                                <button wire:click="openSetujuModal('{{ $kebun->id }}')" @if(!$ahpFinalExists) disabled @endif class="inline-flex items-center justify-center w-8 h-8 rounded-lg border {{ $ahpFinalExists ? 'border-green-600 text-white bg-green-600 hover:bg-white hover:text-green-600 cursor-pointer' : 'border-slate-300 text-slate-400 bg-slate-100 cursor-not-allowed' }} transition" title="Setujui">
+                                    <i class="fa-solid fa-check text-[13px]"></i>
                                 </button>
-                                @if($k->polygon)
-                                    <a
-                                        href="{{ url('/admin/daftar-kebun/' . $k->id . '/peta') }}"
-                                        class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-blue-600 text-white bg-blue-600 hover:bg-white hover:text-blue-600 transition cursor-pointer"
-                                        title="Lihat peta lahan"
-                                    >
-                                        <i class="fa-solid fa-map-location-dot text-[13px]"></i>
-                                    </a>
-                                @endif
-                                <button
-                                    wire:click="confirmDelete('{{ $k->id }}')"
-                                    class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-red-600 text-white bg-red-600 hover:bg-white hover:text-red-600 transition cursor-pointer"
-                                    title="Hapus kebun"
-                                >
-                                    <i class="fa-regular fa-trash-can text-[13px]"></i>
+                                <button wire:click="openTolakModal('{{ $kebun->id }}')" class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-rose-600 text-white bg-rose-600 hover:bg-white hover:text-rose-600 transition cursor-pointer" title="Tolak">
+                                    <i class="fa-solid fa-xmark text-[13px]"></i>
+                                </button>
+                                <button wire:click="showDetail('{{ $kebun->id }}')" class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-blue-600 text-white bg-blue-600 hover:bg-white hover:text-blue-600 transition cursor-pointer" title="Lihat Detail">
+                                    <i class="fa-regular fa-eye text-[13px]"></i>
                                 </button>
                             </div>
                         </td>
@@ -238,54 +92,111 @@
                 @empty
                     <tr>
                         <td colspan="6" class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500">
-                            Tidak ada data kebun yang ditemukan.
+                            Tidak ada pengajuan pengecekan yang menunggu persetujuan.
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
-
-        {{ $kebun->links('vendor.pagination.custom-pagination') }}
+        {{ $kebuns->links('vendor.pagination.custom-pagination') }}
     </div>
 
-    {{-- Delete Confirmation Modal --}}
-    @if($confirmingDeleteId)
-        <div class="fixed inset-0 z-40 flex items-center justify-center p-4">
-            <div class="absolute inset-0 bg-black/40" wire:click="cancelDelete"></div>
-            <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6">
-                <div class="text-center">
-                    <div class="bg-rose-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mb-2">Hapus Data Kebun?</h3>
-                    <p class="text-sm text-slate-600 mb-4">
-                        Data kebun ini akan dihapus permanen, termasuk:
-                    </p>
-                    <ul class="text-sm text-slate-500 text-left mb-5 space-y-1">
-                        <li>• Data kebun dan seluruh informasinya</li>
-                        <li>• Data pemetaan polygon dan koordinat</li>
-                        <li>• Seluruh data kuisioner terkait kebun ini</li>
-                    </ul>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button
-                            wire:click="cancelDelete"
-                            class="px-4 py-2.5 border border-slate-200 text-slate-700 rounded-lg font-semibold hover:bg-slate-50 transition"
-                        >
-                            Batal
-                        </button>
-                        <button
-                            wire:click="deleteKebun"
-                            class="px-4 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold transition"
-                        >
-                            Ya, Hapus
-                        </button>
-                    </div>
+    <!-- Modal Tolak -->
+    @if($showTolakModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/50" wire:click="closeTolakModal"></div>
+        <div class="relative bg-white rounded-lg shadow-2xl max-w-md w-full p-6">
+            <div class="text-center">
+                <div class="bg-rose-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Tolak Pengajuan?</h3>
+                <p class="text-gray-600 mb-6">
+                    @if($tolakMode === 'bulk')
+                        Anda yakin ingin menolak <strong>{{ count($selectedKebun) }} pengajuan</strong> terpilih? Silakan berikan alasan penolakan.
+                    @else
+                        Berikan alasan penolakan pengajuan ini. Komentar ini akan dapat dilihat oleh pekebun agar mereka dapat memperbaikinya.
+                    @endif
+                </p>
+
+                <div class="mb-6 text-left">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Alasan Penolakan <span class="text-rose-600">*</span>
+                    </label>
+                    <textarea 
+                        wire:model="komentarPenolakan" 
+                        rows="4" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-rose-500 text-sm"
+                        placeholder="Tuliskan alasan penolakan..."
+                    ></textarea>
+                    @error('komentarPenolakan') <span class="text-rose-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button 
+                        wire:click="closeTolakModal" 
+                        type="button" 
+                        class="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+                    >
+                        Batal
+                    </button>
+                    <button 
+                        wire:click="tolakPengajuan" 
+                        type="button" 
+                        class="px-4 py-3 bg-rose-600 hover:bg-rose-700 text-white rounded-lg font-semibold transition"
+                    >
+                        Konfirmasi Tolak
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+    @endif
+
+    <!-- Modal Setujui -->
+    @if($showSetujuModal)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/50" wire:click="closeSetujuModal"></div>
+        <div class="relative bg-white rounded-lg shadow-2xl max-w-md w-full p-6">
+            <div class="text-center">
+                <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Setujui Pengajuan?</h3>
+                <p class="text-gray-600 mb-6">
+                    @if($setujuMode === 'bulk')
+                        Anda yakin ingin menyetujui <strong>{{ count($selectedKebun) }} pengajuan</strong> terpilih? Data yang disetujui akan langsung masuk ke antrean Kalkulasi Ranking TOPSIS.
+                    @else
+                        @php
+                            $kebunToSetuju = \App\Models\Kebun::find($setujuId);
+                        @endphp
+                        Anda yakin ingin menyetujui pengajuan kebun <strong>{{ $kebunToSetuju->nama_kebun ?? 'ini' }}</strong>? Data akan masuk ke Kalkulasi Ranking TOPSIS.
+                    @endif
+                </p>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button 
+                        wire:click="closeSetujuModal" 
+                        type="button"
+                        class="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+                    >
+                        Batal
+                    </button>
+                    <button 
+                        wire:click="terimaPengajuan" 
+                        type="button"
+                        class="w-full px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition"
+                    >
+                        Ya, Setujui
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     @endif
 
     {{-- Detail Modal --}}
@@ -295,7 +206,7 @@
             <div class="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
 
                 {{-- Header --}}
-                <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white">
+                <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
                     <div>
                         <h3 class="text-lg font-bold text-slate-900">Detail Kebun</h3>
                         <p class="text-sm text-slate-500">Informasi lengkap kebun dan pemiliknya.</p>

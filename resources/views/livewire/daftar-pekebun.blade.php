@@ -351,7 +351,7 @@
                         </div>
                         <div>
                             @php
-                                $sudahIspo = $detailUser->kebun->where('status_ispo', 'sudah')->count();
+                                $sudahIspo = $detailUser->kebun->whereIn('status_ispo', ['sudah-layak', 'cukup-layak'])->count();
                             @endphp
                             <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Status Kelayakan ISPO</p>
                             <p class="text-lg font-bold text-emerald-700">
@@ -490,20 +490,28 @@
                                             {{ $kebun->kuisioner ? 'Kuisioner terisi' : 'Kuisioner belum diisi' }}
                                         </span>
                                         <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full whitespace-nowrap
-                                            @if($kebun->status_ispo === 'sudah')
-                                                bg-emerald-50 text-emerald-700 border border-emerald-100
+                                            @if($kebun->status_ispo === 'sudah-layak')
+                                                bg-green-100 text-green-700 border border-green-200
+                                            @elseif($kebun->status_ispo === 'cukup-layak')
+                                                bg-blue-100 text-blue-700 border border-blue-200
+                                            @elseif($kebun->status_ispo === 'belum-layak')
+                                                bg-red-100 text-red-700 border border-red-200
                                             @elseif($kebun->status_ispo === 'proses')
-                                                bg-amber-50 text-amber-700 border border-amber-100
+                                                bg-yellow-100 text-yellow-700 border border-yellow-200
                                             @else
-                                                bg-slate-50 text-slate-500 border border-slate-200
+                                                bg-gray-100 text-gray-600 border border-gray-200
                                             @endif">
                                             <i class="fa-solid fa-award text-[10px]"></i>
-                                            @if($kebun->status_ispo === 'sudah')
-                                                Layak ISPO
+                                            @if($kebun->status_ispo === 'sudah-layak')
+                                                Sudah Layak
+                                            @elseif($kebun->status_ispo === 'cukup-layak')
+                                                Cukup Layak
+                                            @elseif($kebun->status_ispo === 'belum-layak')
+                                                Belum Layak
                                             @elseif($kebun->status_ispo === 'proses')
-                                                Proses Kelayakan ISPO
+                                                Proses
                                             @else
-                                                Belum Layak ISPO
+                                                Belum Diajukan
                                             @endif
                                         </span>
                                     </div>
