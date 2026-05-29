@@ -302,7 +302,7 @@ class PekebunController extends Controller
         
         $kebuns = $user->kebun()
             ->where('status_finalisasi', '!=', 'belum')
-            ->with(['topsisRanking'])
+            ->with(['topsisRanking', 'kuisioner'])
             ->get();
             
         $allVi = \App\Models\TopsisRanking::whereNotNull('vi')

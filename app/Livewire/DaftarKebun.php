@@ -53,7 +53,7 @@ class DaftarKebun extends Component
             'frekuensi_panen' => 'required|integer|max:100',
             'harga_jual_tbs_terakhir' => 'required|integer|min:0',
             'pendapatan_bersih' => 'required|integer|min:0',
-            'kepada_siapa_hasil_panen_dijual' => 'required|in:RAM,PKS langsung',
+            'kepada_siapa_hasil_panen_dijual' => 'required|in:TOKE,PKS',
         ];
     }
 

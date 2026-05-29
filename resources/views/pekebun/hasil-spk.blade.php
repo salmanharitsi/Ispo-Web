@@ -28,6 +28,7 @@
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center">Skor Absolut</th>
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center" title="Nilai Preferensi TOPSIS">Vi (TOPSIS)</th>
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center">Status Pengajuan</th>
+                        <th scope="col" class="px-4 sm:px-6 py-3">Saran</th>
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center">Aksi (Edit & Ajukan Ulang)</th>
                     </tr>
                 </thead>
@@ -116,9 +117,27 @@
                                 @endif
                             </td>
                             <td class="px-4 sm:px-6 py-3 text-center align-middle">
+                                @if($kebun->status_finalisasi === 'final' || $kebun->status_finalisasi === 'revisi')
+                                    <span class="text-xs text-slate-400 italic">-</span>
+                                @elseif($kebun->kuisioner && count($kebun->kuisioner->saran) > 0)
+                                    @php $jumlahSaran = count($kebun->kuisioner->saran); @endphp
+                                    <button type="button" onclick='openSaranModal(@json($kebun->kuisioner->saran), "{{ addslashes($kebun->nama_kebun) }}")' class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200 hover:bg-amber-100 hover:border-amber-300 transition-all cursor-pointer group">
+                                        <i class="fa-solid fa-lightbulb text-amber-500 group-hover:text-amber-600 transition-colors"></i>
+                                        <span class="whitespace-nowrap">{{ $jumlahSaran }} Saran</span> 
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px] opacity-50 group-hover:opacity-100 transition-opacity"></i>
+                                    </button>
+                                @else
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <i class="fa-solid fa-circle-check"></i> 
+                                        <span class="whitespace-nowrap">Semua Terpenuhi</span>
+                                    </span>
+                                @endif
+                            </td>
+                            <td class="px-4 sm:px-6 py-3 text-center align-middle">
                                 @if($kebun->status_finalisasi === 'final')
                                     <button disabled class="w-full flex gap-2 items-center justify-center bg-gray-300 text-white font-semibold py-2 px-3 rounded-lg text-xs cursor-not-allowed">
-                                        <i class="fas fa-clock"></i> Proses Pengecekan Admin
+                                        <i class="fas fa-clock"></i> 
+                                        <span class="whitespace-nowrap">Proses Pengecekan Admin</span>
                                     </button>
                                 @else
                                     <div class="flex flex-col space-y-2">
@@ -139,7 +158,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500">
+                            <td colspan="7" class="px-4 sm:px-6 py-8 text-center text-sm text-slate-500">
                                 Belum ada kebun yang diajukan untuk pengecekan kelayakan.
                             </td>
                         </tr>
@@ -152,6 +171,42 @@
                 Peringkat yang ditampilkan adalah peringkat sementara berdasarkan kalkulasi TOPSIS terakhir dari admin. Anda dapat memperbaiki data Pemetaan dan Kuisioner lalu <b>Ajukan Ulang</b> agar diverifikasi kembali.
             </div>
         </div>
+    </div>
+  </div>
+</div>
+
+<!-- Saran Detail Modal -->
+<div id="saranModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeSaranModal()"></div>
+  <div class="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] flex flex-col overflow-hidden">
+    <!-- Modal Header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-gradient-to-r from-amber-50 to-orange-50">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center">
+          <i class="fa-solid fa-lightbulb text-amber-600"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-slate-800">Saran Perbaikan</h3>
+          <p class="text-xs text-slate-500" id="saranKebunName"></p>
+        </div>
+      </div>
+      <button onclick="closeSaranModal()" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-all">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <!-- Modal Body -->
+    <div class="overflow-y-auto px-6 py-4 flex-1">
+      <div class="flex items-center gap-2 mb-4">
+        <span id="saranCountBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-700"></span>
+        <span class="text-xs text-slate-400">Perbaiki item berikut untuk meningkatkan skor ISPO</span>
+      </div>
+      <ol id="saranListContainer" class="space-y-2"></ol>
+    </div>
+    <!-- Modal Footer -->
+    <div class="px-6 py-3 border-t border-slate-100 bg-slate-50/50">
+      <button onclick="closeSaranModal()" class="w-full px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-sm font-semibold transition-colors">
+        Tutup
+      </button>
     </div>
   </div>
 </div>
@@ -199,9 +254,32 @@
 </div>
 
 <script>
+function openSaranModal(saranList, kebunName) {
+    document.getElementById('saranKebunName').innerText = kebunName;
+    document.getElementById('saranCountBadge').innerText = saranList.length + ' item';
+
+    const container = document.getElementById('saranListContainer');
+    container.innerHTML = '';
+
+    saranList.forEach(function(saran, index) {
+        const li = document.createElement('li');
+        li.className = 'flex gap-3 items-start p-3 rounded-xl bg-slate-50 border border-slate-100 hover:border-amber-200 hover:bg-amber-50/30 transition-all';
+        li.innerHTML = `
+            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[11px] font-bold mt-0.5">${index + 1}</span>
+            <span class="text-sm text-slate-700 leading-relaxed">${saran}</span>
+        `;
+        container.appendChild(li);
+    });
+
+    document.getElementById('saranModal').classList.remove('hidden');
+}
+
+function closeSaranModal() {
+    document.getElementById('saranModal').classList.add('hidden');
+}
+
 function openFinalizeModal(id, name) {
     document.getElementById('modalKebunName').innerText = name;
-    // URL action menyesuaikan route
     document.getElementById('finalizeForm').action = "{{ url('/pekebun/daftar-kebun') }}/" + id + "/finalisasi?source=hasil_spk";
     document.getElementById('finalizeModal').classList.remove('hidden');
 }
