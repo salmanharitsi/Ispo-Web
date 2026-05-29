@@ -23,8 +23,8 @@ return new class extends Migration {
              */
             $table->decimal('p1_q1_surat_kepemilikan_sah', 8, 4)->default(0);
             $table->decimal('p1_q2_di_luar_kawasan_terlarang', 8, 4)->default(0);
-            $table->decimal('p1_q3_dokumen_penyelesaian_sengketa', 8, 4)->default(0);
-            $table->decimal('p1_q4_salinan_perjanjian_sengketa', 8, 4)->default(0);
+            $table->decimal('p1_q3_bebas_sengketa', 8, 4)->default(0);
+            $table->decimal('p1_q4_batas_lahan_jelas', 8, 4)->default(0);
             $table->decimal('p1_q5_memiliki_stdb', 8, 4)->default(0);
             $table->decimal('p1_q6_memiliki_izin_lingkungan', 8, 4)->default(0);
             $table->decimal('p1_q7_catatan_pengelolaan_lingkungan', 8, 4)->default(0);
@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->decimal('p2_q14_catatan_asal_bibit', 8, 4)->default(0);
             $table->decimal('p2_q15_tanam_sesuai_standar', 8, 4)->default(0);
             $table->decimal('p2_q16_catatan_pelaksanaan_tanam', 8, 4)->default(0);
-            $table->decimal('p2_q17_panduan_lahan_gambut', 8, 4)->default(0);
+            $table->decimal('p2_q17_bebas_lahan_gambut', 8, 4)->default(0);
             $table->decimal('p2_q18_pemeliharaan_rutin', 8, 4)->default(0);
             $table->decimal('p2_q19_catatan_pemupukan_pemeliharaan', 8, 4)->default(0);
             $table->decimal('p2_q20_pengendalian_hama_sesuai_pht', 8, 4)->default(0);

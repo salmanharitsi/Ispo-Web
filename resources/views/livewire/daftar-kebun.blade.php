@@ -488,8 +488,8 @@
                 class="w-full px-4 py-3 border @error('kepada_siapa_hasil_panen_dijual') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
               >
                 <option value="">Pilih tujuan penjualan</option>
-                <option value="RAM">RAM</option>
-                <option value="PKS langsung">PKS langsung</option>
+                <option value="TOKE">TOKE</option>
+                <option value="PKS">PKS</option>
               </select>
               @error('kepada_siapa_hasil_panen_dijual')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

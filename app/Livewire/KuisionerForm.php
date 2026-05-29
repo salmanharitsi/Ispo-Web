@@ -16,8 +16,8 @@ class KuisionerForm extends Component
     // PRINSIP 1
     public ?string $p1_q1_surat_kepemilikan_sah = null;
     public ?string $p1_q2_di_luar_kawasan_terlarang = null;
-    public ?string $p1_q3_dokumen_penyelesaian_sengketa = null;
-    public ?string $p1_q4_salinan_perjanjian_sengketa = null;
+    public ?string $p1_q3_bebas_sengketa = null;
+    public ?string $p1_q4_batas_lahan_jelas = null;
     public ?string $p1_q5_memiliki_stdb = null;
     public ?string $p1_q6_memiliki_izin_lingkungan = null;
     public ?string $p1_q7_catatan_pengelolaan_lingkungan = null;
@@ -32,7 +32,7 @@ class KuisionerForm extends Component
     public ?string $p2_q14_catatan_asal_bibit = null;
     public ?string $p2_q15_tanam_sesuai_standar = null;
     public ?string $p2_q16_catatan_pelaksanaan_tanam = null;
-    public ?string $p2_q17_panduan_lahan_gambut = null;
+    public ?string $p2_q17_bebas_lahan_gambut = null;
     public ?string $p2_q18_pemeliharaan_rutin = null;
     public ?string $p2_q19_catatan_pemupukan_pemeliharaan = null;
     public ?string $p2_q20_pengendalian_hama_sesuai_pht = null;
@@ -64,8 +64,8 @@ class KuisionerForm extends Component
             // P1
             'p1_q1_surat_kepemilikan_sah' => 'required|in:0,1,2,3,4',
             'p1_q2_di_luar_kawasan_terlarang' => $bool,
-            'p1_q3_dokumen_penyelesaian_sengketa' => $bool,
-            'p1_q4_salinan_perjanjian_sengketa' => $bool,
+            'p1_q3_bebas_sengketa' => $bool,
+            'p1_q4_batas_lahan_jelas' => $bool,
             'p1_q5_memiliki_stdb' => 'required|in:0,0.5,1',
             'p1_q6_memiliki_izin_lingkungan' => $bool,
             'p1_q7_catatan_pengelolaan_lingkungan' => $bool,
@@ -80,7 +80,7 @@ class KuisionerForm extends Component
             'p2_q14_catatan_asal_bibit' => $bool,
             'p2_q15_tanam_sesuai_standar' => $bool,
             'p2_q16_catatan_pelaksanaan_tanam' => $bool,
-            'p2_q17_panduan_lahan_gambut' => $bool,
+            'p2_q17_bebas_lahan_gambut' => $bool,
             'p2_q18_pemeliharaan_rutin' => $bool,
             'p2_q19_catatan_pemupukan_pemeliharaan' => $bool,
             'p2_q20_pengendalian_hama_sesuai_pht' => $bool,
@@ -134,8 +134,8 @@ class KuisionerForm extends Component
         // P1
         $this->p1_q1_surat_kepemilikan_sah = $v($k->p1_q1_surat_kepemilikan_sah);
         $this->p1_q2_di_luar_kawasan_terlarang = $b($k->p1_q2_di_luar_kawasan_terlarang);
-        $this->p1_q3_dokumen_penyelesaian_sengketa = $b($k->p1_q3_dokumen_penyelesaian_sengketa);
-        $this->p1_q4_salinan_perjanjian_sengketa = $b($k->p1_q4_salinan_perjanjian_sengketa);
+        $this->p1_q3_bebas_sengketa = $b($k->p1_q3_bebas_sengketa);
+        $this->p1_q4_batas_lahan_jelas = $b($k->p1_q4_batas_lahan_jelas);
         $this->p1_q5_memiliki_stdb = $v($k->p1_q5_memiliki_stdb);
         $this->p1_q6_memiliki_izin_lingkungan = $b($k->p1_q6_memiliki_izin_lingkungan);
         $this->p1_q7_catatan_pengelolaan_lingkungan = $b($k->p1_q7_catatan_pengelolaan_lingkungan);
@@ -150,7 +150,7 @@ class KuisionerForm extends Component
         $this->p2_q14_catatan_asal_bibit = $b($k->p2_q14_catatan_asal_bibit);
         $this->p2_q15_tanam_sesuai_standar = $b($k->p2_q15_tanam_sesuai_standar);
         $this->p2_q16_catatan_pelaksanaan_tanam = $b($k->p2_q16_catatan_pelaksanaan_tanam);
-        $this->p2_q17_panduan_lahan_gambut = $b($k->p2_q17_panduan_lahan_gambut);
+        $this->p2_q17_bebas_lahan_gambut = $b($k->p2_q17_bebas_lahan_gambut);
         $this->p2_q18_pemeliharaan_rutin = $b($k->p2_q18_pemeliharaan_rutin);
         $this->p2_q19_catatan_pemupukan_pemeliharaan = $b($k->p2_q19_catatan_pemupukan_pemeliharaan);
         $this->p2_q20_pengendalian_hama_sesuai_pht = $b($k->p2_q20_pengendalian_hama_sesuai_pht);
@@ -186,8 +186,8 @@ class KuisionerForm extends Component
             // P1
             'p1_q1_surat_kepemilikan_sah' => $this->p1_q1_surat_kepemilikan_sah,
             'p1_q2_di_luar_kawasan_terlarang' => $this->p1_q2_di_luar_kawasan_terlarang === '1',
-            'p1_q3_dokumen_penyelesaian_sengketa' => $this->p1_q3_dokumen_penyelesaian_sengketa === '1',
-            'p1_q4_salinan_perjanjian_sengketa' => $this->p1_q4_salinan_perjanjian_sengketa === '1',
+            'p1_q3_bebas_sengketa' => $this->p1_q3_bebas_sengketa === '1',
+            'p1_q4_batas_lahan_jelas' => $this->p1_q4_batas_lahan_jelas === '1',
             'p1_q5_memiliki_stdb' => $this->p1_q5_memiliki_stdb,
             'p1_q6_memiliki_izin_lingkungan' => $this->p1_q6_memiliki_izin_lingkungan === '1',
             'p1_q7_catatan_pengelolaan_lingkungan' => $this->p1_q7_catatan_pengelolaan_lingkungan === '1',
@@ -202,7 +202,7 @@ class KuisionerForm extends Component
             'p2_q14_catatan_asal_bibit' => $this->p2_q14_catatan_asal_bibit === '1',
             'p2_q15_tanam_sesuai_standar' => $this->p2_q15_tanam_sesuai_standar === '1',
             'p2_q16_catatan_pelaksanaan_tanam' => $this->p2_q16_catatan_pelaksanaan_tanam === '1',
-            'p2_q17_panduan_lahan_gambut' => $this->p2_q17_panduan_lahan_gambut === '1',
+            'p2_q17_bebas_lahan_gambut' => $this->p2_q17_bebas_lahan_gambut === '1',
             'p2_q18_pemeliharaan_rutin' => $this->p2_q18_pemeliharaan_rutin === '1',
             'p2_q19_catatan_pemupukan_pemeliharaan' => $this->p2_q19_catatan_pemupukan_pemeliharaan === '1',
             'p2_q20_pengendalian_hama_sesuai_pht' => $this->p2_q20_pengendalian_hama_sesuai_pht === '1',

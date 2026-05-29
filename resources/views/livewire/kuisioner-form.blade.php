@@ -37,8 +37,8 @@
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                             @foreach([
                                 '4' => 'SHM',
-                                '3' => 'Akta jual beli',
-                                '2' => 'Girik',
+                                '3' => 'Girik',
+                                '2' => 'SKT',
                                 '1' => 'SKGR',
                                 '0' => 'Tidak ada'
                             ] as $val => $label)
@@ -79,12 +79,12 @@
                 </div>
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Jika lahan Anda pernah disengketakan, apakah ada dokumen hasil musyawarah penyelesaian sengketa?',
-                        'model' => 'p1_q3_dokumen_penyelesaian_sengketa',
+                        'label' => 'Apakah lahan Anda saat ini bebas dari sengketa dengan pihak manapun?',
+                        'model' => 'p1_q3_bebas_sengketa',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Jika telah ada kesepakatan penyelesaian sengketa, apakah Anda memiliki salinan perjanjian tertulisnya?',
-                        'model' => 'p1_q4_salinan_perjanjian_sengketa',
+                        'label' => 'Apakah batas lahan Anda jelas dan tidak tumpang tindih dengan lahan pihak lain?',
+                        'model' => 'p1_q4_batas_lahan_jelas',
                     ])
                 </div>
             </div>
@@ -237,8 +237,8 @@
 
                     <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Penanaman di lahan gambut</p>
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Jika kebun Anda berada di lahan gambut: apakah Anda mengikuti panduan teknis khusus penanaman di lahan gambut (sesuai aturan)?',
-                        'model' => 'p2_q17_panduan_lahan_gambut',
+                        'label' => 'Apakah kebun Anda bebas dari lahan gambut atau sudah dikelola sesuai aturan gambut yang berlaku?',
+                        'model' => 'p2_q17_bebas_lahan_gambut',
                     ])
 
                     <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Pemeliharaan tanaman</p>
