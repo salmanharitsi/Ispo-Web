@@ -663,7 +663,7 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="text-center mb-16">
-        <div class="inline-block bg-white bg-opacity-15 backdrop-blur-sm text-white px-6 py-2 rounded-full mb-4 font-semibold text-sm border border-white border-opacity-20">
+        <div class="inline-block bg-white bg-opacity-15 backdrop-blur-sm text-gray-800 px-6 py-2 rounded-full mb-4 font-semibold text-sm border border-white border-opacity-20">
           🌿 Alur Proses
         </div>
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Proses Penilaian Kesiapan ISPO</h2>
