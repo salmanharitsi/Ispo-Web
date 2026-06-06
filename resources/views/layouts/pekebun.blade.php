@@ -103,10 +103,10 @@
                             </a>
                         </li>
                         <li>
-                            <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
+                            <a href="{{ route('pekebun.hasil-spk') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.hasil-spk') }}">
                                 <i
-                                    class="fas fa-chart-line text-lg w-5 shrink-0 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                                    class="fas fa-chart-line text-lg w-5 shrink-0 {{ iconColor('pekebun.hasil-spk') }}"></i>
                                 <span class="sidebar-text font-medium">Hasil SPK</span>
                             </a>
                         </li>
@@ -190,9 +190,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href=""
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('riwayat-presensi-guru') }}">
-                                <i class="fas fa-chart-line text-lg w-5 {{ iconColor('riwayat-presensi-guru') }}"></i>
+                            <a href="{{ route('pekebun.hasil-spk') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('pekebun.hasil-spk') }}">
+                                <i class="fas fa-chart-line text-lg w-5 {{ iconColor('pekebun.hasil-spk') }}"></i>
                                 <span class="font-medium">Hasil SPK</span>
                             </a>
                         </li>

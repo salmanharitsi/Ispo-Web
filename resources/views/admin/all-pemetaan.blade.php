@@ -143,11 +143,21 @@
                   @endif
                 </td>
                 <td class="py-2">
-                  @php $status = $row['status_ispo'] ?? 'belum'; @endphp
-                  @if($status === 'sudah')
+                  @php $status = $row['status_ispo'] ?? 'belum-pengajuan'; @endphp
+                  @if($status === 'sudah-layak')
                     <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[11px] font-medium">
                       <i class="fa-solid fa-award text-[10px]"></i>
-                      Sudah ISPO
+                      Sudah Layak
+                    </span>
+                  @elseif($status === 'cukup-layak')
+                    <span class="inline-flex items-center gap-1 rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 text-[11px] font-medium">
+                      <i class="fa-solid fa-check text-[10px]"></i>
+                      Cukup Layak
+                    </span>
+                  @elseif($status === 'belum-layak')
+                    <span class="inline-flex items-center gap-1 rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-medium">
+                      <i class="fa-solid fa-xmark text-[10px]"></i>
+                      Belum Layak
                     </span>
                   @elseif($status === 'proses')
                     <span class="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-[11px] font-medium">
@@ -157,7 +167,7 @@
                   @else
                     <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 text-slate-600 px-2 py-0.5 text-[11px] font-medium">
                       <i class="fa-regular fa-circle text-[10px]"></i>
-                      Belum
+                      Belum Diajukan
                     </span>
                   @endif
                 </td>
@@ -381,13 +391,15 @@
 
       // Warna area berdasarkan status ISPO
       const statusStyle = {
-        belum: { fillColor: "#fca5a5", color: "#dc2626" },
-        proses: { fillColor: "#fde68a", color: "#d97706" },
-        sudah: { fillColor: "#6ee7b7", color: "#059669" },
+        'belum-pengajuan': { fillColor: "#fca5a5", color: "#dc2626" },
+        'proses': { fillColor: "#fde68a", color: "#d97706" },
+        'sudah-layak': { fillColor: "#6ee7b7", color: "#059669" },
+        'cukup-layak': { fillColor: "#6ee7b7", color: "#059669" },
+        'belum-layak': { fillColor: "#6ee7b7", color: "#059669" },
       };
 
-      const status = item.status_ispo || 'belum';
-      const { fillColor, color: borderColor } = statusStyle[status] ?? statusStyle['belum'];
+      const status = item.status_ispo || 'belum-pengajuan';
+      const { fillColor, color: borderColor } = statusStyle[status] ?? statusStyle['belum-pengajuan'];
 
       const style = {
         color: borderColor,

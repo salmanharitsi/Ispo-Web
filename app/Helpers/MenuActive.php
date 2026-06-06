@@ -57,6 +57,9 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Daftar Kuisioner', 'route' => 'pekebun.daftar-kuisioner'],
                 ['label' => 'Kuisioner Kebun'],
             ],
+            'pekebun.hasil-spk' => [
+                ['label' => 'Hasil SPK'],
+            ],
 
             // Admin Breadcrumbs
             'admin' => [
@@ -82,6 +85,18 @@ if (!function_exists('breadcrumb')) {
             'admin.peta-kebun' => [
                 ['label' => 'Daftar Kebun', 'route' => 'admin.daftar-kebun'],
                 ['label' => 'Peta Kebun'],
+            ],
+            'admin.ahp.prinsip' => [
+                ['label' => 'Perhitungan AHP'],
+                ['label' => 'Pembobotan Prinsip'],
+            ],
+            'admin.ahp.kriteria' => [
+                ['label' => 'Perhitungan AHP'],
+                ['label' => 'Pembobotan Kriteria'],
+            ],
+            'admin.ahp.final' => [
+                ['label' => 'Perhitungan AHP'],
+                ['label' => 'Pembobotan Final'],
             ],
         ];
 

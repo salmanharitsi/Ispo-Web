@@ -1,4 +1,4 @@
-<div class="p-4 sm:p-6 space-y-6">
+<div class="p-4 sm:p-6 space-y-6" x-data="scrollToError">
     <form wire:submit.prevent="save" class="space-y-8">
         
         {{-- PRINSIP 1 --}}
@@ -12,12 +12,12 @@
                         Kepatuhan terhadap Peraturan & Legalitas
                     </h2>
                     <p class="text-xs text-slate-500 mt-1">
-                        Jawab "Ya" jika kondisi tersebut sudah sesuai di kebun Anda.
+                        Jawab sesuai dengan kondisi legalitas lahan dan usaha Anda.
                     </p>
                 </div>
                 <span class="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-[11px] font-medium text-slate-500 border border-slate-200 w-fit">
                     <i class="fa-solid fa-scale-balanced text-[10px]"></i>
-                    <span>8 Pertanyaan</span>
+                    <span>7 Pertanyaan</span>
                 </span>
             </div>
 
@@ -30,10 +30,26 @@
                     <h3 class="text-xs font-semibold text-slate-700">Legalitas lahan</h3>
                 </div>
                 <div class="space-y-4">
-                    @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda memiliki surat kepemilikan lahan yang sah (sertifikat, akta jual beli, girik, atau dokumen kepemilikan lain)?',
-                        'model' => 'p1_q1_surat_kepemilikan_sah',
-                    ])
+                    <div class="flex flex-col gap-3">
+                        <p class="text-sm font-medium text-slate-800">
+                            Apakah Anda memiliki surat kepemilikan lahan yang sah (sertifikat, akta jual beli, girik, atau dokumen kepemilikan lain)?
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            @foreach([
+                                '4' => 'SHM',
+                                '3' => 'Girik',
+                                '2' => 'SKT',
+                                '1' => 'SKGR',
+                                '0' => 'Tidak ada'
+                            ] as $val => $label)
+                                <label class="flex items-center gap-2 px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 cursor-pointer hover:bg-white transition shadow-sm">
+                                    <input type="radio" wire:model="p1_q1_surat_kepemilikan_sah" value="{{ $val }}" class="h-4 w-4 text-emerald-600 border-slate-300 focus:ring-emerald-500">
+                                    <span>{{ $label }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                        @error('p1_q1_surat_kepemilikan_sah') <p class="text-xs text-rose-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
                 </div>
             </div>
 
@@ -63,12 +79,12 @@
                 </div>
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Jika lahan Anda pernah disengketakan, apakah ada dokumen hasil musyawarah penyelesaian sengketa?',
-                        'model' => 'p1_q3_dokumen_penyelesaian_sengketa',
+                        'label' => 'Apakah lahan Anda saat ini bebas dari sengketa dengan pihak manapun?',
+                        'model' => 'p1_q3_bebas_sengketa',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Jika telah ada kesepakatan penyelesaian sengketa, apakah Anda memiliki salinan perjanjian tertulisnya?',
-                        'model' => 'p1_q4_salinan_perjanjian_sengketa',
+                        'label' => 'Apakah batas lahan Anda jelas dan tidak tumpang tindih dengan lahan pihak lain?',
+                        'model' => 'p1_q4_batas_lahan_jelas',
                     ])
                 </div>
             </div>
@@ -82,14 +98,24 @@
                     <h3 class="text-xs font-semibold text-slate-700">Legalitas usaha perkebunan</h3>
                 </div>
                 <div class="space-y-4">
-                    @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda sudah memiliki STDB (Surat Tanda Daftar Budidaya)?',
-                        'model' => 'p1_q5_memiliki_stdb',
-                    ])
-                    @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda sedang mengurus STDB (Surat Tanda Daftar Budidaya)?',
-                        'model' => 'p1_q6_sedang_mengurus_stdb',
-                    ])
+                    <div class="flex flex-col gap-3">
+                        <p class="text-sm font-medium text-slate-800">
+                            Apakah Anda sudah memiliki STDB (Surat Tanda Daftar Budidaya)?
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            @foreach([
+                                '1' => 'Ya',
+                                '0.5' => 'Sedang mengurus',
+                                '0' => 'Tidak'
+                            ] as $val => $label)
+                                <label class="flex items-center gap-2 px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 cursor-pointer hover:bg-white transition shadow-sm">
+                                    <input type="radio" wire:model="p1_q5_memiliki_stdb" value="{{ $val }}" class="h-4 w-4 text-emerald-600 border-slate-300 focus:ring-emerald-500">
+                                    <span>{{ $label }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                        @error('p1_q5_memiliki_stdb') <p class="text-xs text-rose-500 mt-1">{{ $message }}</p> @enderror
+                    </div>
                 </div>
             </div>
 
@@ -104,11 +130,11 @@
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda memiliki izin lingkungan sesuai regulasi SPPL (atau dokumen izin lingkungan lain)?',
-                        'model' => 'p1_q7_memiliki_izin_lingkungan',
+                        'model' => 'p1_q6_memiliki_izin_lingkungan',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda memiliki catatan bahwa Anda telah menjalankan pengelolaan lingkungan sesuai izin tersebut (misalnya limbah, saluran air, pembatasan pembakaran)?',
-                        'model' => 'p1_q8_catatan_pengelolaan_lingkungan',
+                        'model' => 'p1_q7_catatan_pengelolaan_lingkungan',
                     ])
                 </div>
             </div>
@@ -145,11 +171,11 @@
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda tergabung dalam kelompok tani atau koperasi pekebun?',
-                        'model' => 'p2_q9_tergabung_kelompok_tani',
+                        'model' => 'p2_q8_tergabung_kelompok_tani',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah kelompok tani atau koperasi tersebut memiliki dokumen resmi (pembentukan, daftar anggota, atau pengesahan)?',
-                        'model' => 'p2_q10_kelompok_memiliki_dokumen_resmi',
+                        'model' => 'p2_q9_kelompok_memiliki_dokumen_resmi',
                     ])
                 </div>
             </div>
@@ -165,11 +191,11 @@
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda atau kelompok tani memiliki rencana kerja tertulis (rencana usaha kebun)?',
-                        'model' => 'p2_q11_rencana_kerja_tertulis',
+                        'model' => 'p2_q10_rencana_kerja_tertulis',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda atau kelompok tani memiliki laporan kegiatan kebun atau catatan kegiatan rutin?',
-                        'model' => 'p2_q12_catatan_kegiatan_kebun',
+                        'model' => 'p2_q11_catatan_kegiatan_kebun',
                     ])
                 </div>
             </div>
@@ -183,57 +209,72 @@
                     <h3 class="text-xs font-semibold text-slate-700">Teknis budidaya & produksi</h3>
                 </div>
                 <div class="space-y-4">
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-2">Pembukaan lahan</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Saat membuka lahan baru, apakah Anda melakukannya tanpa membakar?',
-                        'model' => 'p2_q13_buka_lahan_tanpa_bakar',
+                        'model' => 'p2_q12_buka_lahan_tanpa_bakar',
                     ])
+                    
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Benih sawit</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah bibit sawit yang Anda gunakan berasal dari produsen resmi/bersertifikat?',
-                        'model' => 'p2_q14_bibit_dari_produsen_resmi',
+                        'model' => 'p2_q13_bibit_dari_produsen_resmi',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda mempunyai catatan asal bibit (asal benih, tanggal perolehan)?',
-                        'model' => 'p2_q15_catatan_asal_bibit',
+                        'model' => 'p2_q14_catatan_asal_bibit',
                     ])
+
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Penanaman di lahan mineral</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda menanam dengan jarak tanam dan cara yang sesuai standar tanam sawit?',
-                        'model' => 'p2_q16_tanam_sesuai_standar',
+                        'model' => 'p2_q15_tanam_sesuai_standar',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda mencatat pelaksanaan penanaman (tanggal tanam, jumlah bibit, luas lahan)?',
-                        'model' => 'p2_q17_catatan_pelaksanaan_tanam',
+                        'model' => 'p2_q16_catatan_pelaksanaan_tanam',
                     ])
+
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Penanaman di lahan gambut</p>
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Jika kebun Anda berada di lahan gambut: apakah Anda mengikuti panduan teknis khusus penanaman di lahan gambut (sesuai aturan)?',
-                        'model' => 'p2_q18_panduan_lahan_gambut',
+                        'label' => 'Apakah kebun Anda bebas dari lahan gambut atau sudah dikelola sesuai aturan gambut yang berlaku?',
+                        'model' => 'p2_q17_bebas_lahan_gambut',
                     ])
+
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Pemeliharaan tanaman</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda melakukan pemeliharaan tanaman secara rutin (pemupukan, pemangkasan pelepah, perawatan saluran air, dsb)?',
-                        'model' => 'p2_q19_pemeliharaan_rutin',
+                        'model' => 'p2_q18_pemeliharaan_rutin',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda menyimpan catatan pemupukan dan kegiatan pemeliharaan tanaman?',
-                        'model' => 'p2_q20_catatan_pemupukan_pemeliharaan',
+                        'model' => 'p2_q19_catatan_pemupukan_pemeliharaan',
                     ])
+
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Pengendalian Hama & OPT (PHT/IPM)</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda menerapkan pengendalian hama secara terencana sesuai pedoman PHT (misalnya rotasi, pestisida aman, pengamatan rutin)?',
-                        'model' => 'p2_q21_pengendalian_hama_sesuai_pht',
+                        'model' => 'p2_q20_pengendalian_hama_sesuai_pht',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda memiliki alat atau sarana untuk pengendalian hama sesuai pedoman (semprot, pelindung, perangkap, dsb)?',
-                        'model' => 'p2_q22_sarana_pengendalian_hama',
+                        'model' => 'p2_q21_sarana_pengendalian_hama',
                     ])
+
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Pemanenan</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda memanen buah hanya ketika buah sudah matang panen?',
-                        'model' => 'p2_q23_panen_buah_matang',
+                        'model' => 'p2_q22_panen_buah_matang',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda mencatat hasil panen (jumlah tandan, tanggal panen)?',
-                        'model' => 'p2_q24_catatan_hasil_panen',
+                        'model' => 'p2_q23_catatan_hasil_panen',
                     ])
+
+                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mt-4">Pengangkutan TBS</p>
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Setelah panen, apakah TBS segera diangkut ke pembeli/pabrik tanpa penundaan yang lama?',
-                        'model' => 'p2_q25_tbs_segera_diangkut',
+                        'model' => 'p2_q24_tbs_segera_diangkut',
                     ])
                 </div>
             </div>
@@ -255,7 +296,7 @@
                 </div>
                 <span class="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-[11px] font-medium text-slate-500 border border-slate-200 w-fit">
                     <i class="fa-solid fa-leaf text-[10px]"></i>
-                    <span>3 Pertanyaan</span>
+                    <span>4 Pertanyaan</span>
                 </span>
             </div>
 
@@ -270,7 +311,11 @@
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
                         'label' => 'Apakah Anda ikut serta atau melaksanakan upaya mencegah kebakaran kebun (misalnya membuat sekat api, patroli, gotong royong dengan warga)?',
-                        'model' => 'p3_q26_upaya_mencegah_kebakaran',
+                        'model' => 'p3_q25_upaya_mencegah_kebakaran',
+                    ])
+                    @include('pekebun.partials.kuisioner-question', [
+                        'label' => 'Apakah Anda memiliki alat dasar pemadam kebakaran di kebun (misalnya pompa air, ember, atau alat semprot)?',
+                        'model' => 'p3_q26_memiliki_alat_pemadam',
                     ])
                 </div>
             </div>

@@ -98,10 +98,10 @@
             </div>
           </div>
 
-          @if ($kebun->status_finalisasi == "belum")
+          @if ($kebun->status_finalisasi != "final")
             <a href="{{ url('/pekebun/daftar-pemetaan/' . $kebun->id) }}" class="w-full flex gap-2 items-center justify-center bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors mt-4">
-              <i class="fas fa-location-crosshairs text-lg w-5"></i>
-              Petakan area
+              <i class="fas {{ $kebun->status_finalisasi == 'belum' ? 'fa-location-crosshairs' : 'fa-edit' }} text-lg w-5"></i>
+              {{ $kebun->status_finalisasi == 'belum' ? 'Petakan area' : 'Edit Pemetaan' }}
             </a>
           @else
             <button disabled class="w-full flex gap-2 items-center justify-center bg-gray-300 text-white font-semibold py-3 rounded-lg mt-4 cursor-not-allowed">

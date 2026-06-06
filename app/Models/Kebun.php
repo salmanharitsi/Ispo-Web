@@ -123,4 +123,9 @@ class Kebun extends Model
     {
         return $this->hasOne(Kuisioner::class);
     }
+
+    public function topsisRanking()
+    {
+        return $this->hasOne(TopsisRanking::class);
+    }
 }

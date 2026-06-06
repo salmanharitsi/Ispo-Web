@@ -475,13 +475,15 @@
 
         // Warna area berdasarkan status ISPO
         const statusStyle = {
-          belum: { fillColor: '#fca5a5', color: '#dc2626' },
-          proses: { fillColor: '#fde68a', color: '#d97706' },
-          sudah: { fillColor: '#6ee7b7', color: '#059669' },
+          'belum-pengajuan': { fillColor: '#fca5a5', color: '#dc2626' },
+          'proses': { fillColor: '#fde68a', color: '#d97706' },
+          'sudah-layak': { fillColor: '#6ee7b7', color: '#059669' },
+          'cukup-layak': { fillColor: '#6ee7b7', color: '#059669' },
+          'belum-layak': { fillColor: '#6ee7b7', color: '#059669' },
         };
 
-        const status = item.status_ispo || 'belum';
-        const { fillColor, color: borderColor } = statusStyle[status] ?? statusStyle['belum'];
+        const status = item.status_ispo || 'belum-pengajuan';
+        const { fillColor, color: borderColor } = statusStyle[status] ?? statusStyle['belum-pengajuan'];
 
         const style = isCurrent ? {
           color: borderColor,

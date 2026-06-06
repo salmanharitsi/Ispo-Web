@@ -180,13 +180,13 @@
                             <div class="flex flex-col items-center gap-1.5">
                                 {{-- ISPO --}}
                                 <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] border whitespace-nowrap
-                                    {{ $k->status_ispo === 'sudah'
+                                    {{ $k->status_ispo === 'sudah-layak'
                                         ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
                                         : ($k->status_ispo === 'proses'
                                             ? 'bg-amber-50 text-amber-700 border-amber-100'
                                             : 'bg-slate-50 text-slate-500 border-slate-200') }}">
                                     <i class="fa-solid fa-award"></i>
-                                    @if($k->status_ispo === 'sudah')
+                                    @if($k->status_ispo === 'sudah-layak')
                                         Layak ISPO
                                     @elseif($k->status_ispo === 'proses')
                                         Proses Kelayakan ISPO
@@ -428,13 +428,13 @@
 
                         {{-- ISPO --}}
                         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border
-                            {{ $detailKebun->status_ispo === 'sudah'
+                            {{ $detailKebun->status_ispo === 'sudah-layak'
                                 ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
                                 : ($detailKebun->status_ispo === 'proses'
                                     ? 'bg-amber-50 text-amber-700 border-amber-100'
                                     : 'bg-slate-50 text-slate-500 border-slate-200') }}">
                             <i class="fa-solid fa-award"></i>
-                            @if($detailKebun->status_ispo === 'sudah') Layak ISPO
+                            @if($detailKebun->status_ispo === 'sudah-layak') Layak ISPO
                             @elseif($detailKebun->status_ispo === 'proses') Proses Kelayakan ISPO
                             @else Belum Layak ISPO
                             @endif
@@ -448,17 +448,6 @@
                             <i class="fa-solid fa-circle-check"></i>
                             {{ $detailKebun->status_finalisasi === 'final' ? 'Data sudah final' : 'Belum final' }}
                         </span>
-
-                        {{-- STDB --}}
-                        @if(!is_null($detailKebun->pernyataan_stdb))
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border
-                                {{ $detailKebun->pernyataan_stdb
-                                    ? 'bg-teal-50 text-teal-700 border-teal-100'
-                                    : 'bg-slate-50 text-slate-500 border-slate-200' }}">
-                                <i class="fa-solid fa-file-shield"></i>
-                                {{ $detailKebun->pernyataan_stdb ? 'Pernyataan STDB: Ya' : 'Pernyataan STDB: Tidak' }}
-                            </span>
-                        @endif
                     </div>
 
                     {{-- Detail lahan & kepemilikan --}}

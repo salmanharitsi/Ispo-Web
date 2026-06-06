@@ -35,7 +35,7 @@
 
           {{-- Status ISPO --}}
           <span class="inline-flex items-center gap-1 rounded-full px-3 py-1 text-[11px] font-medium
-            @if($kebun->status_ispo === 'sudah')
+            @if($kebun->status_ispo === 'sudah-layak')
               bg-emerald-100 text-emerald-700 border border-emerald-200
             @elseif($kebun->status_ispo === 'proses')
               bg-sky-100 text-sky-700 border border-sky-200
@@ -46,9 +46,11 @@
             <span>
               Status Kelayakan ISPO:
               @switch($kebun->status_ispo)
-                @case('sudah') Sudah tersertifikasi @break
-                @case('proses') Dalam proses @break
-                @default Belum tersertifikasi
+                @case('sudah-layak') Sudah Layak @break
+                @case('cukup-layak') Cukup Layak @break
+                @case('belum-layak') Belum Layak @break
+                @case('proses') Dalam Proses @break
+                @default Belum Diajukan
               @endswitch
             </span>
           </span>

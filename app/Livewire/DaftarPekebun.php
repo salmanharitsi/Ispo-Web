@@ -120,7 +120,7 @@ class DaftarPekebun extends Component
                     $q->has('kuisioner');
                 },
                 'kebun as kebun_ispo_sudah_count' => function ($q) {
-                    $q->where('status_ispo', 'sudah');
+                    $q->whereIn('status_ispo', ['sudah-layak', 'cukup-layak']);
                 },
             ]);
 

@@ -1,4 +1,4 @@
-<div class="p-8">
+<div class="p-8" x-data="scrollToError">
   <!-- Success Message -->
   @if (session()->has('message'))
   <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)" class="mb-6 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-center justify-between">

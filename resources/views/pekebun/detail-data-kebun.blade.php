@@ -77,33 +77,7 @@
       </div>
       @endif
 
-      @if ($kebun->polygon && $kebun->kuisioner && $kebun->pernyataan_stdb == false)
-          <div class="bg-green-50 border border-green-500 p-4 rounded-lg">
-          <div class="flex items-start">
-            <svg class="w-6 h-6 text-green-500 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <div class="flex-1">
-              <h3 class="text-green-800 font-semibold mb-1">Pernyataan STDB Belum Diisi!</h3>
-              <p class="text-green-700 text-sm mb-3">
-                Isi Pernyataan STDB untuk melengkapi data kebun dan melanjutkan ke tahap finalisasi.
-              </p>
-              <button
-                type="button"
-                onclick="openSTDBModal()"
-                class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition cursor-pointer"
-              >
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                Isi Pernyataan STDB
-              </button>
-            </div>
-          </div>
-        </div>
-      @endif
-
-      @if ($kebun->polygon && $kebun->kuisioner && $kebun->pernyataan_stdb == true && $kebun->status_finalisasi === 'belum')
+      @if ($kebun->polygon && $kebun->kuisioner && $kebun->status_finalisasi === 'belum')
         <div class="bg-green-50 border border-green-500 p-4 rounded-lg">
           <div class="flex items-start">
             <svg class="w-6 h-6 text-green-500 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -423,22 +397,18 @@
                 <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">Belum</span>
               @endif
             </div>
-            <div class="flex items-center justify-between pb-3 border-b border-green-400">
-              <span class="text-green-100">Status Pernyataan STDB</span>
-              @if($kebun->pernyataan_stdb == true)
-                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Sudah</span>
-              @else
-                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">Belum</span>
-              @endif
-            </div>
             <div class="flex items-center justify-between">
               <span class="text-green-100">Status kelayakan ISPO</span>
-              @if($kebun->status_ispo == 'sudah')
-                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Layak</span>
+              @if($kebun->status_ispo == 'sudah-layak')
+                <span class="bg-white text-green-600 px-3 py-1 rounded-full text-xs font-bold">Sudah Layak</span>
+              @elseif($kebun->status_ispo == 'cukup-layak')
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">Cukup Layak</span>
+              @elseif($kebun->status_ispo == 'belum-layak')
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">Belum Layak</span>
               @elseif($kebun->status_ispo == 'proses')
                 <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">Proses</span>
               @else
-                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">Belum</span>
+                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-bold">Belum Diajukan</span>
               @endif
             </div>
           </div>
@@ -481,7 +451,7 @@
               </p>
             </div>
           @else
-            @if ($kebun->polygon && $kebun->kuisioner && $kebun->pernyataan_stdb == true)
+            @if ($kebun->polygon && $kebun->kuisioner)
               <div class="space-y-3">
                 <div class="text-green-600 flex items-start mb-4">
                   <svg class="w-5 h-5 mr-3 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -506,7 +476,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <p class="text-sm">
-                  Lengkapi semua data kebun seperti pemetaan, kuisioner, dan pernyataan STDB untuk melakukan finalisasi, dan melanjutkan proses pengecekan.
+                  Lengkapi semua data kebun seperti pemetaan dan kuisioner untuk melakukan finalisasi, dan melanjutkan proses pengecekan.
                 </p>
               </div>
               <button
@@ -601,68 +571,6 @@
   </div>
 </div>
 
-<!-- Pernyataan STDB Modal -->
-<div id="stdbModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-  <div class="absolute inset-0 bg-black/50" onclick="closeStdbModal()"></div>
-  <div class="relative bg-white rounded-lg shadow-2xl max-w-xl w-full p-6">
-    <div class="text-center">
-      <div class="bg-emerald-100 text-green-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-        <i class="fa-regular fa-circle-check"></i>
-      </div>
-
-      <h3 class="text-2xl font-bold text-gray-800 mb-5">Pernyataan Kepemilikan STDB</h3>
-
-      <p class="text-gray-600 text-sm mb-4 text-left">
-        Saya yang bertanda tangan sebagai pemilik/pengelola kebun kelapa sawit ini menyatakan bahwa
-        kebun <span class="font-semibold">{{ $kebun->nama_kebun }}</span> telah memiliki
-        <span class="font-semibold">Surat Tanda Daftar Budidaya (STDB)</span> yang diterbitkan oleh instansi
-        berwenang dan STDB tersebut masih berlaku sesuai ketentuan peraturan perundang-undangan.
-      </p>
-
-      <p class="text-gray-600 text-sm mb-5 text-left">
-        Saya memahami bahwa data dan pernyataan yang saya sampaikan akan digunakan dalam proses
-        verifikasi dan penilaian kelayakan ISPO, serta dapat dicek kebenarannya oleh pihak yang berwenang.
-      </p>
-
-      <div class="bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-3 mb-5 text-left flex items-start gap-3">
-        <input
-          id="stdbAgree"
-          type="checkbox"
-          class="mt-1 h-4 w-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
-        >
-        <label for="stdbAgree" class="text-xs text-emerald-800 leading-relaxed">
-          Dengan mencentang kotak ini, saya menyatakan bahwa seluruh keterangan di atas saya isi
-          dengan <span class="font-semibold">benar, jujur, dan dapat dipertanggungjawabkan</span>.
-          Saya bersedia menanggung segala konsekuensi apabila di kemudian hari pernyataan ini
-          terbukti tidak benar.
-        </label>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3">
-        <button
-          type="button"
-          onclick="closeStdbModal()"
-          class="px-4 py-3 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
-        >
-          Batal
-        </button>
-
-        <form action="{{ route('pekebun.pernyataan-stdb', $kebun->id) }}" method="POST">
-          @csrf
-          <button
-            id="stdbSubmitBtn"
-            type="submit"
-            class="w-full px-4 py-3 rounded-lg font-semibold transition
-                   bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed"
-            disabled
-          >
-            Ya, Saya Menyatakan
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 @push('scripts')
 <script>
@@ -684,38 +592,6 @@ function closeFinalizeModal() {
   if (modal) modal.classList.add('hidden');
 }
 
-function openSTDBModal() {
-  const modal = document.getElementById('stdbModal');
-  if (modal) modal.classList.remove('hidden');
-}
-
-function closeStdbModal() {
-  const modal = document.getElementById('stdbModal');
-  if (modal) modal.classList.add('hidden');
-}
-
-// Enable/disable tombol submit STDB berdasarkan checkbox
-document.addEventListener('DOMContentLoaded', function () {
-  const checkbox = document.getElementById('stdbAgree');
-  const submitBtn = document.getElementById('stdbSubmitBtn');
-
-  if (!checkbox || !submitBtn) return;
-
-  function syncStdbButton() {
-    if (checkbox.checked) {
-      submitBtn.disabled = false;
-      submitBtn.classList.remove('bg-gray-200', 'text-gray-500', 'border-gray-300', 'cursor-not-allowed');
-      submitBtn.classList.add('bg-green-600', 'hover:bg-green-700', 'text-white', 'border-green-600', 'cursor-pointer');
-    } else {
-      submitBtn.disabled = true;
-      submitBtn.classList.add('bg-gray-200', 'text-gray-500', 'border-gray-300', 'cursor-not-allowed');
-      submitBtn.classList.remove('bg-green-600', 'hover:bg-green-700', 'text-white', 'border-green-600', 'cursor-pointer');
-    }
-  }
-
-  checkbox.addEventListener('change', syncStdbButton);
-  syncStdbButton();
-});
 </script>
 @endpush
 

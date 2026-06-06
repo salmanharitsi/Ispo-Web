@@ -117,24 +117,6 @@
               @endif
             </div>
 
-            <!-- Status Kuisioner -->
-            <div class="flex items-center justify-between py-2 border-b border-gray-100">
-              <span class="text-gray-600 text-sm flex items-center">
-                <i class="fa-solid fa-sign-hanging w-5 h-5 mr-2 text-green-600"></i>
-                Pernyataan STDB
-              </span>
-              @if($kebun->pernyataan_stdb == true)
-                <span class="text-green-600 font-semibold text-sm flex items-center">
-                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  Sudah
-                </span>
-              @else
-                <span class="text-gray-400 font-semibold text-sm">Belum</span>
-              @endif
-            </div>
-
             <!-- Status ISPO -->
             <div class="flex items-center justify-between py-2">
               <span class="text-gray-600 text-sm flex items-center">
@@ -143,9 +125,17 @@
                 </svg>
                 Penilaian Kelayakan ISPO
               </span>
-              @if($kebun->status_ispo == 'sudah')
+              @if($kebun->status_ispo == 'sudah-layak')
                 <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">
-                  Layak
+                  Sudah Layak
+                </span>
+              @elseif($kebun->status_ispo == 'cukup-layak')
+                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">
+                  Cukup Layak
+                </span>
+              @elseif($kebun->status_ispo == 'belum-layak')
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">
+                  Belum Layak
                 </span>
               @elseif($kebun->status_ispo == 'proses')
                 <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">
@@ -153,7 +143,7 @@
                 </span>
               @else
                 <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold">
-                  Belum
+                  Belum Diajukan
                 </span>
               @endif
             </div>
@@ -498,8 +488,8 @@
                 class="w-full px-4 py-3 border @error('kepada_siapa_hasil_panen_dijual') border-red-500 @else border-gray-300 @enderror rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition bg-white"
               >
                 <option value="">Pilih tujuan penjualan</option>
-                <option value="RAM">RAM</option>
-                <option value="PKS langsung">PKS langsung</option>
+                <option value="TOKE">TOKE</option>
+                <option value="PKS">PKS</option>
               </select>
               @error('kepada_siapa_hasil_panen_dijual')
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>

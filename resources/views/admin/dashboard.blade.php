@@ -172,15 +172,23 @@
         <div class="mt-4 flex flex-wrap gap-4 text-xs">
           <div class="flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:#E5E7EB;"></span>
-            <span>Belum Layak ({{ $ispoBelum }})</span>
+            <span>Belum Diajukan ({{ $ispoBelum }})</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:#FACC15;"></span>
             <span>Proses Penilaian ({{ $ispoProses }})</span>
           </div>
           <div class="flex items-center gap-2">
+            <span class="inline-block w-3 h-3 rounded-full" style="background:#F87171;"></span>
+            <span>Belum Layak ({{ $ispoBelumLayak }})</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-3 h-3 rounded-full" style="background:#60A5FA;"></span>
+            <span>Cukup Layak ({{ $ispoCukupLayak }})</span>
+          </div>
+          <div class="flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:#22C55E;"></span>
-            <span>Layak ({{ $ispoSudah }})</span>
+            <span>Sudah Layak ({{ $ispoSudah }})</span>
           </div>
         </div>
       </div>
@@ -200,6 +208,8 @@
     const ispoBelum  = @json($ispoBelum);
     const ispoProses = @json($ispoProses);
     const ispoSudah  = @json($ispoSudah);
+    const ispoCukupLayak = @json($ispoCukupLayak);
+    const ispoBelumLayak = @json($ispoBelumLayak);
 
     // ==========================
     // BAR CHART: Kebun per Kecamatan
@@ -254,15 +264,15 @@
     const ispoCanvas = document.getElementById('ispoChart');
     if (ispoCanvas) {
       const ispoCtx = ispoCanvas.getContext('2d');
-      const total = (ispoBelum + ispoProses + ispoSudah) || 1;
+      const total = (ispoBelum + ispoProses + ispoBelumLayak + ispoCukupLayak + ispoSudah) || 1;
 
       new Chart(ispoCtx, {
         type: 'doughnut',
         data: {
-          labels: ['Belum Layak ISPO', 'Proses Kelayakan ISPO', 'Layak ISPO'],
+          labels: ['Belum Diajukan', 'Proses Penilaian', 'Belum Layak', 'Cukup Layak', 'Sudah Layak'],
           datasets: [{
-            data: [ispoBelum, ispoProses, ispoSudah],
-            backgroundColor: ['#E5E7EB', '#FACC15', '#22C55E'],
+            data: [ispoBelum, ispoProses, ispoBelumLayak, ispoCukupLayak, ispoSudah],
+            backgroundColor: ['#E5E7EB', '#FACC15', '#F87171', '#60A5FA', '#22C55E'],
             borderWidth: 0,
             hoverOffset: 4,
           }]

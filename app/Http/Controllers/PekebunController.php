@@ -28,7 +28,7 @@ class PekebunController extends Controller
                         $kebun->longitude,
                     ],
                     'is_current_user' => $kebun->user_id === $currentUserId,
-                    'status_ispo'     => $kebun->status_ispo ?? 'belum',
+                    'status_ispo'     => $kebun->status_ispo ?? 'belum-pengajuan',
                 ];
             })
             ->values()
@@ -62,16 +62,12 @@ class PekebunController extends Controller
         $hasKuisioner = $user->kebun()->whereHas('kuisioner')->exists();
         $jumlahKuisionerSelesai = $user->kebun()->whereHas('kuisioner')->count();
 
-        // Check Step 5: Kuisioner (minimal 1 kebun yang sudah ada kuisionernya)
-        $hasPernyataanStdb = $user->kebun()->where('pernyataan_stdb', true)->exists();
-        $jumlahPernyataanStdb = $user->kebun()->where('pernyataan_stdb', true)->count();
-
-        // Check Step 6: Finalisasi (minimal 1 kebun yang sudah difinalisasi)
-        $hasFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->exists();
-        $jumlahKebunFinalisasi = $user->kebun()->where('status_finalisasi', 'final')->count();
+        // Check Step 5: Finalisasi (minimal 1 kebun yang sudah difinalisasi atau masuk tahap perankingan)
+        $hasFinalisasi = $user->kebun()->whereIn('status_finalisasi', ['final', 'perankingan'])->exists();
+        $jumlahKebunFinalisasi = $user->kebun()->whereIn('status_finalisasi', ['final', 'perankingan'])->count();
 
         // Check if all steps complete
-        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasPernyataanStdb && $hasFinalisasi;
+        $allStepsComplete = $isDataDiriComplete && $hasKebun && $hasPemetaan && $hasKuisioner && $hasFinalisasi;
 
         return view('pekebun.dashboard', compact(
             'user',
@@ -82,8 +78,6 @@ class PekebunController extends Controller
             'jumlahKebunTerpetakan',
             'hasKuisioner',
             'jumlahKuisionerSelesai',
-            'hasPernyataanStdb',
-            'jumlahPernyataanStdb',
             'hasFinalisasi',
             'jumlahKebunFinalisasi',
             'allStepsComplete'
@@ -109,23 +103,15 @@ class PekebunController extends Controller
             }
         }
 
-        $needSTDB = $user->kebun()
-            ->where('polygon', '!=', null)
-            ->whereHas('kuisioner')
-            ->where('pernyataan_stdb','=', false)
-            ->count();
-
         $needFinalisasi = $user->kebun()
-            ->where('status_finalisasi', '=','belum')
+            ->whereIn('status_finalisasi', ['belum', 'revisi'])
             ->where('polygon', '!=', null)
-            ->where('pernyataan_stdb','=', true)
             ->whereHas('kuisioner')
             ->count();
 
         return view('pekebun.daftar-kebun', [
             'isDataDiriComplete' => $isDataDiriComplete,
             'needFinalisasi' => $needFinalisasi,
-            'needSTDB'=> $needSTDB,
         ]);
     }
 
@@ -247,6 +233,14 @@ class PekebunController extends Controller
         $kebun->longitude = round($request->centroid_lng, 8);
         $kebun->save();
 
+        if ($kebun->status_finalisasi === 'perankingan') {
+            $kebun->status_finalisasi = 'revisi';
+            $kebun->status_ispo = 'belum-pengajuan';
+            $kebun->catatan_pengecekan = 'Data pemetaan telah diubah. Silakan ajukan ulang agar dapat diperiksa kembali oleh Admin.';
+            $kebun->save();
+            \App\Models\TopsisRanking::where('kebun_id', $kebun->id)->delete();
+        }
+
         return redirect(url('/pekebun/daftar-pemetaan'))->with([
             'success' => [
                 "title" => "Peta lahan berhasil disimpan.",
@@ -254,7 +248,7 @@ class PekebunController extends Controller
         ]);
     }
 
-    public function post_finalisasiKebun(string $id)
+    public function post_finalisasiKebun(Request $request, string $id)
     {
         $user = Auth::user();
 
@@ -273,43 +267,6 @@ class PekebunController extends Controller
         }
 
         // Optional: pastikan data lengkap dulu
-        if (!$kebun->polygon || !$kebun->kuisioner || $kebun->pernyataan_stdb == false) {
-            return redirect(url('/pekebun/daftar-kebun'))->with([
-                'error' => [
-                    "title" => "Data kebun belum lengkap. Lengkapi pemetaan, kuisioner, dan pernyataan STDB sebelum finalisasi.",
-                ]
-            ]);
-        }
-
-        $kebun->status_finalisasi = 'final';
-        $kebun->status_ispo = 'proses';
-        $kebun->save();
-
-        return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
-            'success' => [
-                "title" => "Data kebun berhasil difinalisasi. Data tidak dapat diubah lagi.",
-            ]
-        ]);
-    }
-
-    public function post_pernyataanStdb(string $id)
-    {
-        $user = Auth::user();
-
-        $kebun = Kebun::where('id', $id)
-            ->where('user_id', $user->id)
-            ->firstOrFail();
-
-        // Optional: cegah finalisasi ulang
-        if ($kebun->pernyataan_stdb === true) {
-            return redirect(url('/pekebun/daftar-kebun'))->with([
-                'error' => [
-                    "title" => "Data kebun ini sudah memiliki pernyataan STDB.",
-                ]
-            ]);
-        }
-
-        // Optional: pastikan data lengkap dulu
         if (!$kebun->polygon || !$kebun->kuisioner) {
             return redirect(url('/pekebun/daftar-kebun'))->with([
                 'error' => [
@@ -318,13 +275,45 @@ class PekebunController extends Controller
             ]);
         }
 
-        $kebun->pernyataan_stdb = true;
+        $kebun->status_finalisasi = 'final';
+        $kebun->status_ispo = 'proses';
         $kebun->save();
+
+        \App\Models\TopsisRanking::where('kebun_id', $kebun->id)->delete();
+
+        if ($request->query('source') === 'hasil_spk') {
+            return redirect(url('/pekebun/hasil-spk'))->with([
+                'success' => [
+                    'title' => 'Berhasil mengajukan ulang data kebun.'
+                ]
+            ]);
+        }
 
         return redirect(url('/pekebun/daftar-kebun/' . $kebun->id))->with([
             'success' => [
-                "title" => "Berhasil mengisi pernyataan STDB untuk kebun ini.",
+                "title" => "Data kebun berhasil difinalisasi. Data tidak dapat diubah lagi.",
             ]
+        ]);
+    }
+
+    public function get_hasil_spk()
+    {
+        $user = Auth::user();
+        
+        $kebuns = $user->kebun()
+            ->where('status_finalisasi', '!=', 'belum')
+            ->with(['topsisRanking', 'kuisioner'])
+            ->get();
+            
+        $allVi = \App\Models\TopsisRanking::whereNotNull('vi')
+            ->orderByDesc('vi')
+            ->pluck('vi')
+            ->unique()
+            ->values();
+
+        return view('pekebun.hasil-spk', [
+            'kebuns' => $kebuns,
+            'allVi' => $allVi
         ]);
     }
 }
