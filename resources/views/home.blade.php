@@ -654,44 +654,132 @@
   </section>
 
   <!-- Process Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Proses Penilaian Kesiapan ISPO</h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Ikuti 6 langkah mudah untuk menilai tingkat kesiapan kebun kelapa sawit Anda dalam menerapkan standar ISPO
+  <section class="py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #064e3b 0%, #065f46 40%, #047857 70%, #059669 100%);">
+    <!-- Decorative background pattern -->
+    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+    <!-- Glow blobs -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-400 rounded-full opacity-10 blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-300 rounded-full opacity-10 blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <div class="inline-block bg-white bg-opacity-15 backdrop-blur-sm text-white px-6 py-2 rounded-full mb-4 font-semibold text-sm border border-white border-opacity-20">
+          🌿 Alur Proses
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Proses Penilaian Kesiapan ISPO</h2>
+        <p class="text-lg text-emerald-100 max-w-2xl mx-auto">
+          Ikuti 5 langkah mudah untuk menilai tingkat kesiapan kebun kelapa sawit Anda dalam menerapkan standar ISPO
         </p>
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">1</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Registrasi Akun</h3>
-          <p class="text-gray-600 text-sm">Buat akun dan lengkapi profil perkebunan Anda di platform</p>
+
+      <!-- Row 1: 3 steps -->
+      <div class="flex flex-wrap justify-center gap-6 mb-6">
+
+        <!-- Step 1 -->
+        <div class="process-step-card group" style="width: 280px;">
+          <div class="bg-white rounded-2xl p-7 h-full text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-default relative overflow-hidden shadow-lg">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg" style="background: linear-gradient(135deg, #34d399, #10b981);">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+              </div>
+              <div class="inline-flex items-center justify-center w-7 h-7 bg-emerald-600 text-white rounded-full text-xs font-bold mb-3">1</div>
+              <h3 class="font-bold text-gray-800 text-lg mb-2">Registrasi Akun</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Buat akun dan lengkapi profil perkebunan Anda di platform</p>
+            </div>
+          </div>
         </div>
-        <div class="text-center">
-          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">2</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Pengisian Data Kebun</h3>
-          <p class="text-gray-600 text-sm">Isi data lengkap kebun dan informasi pengelolaan</p>
+
+        <!-- Arrow 1→2 -->
+        <div class="hidden md:flex items-center self-center text-emerald-300 opacity-60 -mx-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </div>
-        <div class="text-center">
-          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">3</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Pemetaan Kebun</h3>
-          <p class="text-gray-600 text-sm">Petakan lokasi kebun menggunakan polygon di peta</p>
+
+        <!-- Step 2 -->
+        <div class="process-step-card group" style="width: 280px;">
+          <div class="bg-white rounded-2xl p-7 h-full text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-default relative overflow-hidden shadow-lg">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg" style="background: linear-gradient(135deg, #6ee7b7, #34d399);">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <div class="inline-flex items-center justify-center w-7 h-7 bg-emerald-600 text-white rounded-full text-xs font-bold mb-3">2</div>
+              <h3 class="font-bold text-gray-800 text-lg mb-2">Pengisian Data Kebun</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Isi data lengkap kebun dan informasi pengelolaan</p>
+            </div>
+          </div>
         </div>
-        <div class="text-center">
-          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">4</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Isi Kuisioner</h3>
-          <p class="text-gray-600 text-sm">Jawab kuisioner terkait praktik pengelolaan kebun</p>
+
+        <!-- Arrow 2→3 -->
+        <div class="hidden md:flex items-center self-center text-emerald-300 opacity-60 -mx-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </div>
-        <div class="text-center">
-          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">5</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Isi Pernyataan STDB</h3>
-          <p class="text-gray-600 text-sm">Lengkapi pernyataan Surat Tanda Daftar Budidaya</p>
+
+        <!-- Step 3 -->
+        <div class="process-step-card group" style="width: 280px;">
+          <div class="bg-white rounded-2xl p-7 h-full text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-default relative overflow-hidden shadow-lg">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg" style="background: linear-gradient(135deg, #a7f3d0, #6ee7b7);">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                </svg>
+              </div>
+              <div class="inline-flex items-center justify-center w-7 h-7 bg-emerald-600 text-white rounded-full text-xs font-bold mb-3">3</div>
+              <h3 class="font-bold text-gray-800 text-lg mb-2">Pemetaan Kebun</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Petakan lokasi kebun menggunakan polygon di peta</p>
+            </div>
+          </div>
         </div>
-        <div class="text-center">
-          <div class="bg-green-700 text-white w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">6</div>
-          <h3 class="font-bold text-gray-800 mb-2 text-lg">Hasil Penilaian</h3>
-          <p class="text-gray-600 text-sm">Dapatkan hasil tingkat kesiapan dan rekomendasi perbaikan</p>
+      </div>
+
+      <!-- Row 2: 2 steps centered -->
+      <div class="flex flex-wrap justify-center gap-6">
+
+        <!-- Step 4 -->
+        <div class="process-step-card group" style="width: 280px;">
+          <div class="bg-white rounded-2xl p-7 h-full text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-default relative overflow-hidden shadow-lg">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg" style="background: linear-gradient(135deg, #fde68a, #fbbf24);">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                </svg>
+              </div>
+              <div class="inline-flex items-center justify-center w-7 h-7 bg-amber-500 text-white rounded-full text-xs font-bold mb-3">4</div>
+              <h3 class="font-bold text-gray-800 text-lg mb-2">Isi Kuisioner</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Jawab kuisioner terkait praktik pengelolaan kebun</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrow 4→5 -->
+        <div class="hidden md:flex items-center self-center text-emerald-300 opacity-60 -mx-2">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="process-step-card group" style="width: 280px;">
+          <div class="bg-white border-2 border-amber-300 rounded-2xl p-7 h-full text-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-default relative overflow-hidden shadow-xl">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-full -translate-y-8 translate-x-8"></div>
+            <div class="relative z-10">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-xl" style="background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 0 24px rgba(245,158,11,0.35);">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <div class="inline-flex items-center justify-center w-7 h-7 bg-amber-500 text-white rounded-full text-xs font-bold mb-3">5</div>
+              <h3 class="font-bold text-gray-800 text-lg mb-2">Hasil Penilaian</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">Dapatkan hasil tingkat kesiapan dan rekomendasi perbaikan</p>
+              <div class="mt-4">
+                <span class="inline-block bg-amber-100 text-amber-700 text-xs font-semibold px-3 py-1 rounded-full border border-amber-300">✨ Langkah Akhir</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
