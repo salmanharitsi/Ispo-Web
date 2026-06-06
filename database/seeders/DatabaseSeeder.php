@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            AhpSeeder::class,
+            // AhpSeeder::class,
 
             // jalankan seeder kebun manual setelah melengkapi data diri user
             // php artisan db:seed --class=KebunSeeder

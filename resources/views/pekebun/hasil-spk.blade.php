@@ -28,7 +28,7 @@
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center">Skor Absolut</th>
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center" title="Nilai Preferensi TOPSIS">Vi (TOPSIS)</th>
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center">Status Pengajuan</th>
-                        <th scope="col" class="px-4 sm:px-6 py-3">Saran</th>
+                        <th scope="col" class="px-4 sm:px-6 py-3 text-center">Saran</th>
                         <th scope="col" class="px-4 sm:px-6 py-3 text-center">Aksi (Edit & Ajukan Ulang)</th>
                     </tr>
                 </thead>
@@ -117,7 +117,7 @@
                                 @endif
                             </td>
                             <td class="px-4 sm:px-6 py-3 text-center align-middle">
-                                @if($kebun->status_finalisasi === 'final' || $kebun->status_finalisasi === 'revisi')
+                                @if($kebun->status_finalisasi === 'final' || $kebun->status_finalisasi === 'revisi' || $kebun->status_finalisasi === 'tolak')
                                     <span class="text-xs text-slate-400 italic">-</span>
                                 @elseif($kebun->kuisioner && count($kebun->kuisioner->saran) > 0)
                                     @php $jumlahSaran = count($kebun->kuisioner->saran); @endphp
@@ -203,7 +203,7 @@
       <ol id="saranListContainer" class="space-y-2"></ol>
     </div>
     <!-- Modal Footer -->
-    <div class="px-6 py-3 border-t border-slate-100 bg-slate-50/50">
+    <div class="px-6 py-6 border-t border-slate-100 bg-slate-50/50">
       <button onclick="closeSaranModal()" class="w-full px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-sm font-semibold transition-colors">
         Tutup
       </button>
