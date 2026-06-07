@@ -18,7 +18,7 @@
         $ahpFinalExists = \App\Models\AhpFinal::first() !== null;
     @endphp
 
-    @if (!$ahpFinalExists)
+    @if (!$ahpFinalExists && Auth::user()->role === 'admin')
         <div class="mb-6 p-4 rounded-lg border bg-yellow-50 border-yellow-400 text-yellow-800 flex items-start shadow-sm">
             <div class="mr-3 mt-0.5">
                 <i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>
@@ -34,6 +34,7 @@
     @endif
 
     <div class="space-y-8">
+        @if(Auth::user()->role === 'admin')
         <!-- Tabel Pengajuan Pengecekan (Data Finalisasi) -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-5 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
@@ -45,6 +46,7 @@
                 @livewire('admin.topsis.pengajuan-table')
             </div>
         </div>
+        @endif
 
         <!-- Tabel Perankingan (Data TOPSIS) -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">

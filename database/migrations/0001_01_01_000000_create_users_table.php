@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('foto_profil')->nullable();
             $table->integer('jumlah_anggota_keluarga')->nullable();
             $table->string('jenis_kelamin')->nullable();
-            $table->enum('role', ['admin', 'pekebun'])->default('pekebun');
+            $table->enum('role', ['admin', 'pekebun', 'pimpinan'])->default('pekebun');
             $table->rememberToken();
             $table->timestamps();
         });

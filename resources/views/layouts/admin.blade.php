@@ -57,9 +57,9 @@
                     </h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="{{ url('/admin') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('admin') }}">
-                                <i class="fas fa-home text-lg w-5 shrink-0 {{ iconColor('admin') }}"></i>
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan') : url('/admin') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin', 'pimpinan']) }}">
+                                <i class="fas fa-home text-lg w-5 shrink-0 {{ iconColor(['admin', 'pimpinan']) }}"></i>
                                 <span class="sidebar-text font-medium">Dashboard</span>
                             </a>
                         </li>
@@ -72,18 +72,18 @@
                     </h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="{{ url('/admin/daftar-pekebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun']) }}">
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-pekebun') : url('/admin/daftar-pekebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun', 'pimpinan.daftar-pekebun']) }}">
                                 <i
-                                    class="fas fa-users text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-pekebun']) }}"></i>
+                                    class="fas fa-users text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-pekebun', 'pimpinan.daftar-pekebun']) }}"></i>
                                 <span class="sidebar-text font-medium">Daftar Pekebun</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/admin/daftar-kebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-kebun','admin.all-pemetaan', 'admin.peta-kebun', ]) }}">
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-kebun') : url('/admin/daftar-kebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-kebun','admin.all-pemetaan', 'admin.peta-kebun', 'pimpinan.daftar-kebun', 'pimpinan.all-pemetaan', 'pimpinan.peta-kebun']) }}">
                                 <i
-                                    class="fas fa-map text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun']) }}"></i>
+                                    class="fas fa-map text-lg w-5 shrink-0 {{ iconColor(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun', 'pimpinan.daftar-kebun', 'pimpinan.all-pemetaan', 'pimpinan.peta-kebun']) }}"></i>
                                 <span class="sidebar-text font-medium">Daftar Kebun</span>
                             </a>
                         </li>
@@ -95,6 +95,7 @@
                                 <span class="sidebar-text font-medium">Pengajuan ISPO</span>
                             </a>
                         </li> -->
+                        @if(Auth::user()->role === 'admin')
                         <li>
                             <button type="button" onclick="document.getElementById('ahp-submenu').classList.toggle('hidden'); document.getElementById('ahp-icon').classList.toggle('rotate-90')" class="w-full menu-item flex items-center justify-between px-4 py-3 rounded-lg {{ menuActive(['admin.ahp.prinsip', 'admin.ahp.kriteria', 'admin.ahp.final']) }}">
                                 <div class="flex items-center space-x-3">
@@ -124,11 +125,12 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         <li>
-                            <a href="{{ url('/admin/topsis') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.topsis.index']) }}">
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/topsis') : url('/admin/topsis') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.topsis.index', 'pimpinan.topsis.index']) }}">
                                 <i
-                                    class="fas fa-trophy text-lg w-5 shrink-0 {{ iconColor(['admin.topsis.index']) }}"></i>
+                                    class="fas fa-trophy text-lg w-5 shrink-0 {{ iconColor(['admin.topsis.index', 'pimpinan.topsis.index']) }}"></i>
                                 <span class="sidebar-text font-medium">Perhitungan TOPSIS</span>
                             </a>
                         </li>
@@ -171,9 +173,9 @@
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">Home</h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="{{ url('/admin') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive('admin') }}">
-                                <i class="fas fa-home text-lg w-5 {{ iconColor('admin') }}"></i>
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan') : url('/admin') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin', 'pimpinan']) }}">
+                                <i class="fas fa-home text-lg w-5 {{ iconColor(['admin', 'pimpinan']) }}"></i>
                                 <span class="font-medium">Dashboard</span>
                             </a>
                         </li>
@@ -184,16 +186,16 @@
                     <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 px-3">Menu</h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="{{ url('/admin/daftar-pekebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun']) }}">
-                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.daftar-pekebun']) }}"></i>
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-pekebun') : url('/admin/daftar-pekebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-pekebun', 'pimpinan.daftar-pekebun']) }}">
+                                <i class="fas fa-list-check text-lg w-5 {{ iconColor(['admin.daftar-pekebun', 'pimpinan.daftar-pekebun']) }}"></i>
                                 <span class="font-medium">Daftar Pekebun</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/admin/daftar-kebun') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun']) }}">
-                                <i class="fas fa-map text-lg w-5 {{ iconColor(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun']) }}"></i>
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-kebun') : url('/admin/daftar-kebun') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun', 'pimpinan.daftar-kebun', 'pimpinan.all-pemetaan', 'pimpinan.peta-kebun']) }}">
+                                <i class="fas fa-map text-lg w-5 {{ iconColor(['admin.daftar-kebun', 'admin.all-pemetaan', 'admin.peta-kebun', 'pimpinan.daftar-kebun', 'pimpinan.all-pemetaan', 'pimpinan.peta-kebun']) }}"></i>
                                 <span class="font-medium">Daftar Kebun</span>
                             </a>
                         </li>
@@ -204,6 +206,7 @@
                                 <span class="font-medium">Pengajuan ISPO</span>
                             </a>
                         </li> -->
+                        @if(Auth::user()->role === 'admin')
                         <li>
                             <button type="button" onclick="document.getElementById('ahp-submenu-mobile').classList.toggle('hidden'); document.getElementById('ahp-icon-mobile').classList.toggle('rotate-90')" class="w-full menu-item flex items-center justify-between px-4 py-3 rounded-lg {{ menuActive(['admin.ahp.prinsip', 'admin.ahp.kriteria', 'admin.ahp.final']) }}">
                                 <div class="flex items-center space-x-3">
@@ -234,10 +237,11 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         <li>
-                            <a href="{{ url('/admin/topsis') }}"
-                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.topsis.index']) }}">
-                                <i class="fas fa-trophy text-lg w-5 {{ iconColor(['admin.topsis.index']) }}"></i>
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/topsis') : url('/admin/topsis') }}"
+                                class="menu-item flex items-center space-x-3 px-4 py-3 rounded-lg {{ menuActive(['admin.topsis.index', 'pimpinan.topsis.index']) }}">
+                                <i class="fas fa-trophy text-lg w-5 {{ iconColor(['admin.topsis.index', 'pimpinan.topsis.index']) }}"></i>
                                 <span class="font-medium">Perhitungan TOPSIS</span>
                             </a>
                         </li>
@@ -277,7 +281,7 @@
 
                         <!-- Breadcrumb -->
                         <div class="hidden md:flex items-center space-x-2 text-sm">
-                            <a href="{{ url("/admin") }}" class="text-gray-500 hover:text-green-600 transition-colors">Home</a>
+                            <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan') : url('/admin') }}" class="text-gray-500 hover:text-green-600 transition-colors">Home</a>
 
                             @foreach (breadcrumb() as $item)
                                 <i class="fas fa-chevron-right text-gray-300 text-xs"></i>
@@ -315,7 +319,7 @@
                                     <p class="text-sm font-semibold text-gray-800">
                                         {{ \Illuminate\Support\Str::limit(Auth::user()->name, 15) }}
                                     </p>
-                                    <p class="text-xs text-gray-500">Admin</p>
+                                    <p class="text-xs text-gray-500">{{ Auth::user()->role === 'pimpinan' ? 'Pimpinan' : 'Admin' }}</p>
                                 </div>
                                 <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
                             </button>

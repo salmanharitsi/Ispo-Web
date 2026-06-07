@@ -56,6 +56,11 @@ class LoginForm extends Component
                     'title' => 'Berhasil masuk sebagai Admin.',
                 ],
             ]),
+            'pimpinan' => redirect(url('/pimpinan'))->with([
+                'success' => [
+                    'title' => 'Berhasil masuk sebagai Pimpinan.',
+                ],
+            ]),
             default => redirect('/'),
         };
     }

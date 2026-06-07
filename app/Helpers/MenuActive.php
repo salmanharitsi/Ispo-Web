@@ -98,6 +98,31 @@ if (!function_exists('breadcrumb')) {
                 ['label' => 'Perhitungan AHP'],
                 ['label' => 'Pembobotan Final'],
             ],
+            'admin.topsis.index' => [
+                ['label'=> 'Perhitungan Topsis'],
+            ],
+
+            // Pimpinan Breadcrumbs
+            'pimpinan' => [
+                ['label' => 'Dashboard'],
+            ],
+            'pimpinan.daftar-pekebun'=> [
+                ['label' => 'Daftar Pekebun'],
+            ],
+            'pimpinan.daftar-kebun' => [
+                ['label' => 'Daftar Kebun']
+            ],
+            'pimpinan.all-pemetaan' => [
+                ['label' => 'Daftar Kebun', 'route' => 'pimpinan.daftar-kebun'],
+                ['label' => 'Semua Pemetaan'],
+            ],
+            'pimpinan.peta-kebun' => [
+                ['label' => 'Daftar Kebun', 'route' => 'pimpinan.daftar-kebun'],
+                ['label' => 'Peta Kebun'],
+            ],
+            'pimpinan.topsis.index' => [
+                ['label'=> 'Perhitungan Topsis'],
+            ]
         ];
 
         return $breadcrumbs[$route] ?? [

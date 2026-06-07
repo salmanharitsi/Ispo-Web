@@ -30,6 +30,16 @@ Route::group(['middleware' => ['admin', 'no-cache']], function () {
     Route::get('/admin/topsis', [AdminController::class, 'topsis_index'])->name('admin.topsis.index');
 });
 
+// Pimpinan Routes
+Route::group(['middleware' => ['admin', 'no-cache']], function () {
+    Route::get('/pimpinan', [AdminController::class, 'get_dashboard_admin'])->name('pimpinan');
+    Route::get('/pimpinan/daftar-pekebun', [AdminController::class,'get_daftar_pekebun'])->name('pimpinan.daftar-pekebun');
+    Route::get('/pimpinan/daftar-kebun', [AdminController::class, 'get_daftar_kebun'])->name('pimpinan.daftar-kebun');
+    Route::get('/pimpinan/daftar-kebun/semua-pemetaan', [AdminController::class, 'get_all_pemetaan'])->name('pimpinan.all-pemetaan');
+    Route::get('/pimpinan/daftar-kebun/{id}/peta', [AdminController::class, 'get_peta_kebun'])->name('pimpinan.peta-kebun');
+    Route::get('/pimpinan/topsis', [AdminController::class, 'topsis_index'])->name('pimpinan.topsis.index');
+});
+
 // Pekebun Routes
 Route::group(['middleware' => ['pekebun', 'no-cache']], function () {
     Route::get('/pekebun', [PekebunController::class, 'get_dashboard_pekebun'])->name('pekebun');

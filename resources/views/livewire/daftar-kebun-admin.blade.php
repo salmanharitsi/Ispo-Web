@@ -218,13 +218,14 @@
                                 </button>
                                 @if($k->polygon)
                                     <a
-                                        href="{{ url('/admin/daftar-kebun/' . $k->id . '/peta') }}"
+                                        href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-kebun/' . $k->id . '/peta') : url('/admin/daftar-kebun/' . $k->id . '/peta') }}"
                                         class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-blue-600 text-white bg-blue-600 hover:bg-white hover:text-blue-600 transition cursor-pointer"
                                         title="Lihat peta lahan"
                                     >
                                         <i class="fa-solid fa-map-location-dot text-[13px]"></i>
                                     </a>
                                 @endif
+                                @if(Auth::user()->role === 'admin')
                                 <button
                                     wire:click="confirmDelete('{{ $k->id }}')"
                                     class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-red-600 text-white bg-red-600 hover:bg-white hover:text-red-600 transition cursor-pointer"
@@ -232,6 +233,7 @@
                                 >
                                     <i class="fa-regular fa-trash-can text-[13px]"></i>
                                 </button>
+                                @endif
                             </div>
                         </td>
                     </tr>

@@ -15,6 +15,7 @@ class AuthController extends Controller
 
         return match ($user->role) {
             'admin' => redirect('admin'),
+            'pimpinan' => redirect('pimpinan'),
             'pekebun' => redirect('pekebun'),
             default => redirect('dashboard'),
         };

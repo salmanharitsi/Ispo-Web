@@ -16,7 +16,7 @@
             <p class="text-gray-600 mt-1">Data seluruh kebun yang terdaftar pada sistem</p>
           </div>
           <a 
-            href="{{ url('/admin/daftar-kebun/semua-pemetaan') }}"
+            href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-kebun/semua-pemetaan') : url('/admin/daftar-kebun/semua-pemetaan') }}"
             class="inline-flex gap-2 items-center justify-center bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition shadow-lg"
           >
             <i class="fa-solid fa-map-location-dot text-lg w-5"></i>

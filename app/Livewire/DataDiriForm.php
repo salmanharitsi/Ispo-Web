@@ -35,7 +35,7 @@ class DataDiriForm extends Component
     protected function rules()
     {
         return [
-            'foto_profil'               => 'required|image|max:2048',
+            'foto_profil'               => 'nullable|image|max:2048',
             'name'                      => 'required|string|min:3|max:255',
             'no_hp'                     => 'required|string|max:15',
             'tempat_lahir'              => 'required|string|max:255',

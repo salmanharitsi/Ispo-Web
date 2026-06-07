@@ -19,8 +19,8 @@
           Menampilkan batas polygon lahan kebun berdasarkan hasil pemetaan.
         </p>
       </div>
-      <a href="{{ url('/admin/daftar-kebun') }}"
-        class="inline-flex items-center gap-2 rounded-lg bg-white border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 transition shadow-sm">
+      <a href="{{ Auth::user()->role === 'pimpinan' ? url('/pimpinan/daftar-kebun') : url('/admin/daftar-kebun') }}"
+         class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors shadow-sm">
         <i class="fa-solid fa-arrow-left text-xs"></i>
         <span>Kembali ke Daftar Kebun</span>
       </a>

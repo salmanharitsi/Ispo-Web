@@ -179,6 +179,7 @@
                                 >
                                     <i class="fa-regular fa-eye text-[13px"></i>
                                 </button>
+                                @if(Auth::user()->role === 'admin')
                                 <button
                                     wire:click="confirmDelete('{{ $user->id }}')"
                                     class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-red-600 text-white bg-red-600 hover:bg-white hover:text-red-600 transition cursor-pointer"
@@ -186,6 +187,7 @@
                                 >
                                     <i class="fa-regular fa-trash-can text-[13px]"></i>
                                 </button>
+                                @endif
                             </div>
                         </td>
                     </tr>

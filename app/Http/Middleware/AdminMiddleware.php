@@ -19,7 +19,7 @@ class AdminMiddleware
         if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->role == 'admin') {
+            if (in_array($user->role, ['admin', 'pimpinan'])) {
                 return $next($request);
             }
         }

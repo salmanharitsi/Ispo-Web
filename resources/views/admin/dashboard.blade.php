@@ -26,9 +26,16 @@
               </svg>
               {{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM YYYY') }}
             </div>
+            @if(Auth::user()->role === 'admin')
             <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-[11px] uppercase tracking-wide font-semibold">
               Dashboard Admin
             </span>
+            @endif
+            @if(Auth::user()->role === 'pimpinan')
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/10 text-[11px] uppercase tracking-wide font-semibold">
+              Dashboard Pimpinan
+            </span>
+            @endif
           </div>
         </div>
       </div>

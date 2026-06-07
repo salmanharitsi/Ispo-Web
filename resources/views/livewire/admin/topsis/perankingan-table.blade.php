@@ -19,10 +19,12 @@
         </div>
 
         <div class="flex items-center space-x-2">
+            @if(Auth::user()->role === 'admin')
             <button wire:click="calculateTopsis" @if(!$ahpFinalExists) disabled @endif class="px-4 py-2 {{ $ahpFinalExists ? 'bg-green-600 hover:bg-green-700' : 'bg-slate-400 cursor-not-allowed' }} text-white rounded-lg text-sm transition font-semibold flex items-center">
                 <span wire:loading.remove wire:target="calculateTopsis"><i class="fas fa-sync-alt mr-2"></i> Kalkulasi Ulang Ranking</span>
                 <span wire:loading wire:target="calculateTopsis"><i class="fas fa-spinner fa-spin mr-2"></i> Mengkalkulasi...</span>
             </button>
+            @endif
         </div>
     </div>
 
