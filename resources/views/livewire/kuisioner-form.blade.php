@@ -330,11 +330,11 @@
                 </div>
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda mengetahui adanya satwa atau tumbuhan liar di atau dekat kebun sebelum atau sesudah kebun dibuat?',
+                        'label' => 'Apakah Anda menghindari penggunaan bahan kimia berbahaya di dekat sumber air atau aliran sungai disekitar kebun?',
                         'model' => 'p3_q27_mengetahui_satwa_tumbuhan',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda pernah mencatat atau mendokumentasikan keberadaan satwa/tumbuhan tersebut?',
+                        'label' => 'Apakah Anda memiliki cara untuk mengelola limbah bekas kemasan pupuk dan pestisida seperti dikubur, dikumpulkan di satu tempat, atau diserahkan kepada petugas terkait?',
                         'model' => 'p3_q28_mencatat_satwa_tumbuhan',
                     ])
                 </div>
