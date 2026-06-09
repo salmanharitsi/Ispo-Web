@@ -121,7 +121,7 @@
         <!-- Tempat & Tanggal Lahir -->
         <div class="col-span-2 md:col-span-1">
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Tempat Lahir
+            Tempat Lahir <span class="text-red-500">*</span>
           </label>
           <input 
             type="text" 
@@ -136,7 +136,7 @@
 
         <div class="col-span-2 md:col-span-1">
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Tanggal Lahir
+            Tanggal Lahir <span class="text-red-500">*</span>
           </label>
           <input 
             type="date" 
@@ -151,7 +151,7 @@
         <!-- Pendidikan & Jenis Kelamin -->
         <div class="col-span-2 md:col-span-1">
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Pendidikan Terakhir
+            Pendidikan Terakhir <span class="text-red-500">*</span>
           </label>
           <select
             wire:model.live="pendidikan_terakhir"
@@ -269,7 +269,7 @@
         <!-- RT / RW -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            RT / RW
+            RT / RW <span class="text-red-500">*</span>
           </label>
           <div class="flex gap-3">
             <div class="w-1/2">
@@ -317,7 +317,7 @@
         <!-- Kabupaten -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Kabupaten
+            Kabupaten <span class="text-red-500">*</span>
           </label>
           <input 
             type="text" 
@@ -333,7 +333,7 @@
         <!-- Kota -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
-            Kota
+            Kota <span class="text-red-500">*</span>
           </label>
           <input 
             type="text" 
