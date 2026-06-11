@@ -109,8 +109,8 @@ class Kuisioner extends Model
 
         if ($this->p3_q25_upaya_mencegah_kebakaran == 0) $saran[] = "Lakukan upaya mencegah kebakaran kebun (misalnya membuat sekat api, patroli, gotong royong dengan warga).";
         if ($this->p3_q26_memiliki_alat_pemadam == 0) $saran[] = "Sediakan alat dasar pemadam kebakaran di kebun (misalnya pompa air, ember, atau alat semprot).";
-        if ($this->p3_q27_mengetahui_satwa_tumbuhan == 0) $saran[] = "Kenali dan perhatikan keberadaan satwa atau tumbuhan liar di atau dekat kebun.";
-        if ($this->p3_q28_mencatat_satwa_tumbuhan == 0) $saran[] = "Catat atau dokumentasikan keberadaan satwa/tumbuhan liar yang ada di sekitar kebun.";
+        if ($this->p3_q27_mengetahui_satwa_tumbuhan == 0) $saran[] = "Tanam atau pertahankan vegetasi alami di sekitar kebun untuk mendukung keanekaragaman hayati.";
+        if ($this->p3_q28_mencatat_satwa_tumbuhan == 0) $saran[] = "Biarkan satwa liar hidup di habitatnya dan hindari tindakan yang dapat mengganggunya.";
 
         if ($this->p4_q29_mendapat_info_resmi_harga == 0) $saran[] = "Dapatkan informasi resmi harga TBS dari tim penetapan harga sebelum menjual.";
         if ($this->p4_q30_catat_harga_dan_jumlah_tbs == 0) $saran[] = "Catat harga dan jumlah TBS yang Anda jual.";

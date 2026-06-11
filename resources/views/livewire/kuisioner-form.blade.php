@@ -330,11 +330,11 @@
                 </div>
                 <div class="space-y-4">
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda menghindari penggunaan bahan kimia berbahaya di dekat sumber air atau aliran sungai disekitar kebun?',
+                        'label' => 'Apakah Anda menjaga atau membiarkan sebagian area kebun ditumbuhi tanaman lain selain kelapa sawit, seperti bunga-bungaan, pakis, atau vegetasi alami lainnya?',
                         'model' => 'p3_q27_mengetahui_satwa_tumbuhan',
                     ])
                     @include('pekebun.partials.kuisioner-question', [
-                        'label' => 'Apakah Anda memiliki cara untuk mengelola limbah bekas kemasan pupuk dan pestisida seperti dikubur, dikumpulkan di satu tempat, atau diserahkan kepada petugas terkait?',
+                        'label' => 'Apakah Anda membiarkan satwa liar yang berada di sekitar kebun tetap hidup dan tidak mengganggunya?',
                         'model' => 'p3_q28_mencatat_satwa_tumbuhan',
                     ])
                 </div>

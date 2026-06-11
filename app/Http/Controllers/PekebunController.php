@@ -40,7 +40,7 @@ class PekebunController extends Controller
         $user = Auth::user();
 
         // Check Step 1: Data Diri
-        $dataRequiredFields = ['name', 'no_hp','tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'alamat', 'rt_rw', 'kecamatan', 'kabupaten', 'kota', 'foto_profil', 'jumlah_anggota_keluarga', 'jenis_kelamin'];
+        $dataRequiredFields = ['name', 'no_hp','tempat_lahir', 'tanggal_lahir', 'pendidikan_terakhir', 'alamat', 'rt_rw', 'kecamatan', 'kabupaten', 'kota', 'jumlah_anggota_keluarga', 'jenis_kelamin'];
         $isDataDiriComplete = true;
 
         foreach ($dataRequiredFields as $field) {
