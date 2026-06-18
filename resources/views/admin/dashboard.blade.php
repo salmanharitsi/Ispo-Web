@@ -105,7 +105,7 @@
           <p class="text-xs text-slate-500">{{ $kebunMapped }} dari {{ $totalKebun }} kebun</p>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-          <div class="h-2.5 bg-linear-to-r from-green-500 to-green-600 rounded-full" style="width: {{ $pctMapped }}%"></div>
+          <div class="h-2.5 rounded-full" style="width: {{ $pctMapped }}%; background: linear-gradient(to right, #16a34a, #22C55E);"></div>
         </div>
       </div>
 
@@ -122,7 +122,7 @@
           <p class="text-xs text-slate-500">{{ $kebunKuisioner }} dari {{ $totalKebun }} kebun</p>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-          <div class="h-2.5 bg-linear-to-r from-blue-500 to-blue-600 rounded-full" style="width: {{ $pctKuisioner }}%"></div>
+          <div class="h-2.5 rounded-full" style="width: {{ $pctKuisioner }}%; background: linear-gradient(to right, #2563eb, #60A5FA);"></div>
         </div>
       </div>
 
@@ -139,7 +139,7 @@
           <p class="text-xs text-slate-500">{{ $kebunFinal }} kebun sudah final</p>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-          <div class="h-2.5 bg-linear-to-r from-emerald-500 to-emerald-600 rounded-full" style="width: {{ $pctFinal }}%"></div>
+          <div class="h-2.5 rounded-full" style="width: {{ $pctFinal }}%; background: linear-gradient(to right, #d97706, #FACC15);"></div>
         </div>
       </div>
     </div>
@@ -211,12 +211,16 @@
     // Data dari controller
     const kecamatanLabels = @json($kecamatanLabels);
     const kecamatanCounts = @json($kecamatanCounts);
+    const totalKebunAll   = @json($totalKebun);
 
-    const ispoBelum  = @json($ispoBelum);
-    const ispoProses = @json($ispoProses);
-    const ispoSudah  = @json($ispoSudah);
+    const ispoBelum      = @json($ispoBelum);
+    const ispoProses     = @json($ispoProses);
+    const ispoSudah      = @json($ispoSudah);
     const ispoCukupLayak = @json($ispoCukupLayak);
     const ispoBelumLayak = @json($ispoBelumLayak);
+
+    // Palet warna pie chart — urutan: abu, kuning, merah, biru, hijau
+    const piePalette = ['#E5E7EB', '#FACC15', '#F87171', '#60A5FA', '#22C55E'];
 
     // ==========================
     // BAR CHART: Kebun per Kecamatan
@@ -225,6 +229,43 @@
     if (kecamatanCanvas) {
       const kecamatanCtx = kecamatanCanvas.getContext('2d');
 
+      // Tentukan warna tiap batang berdasarkan ranking nilai (tertinggi → hijau, terendah → merah)
+      // Palet yang dipakai: hijau, biru, kuning, merah, abu  (diurutkan dari "terbaik" ke "terburuk")
+      const barPalette = ['#22C55E', '#60A5FA', '#FACC15', '#F87171', '#E5E7EB'];
+
+      const n = kecamatanCounts.length;
+      // Buat array index diurutkan dari nilai terbesar ke terkecil
+      const sortedIndices = [...Array(n).keys()].sort((a, b) => kecamatanCounts[b] - kecamatanCounts[a]);
+      // Tentukan "rank" tiap bar (0 = tertinggi)
+      const rank = new Array(n);
+      sortedIndices.forEach((origIdx, rankPos) => { rank[origIdx] = rankPos; });
+
+      // Petakan rank ke warna palet (jika lebih dari 5 bar, siklus warna)
+      const barColors = kecamatanCounts.map((_, i) => barPalette[rank[i] % barPalette.length]);
+      const barHoverColors = barColors.map(c => c + 'CC'); // sedikit transparan saat hover
+
+      // Hitung persenan tiap kecamatan dari total seluruh kebun
+      const totalForPct = totalKebunAll > 0 ? totalKebunAll : (kecamatanCounts.reduce((a, b) => a + b, 0) || 1);
+      const kecamatanPct = kecamatanCounts.map(v => ((v / totalForPct) * 100).toFixed(1));
+
+      // Plugin custom: tampilkan label persenan di atas tiap batang
+      const barLabelPlugin = {
+        id: 'barPercentLabel',
+        afterDatasetsDraw(chart) {
+          const { ctx, data } = chart;
+          chart.getDatasetMeta(0).data.forEach((bar, i) => {
+            const pct = kecamatanPct[i];
+            ctx.save();
+            ctx.font = 'bold 10px sans-serif';
+            ctx.fillStyle = '#475569';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText(pct + '%', bar.x, bar.y - 3);
+            ctx.restore();
+          });
+        }
+      };
+
       new Chart(kecamatanCtx, {
         type: 'bar',
         data: {
@@ -232,8 +273,8 @@
           datasets: [{
             label: 'Jumlah Kebun',
             data: kecamatanCounts,
-            backgroundColor: 'rgba(34, 197, 94, 0.8)',
-            hoverBackgroundColor: 'rgba(22, 163, 74, 0.9)',
+            backgroundColor: barColors,
+            hoverBackgroundColor: barHoverColors,
             borderRadius: 6,
             maxBarThickness: 40,
           }]
@@ -241,6 +282,7 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          layout: { padding: { top: 20 } },
           scales: {
             x: {
               ticks: { color: '#64748b', font: { size: 11 } },
@@ -259,19 +301,62 @@
               padding: 8,
               titleFont: { size: 12 },
               bodyFont: { size: 11 },
+              callbacks: {
+                label: function(context) {
+                  const val  = context.raw || 0;
+                  const pct  = kecamatanPct[context.dataIndex];
+                  return `Jumlah Kebun: ${val} (${pct}% dari total)`;
+                }
+              }
             }
           }
-        }
+        },
+        plugins: [barLabelPlugin]
       });
     }
 
     // ==========================
     // DOUGHNUT CHART: Status Sertifikasi ISPO
+    // Plugin: tampilkan persenan langsung di tiap slice
     // ==========================
     const ispoCanvas = document.getElementById('ispoChart');
     if (ispoCanvas) {
       const ispoCtx = ispoCanvas.getContext('2d');
       const total = (ispoBelum + ispoProses + ispoBelumLayak + ispoCukupLayak + ispoSudah) || 1;
+
+      // Plugin custom: render teks persenan di tengah tiap arc
+      const doughnutLabelPlugin = {
+        id: 'doughnutPercentLabel',
+        afterDatasetsDraw(chart) {
+          const { ctx, data } = chart;
+          const dataset  = chart.getDatasetMeta(0);
+          const chartData = data.datasets[0].data;
+          const sum = chartData.reduce((a, b) => a + b, 0) || 1;
+
+          dataset.data.forEach((arc, i) => {
+            const value = chartData[i];
+            if (value === 0) return;
+            const pct = ((value / sum) * 100).toFixed(1);
+
+            // Titik tengah arc
+            const midAngle  = (arc.startAngle + arc.endAngle) / 2;
+            const midRadius = (arc.innerRadius + arc.outerRadius) / 2;
+            const x = arc.x + Math.cos(midAngle) * midRadius;
+            const y = arc.y + Math.sin(midAngle) * midRadius;
+
+            // Hanya tampilkan jika slice cukup besar (> 5%)
+            if (parseFloat(pct) < 5) return;
+
+            ctx.save();
+            ctx.font        = 'bold 11px sans-serif';
+            ctx.fillStyle   = i === 0 ? '#6B7280' : '#1e293b'; // abu pakai teks gelap sedikit beda
+            ctx.textAlign   = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(pct + '%', x, y);
+            ctx.restore();
+          });
+        }
+      };
 
       new Chart(ispoCtx, {
         type: 'doughnut',
@@ -279,13 +364,14 @@
           labels: ['Belum Diajukan', 'Proses Penilaian', 'Belum Layak', 'Cukup Layak', 'Sudah Layak'],
           datasets: [{
             data: [ispoBelum, ispoProses, ispoBelumLayak, ispoCukupLayak, ispoSudah],
-            backgroundColor: ['#E5E7EB', '#FACC15', '#F87171', '#60A5FA', '#22C55E'],
-            borderWidth: 0,
-            hoverOffset: 4,
+            backgroundColor: piePalette,
+            borderWidth: 2,
+            borderColor: '#ffffff',
+            hoverOffset: 6,
           }]
         },
         options: {
-          cutout: '68%',
+          cutout: '62%',
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
@@ -293,15 +379,16 @@
             tooltip: {
               callbacks: {
                 label: function (context) {
-                  const label = context.label || '';
-                  const value = context.raw || 0;
+                  const label   = context.label || '';
+                  const value   = context.raw || 0;
                   const percent = ((value / total) * 100).toFixed(1);
                   return `${label}: ${value} kebun (${percent}%)`;
                 }
               }
             }
           }
-        }
+        },
+        plugins: [doughnutLabelPlugin]
       });
     }
   });
