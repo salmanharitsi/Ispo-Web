@@ -182,7 +182,7 @@
             <span>Belum Diajukan ({{ $ispoBelum }})</span>
           </div>
           <div class="flex items-center gap-2">
-            <span class="inline-block w-3 h-3 rounded-full" style="background:#FACC15;"></span>
+            <span class="inline-block w-3 h-3 rounded-full" style="background:#F59E0B;"></span>
             <span>Proses Penilaian ({{ $ispoProses }})</span>
           </div>
           <div class="flex items-center gap-2">
@@ -190,7 +190,7 @@
             <span>Belum Layak ({{ $ispoBelumLayak }})</span>
           </div>
           <div class="flex items-center gap-2">
-            <span class="inline-block w-3 h-3 rounded-full" style="background:#60A5FA;"></span>
+            <span class="inline-block w-3 h-3 rounded-full" style="background:#FDE047;"></span>
             <span>Cukup Layak ({{ $ispoCukupLayak }})</span>
           </div>
           <div class="flex items-center gap-2">
@@ -219,8 +219,8 @@
     const ispoCukupLayak = @json($ispoCukupLayak);
     const ispoBelumLayak = @json($ispoBelumLayak);
 
-    // Palet warna pie chart — urutan: abu, kuning, merah, biru, hijau
-    const piePalette = ['#E5E7EB', '#FACC15', '#F87171', '#60A5FA', '#22C55E'];
+    // Palet warna pie chart — urutan: abu, amber, merah, kuning, hijau
+    const piePalette = ['#E5E7EB', '#F59E0B', '#F87171', '#FDE047', '#22C55E'];
 
     // ==========================
     // BAR CHART: Kebun per Kecamatan
@@ -230,8 +230,8 @@
       const kecamatanCtx = kecamatanCanvas.getContext('2d');
 
       // Tentukan warna tiap batang berdasarkan ranking nilai (tertinggi → hijau, terendah → merah)
-      // Palet yang dipakai: hijau, biru, kuning, merah, abu  (diurutkan dari "terbaik" ke "terburuk")
-      const barPalette = ['#22C55E', '#60A5FA', '#FACC15', '#F87171', '#E5E7EB'];
+      // Palet yang dipakai: hijau, kuning, amber, merah, abu  (diurutkan dari "terbaik" ke "terburuk")
+      const barPalette = ['#22C55E', '#FDE047', '#F59E0B', '#F87171', '#E5E7EB'];
 
       const n = kecamatanCounts.length;
       // Buat array index diurutkan dari nilai terbesar ke terkecil
@@ -349,7 +349,7 @@
 
             ctx.save();
             ctx.font        = 'bold 11px sans-serif';
-            ctx.fillStyle   = i === 0 ? '#6B7280' : '#1e293b'; // abu pakai teks gelap sedikit beda
+            ctx.fillStyle   = i === 0 ? '#6B7280' : (i === 3 ? '#78350f' : '#1e293b'); // kuning pakai teks gelap
             ctx.textAlign   = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText(pct + '%', x, y);
