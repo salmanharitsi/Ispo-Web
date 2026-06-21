@@ -150,21 +150,153 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">850+</div>
+          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">{{ number_format($totalKebun) }}+</div>
           <div class="text-gray-600">Penilaian Dilakukan</div>
         </div>
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">12,000+</div>
+          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">{{ number_format($totalLuas, 0, ',', '.') }}+</div>
           <div class="text-gray-600">Hektar Dinilai</div>
         </div>
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">95%</div>
-          <div class="text-gray-600">Kepuasan Pengguna</div>
+          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">{{ number_format($totalPekebun) }}</div>
+          <div class="text-gray-600">Pekebun Terdaftar</div>
         </div>
         <div class="text-center">
-          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">24/7</div>
-          <div class="text-gray-600">Akses Platform</div>
+          <div class="text-3xl md:text-4xl font-bold text-green-700 mb-2">{{ $ispoSudah }}</div>
+          <div class="text-gray-600">Kebun Layak ISPO</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       STATISTIK KESIAPAN ISPO — Section (di atas peta)
+       ═══════════════════════════════════════════════════════ -->
+  <section class="py-16" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #f0fdf4 100%)">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {{-- Section Header --}}
+      <div class="text-center mb-12">
+        <div class="inline-block bg-green-700 text-white px-6 py-2 rounded-full mb-4 font-semibold text-sm">
+          📊 Data Kesiapan Real-Time
+        </div>
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Statistik Kesiapan ISPO Pekebun</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+          Lihat posisi Anda dibanding pekebun lain di Kabupaten Rokan Hulu. Jadikan ini motivasi untuk terus meningkatkan kesiapan kebun menuju sertifikasi ISPO.
+        </p>
+      </div>
+
+      {{-- Charts Grid --}}
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch mb-10">
+
+        {{-- LEFT: Doughnut Pie — Status Kelayakan --}}
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-green-100 p-6 flex flex-col">
+          <div class="mb-4">
+            <h3 class="text-lg font-bold text-gray-800">Distribusi Status Kelayakan ISPO</h3>
+            <p class="text-sm text-gray-500 mt-1">Seberapa banyak kebun yang sudah layak?</p>
+          </div>
+          <div class="flex-1 flex items-center justify-center" style="min-height:220px;">
+            <canvas id="homePieChart"></canvas>
+          </div>
+          {{-- Legend --}}
+          <div class="mt-5 grid grid-cols-1 gap-2 text-xs">
+            <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full inline-block" style="background:#22C55E;"></span><span class="font-medium text-gray-700">Sudah Layak</span></div>
+              <span class="font-bold text-gray-800">{{ $ispoSudah }} kebun</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full inline-block" style="background:#FDE047;"></span><span class="font-medium text-gray-700">Cukup Layak</span></div>
+              <span class="font-bold text-gray-800">{{ $ispoCukupLayak }} kebun</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full inline-block" style="background:#F59E0B;"></span><span class="font-medium text-gray-700">Proses Penilaian</span></div>
+              <span class="font-bold text-gray-800">{{ $ispoProses }} kebun</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full inline-block" style="background:#F87171;"></span><span class="font-medium text-gray-700">Belum Layak</span></div>
+              <span class="font-bold text-gray-800">{{ $ispoBelumLayak }} kebun</span>
+            </div>
+            <div class="flex items-center justify-between bg-gray-50 rounded-lg px-3 py-2">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full inline-block" style="background:#E5E7EB;"></span><span class="font-medium text-gray-700">Belum Diajukan</span></div>
+              <span class="font-bold text-gray-800">{{ $ispoBelum }} kebun</span>
+            </div>
+          </div>
+        </div>
+
+        {{-- RIGHT: Bar Chart + Motivational Cards --}}
+        <div class="lg:col-span-3 flex flex-col gap-6">
+
+          {{-- Bar Chart Card --}}
+          <div class="bg-white rounded-2xl shadow-lg border border-green-100 p-6">
+            <div class="mb-4">
+              <h3 class="text-lg font-bold text-gray-800">Perbandingan Status Kelayakan</h3>
+              <p class="text-sm text-gray-500 mt-1">Tingkatkan kategori Anda menuju "Sudah Layak"</p>
+            </div>
+            <div style="height:180px;">
+              <canvas id="homeBarChart"></canvas>
+            </div>
+          </div>
+
+          {{-- Motivational Progress Bars --}}
+          <div class="bg-white rounded-2xl shadow-lg border border-green-100 p-6">
+            <h3 class="text-base font-bold text-gray-800 mb-4">🎯 Target Kesiapan Kabupaten Rokan Hulu</h3>
+            @php
+              $totalAll = $totalKebun ?: 1;
+              $pctSudah = round(($ispoSudah / $totalAll) * 100);
+              $pctCukup = round(($ispoCukupLayak / $totalAll) * 100);
+              $pctLayak = round((($ispoSudah + $ispoCukupLayak) / $totalAll) * 100);
+            @endphp
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>🟢 Kebun Sudah Layak ISPO</span>
+                  <span class="font-bold text-green-700">{{ $pctSudah }}%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                  <div class="h-3 rounded-full transition-all duration-1000" style="width:{{ $pctSudah }}%; background: linear-gradient(90deg, #16a34a, #22c55e);"></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">{{ $ispoSudah }} dari {{ $totalKebun }} kebun telah memenuhi standar ISPO</p>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>🟡 Kebun Cukup Layak</span>
+                  <span class="font-bold text-yellow-600">{{ $pctCukup }}%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                  <div class="h-3 rounded-full transition-all duration-1000" style="width:{{ $pctCukup }}%; background: linear-gradient(90deg, #ca8a04, #fde047);"></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">Perlu sedikit peningkatan untuk mencapai "Sudah Layak"</p>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm font-medium text-gray-700 mb-1">
+                  <span>✅ Total Kebun Memenuhi Syarat (Layak &amp; Cukup Layak)</span>
+                  <span class="font-bold text-emerald-700">{{ $pctLayak }}%</span>
+                </div>
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+                  <div class="h-3 rounded-full transition-all duration-1000" style="width:{{ $pctLayak }}%; background: linear-gradient(90deg, #059669, #34d399);"></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">{{ $ispoSudah + $ispoCukupLayak }} kebun sudah layak atau cukup layak</p>
+              </div>
+            </div>
+
+            <div class="mt-5 bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-start gap-3">
+              <span class="text-2xl">💡</span>
+              <p class="text-sm text-green-800">
+                <strong>Ayo bergabung!</strong> Lakukan penilaian kesiapan ISPO sekarang dan dapatkan rekomendasi personal untuk meningkatkan nilai kebun Anda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {{-- CTA Button --}}
+      <div class="text-center">
+        <a href="{{ url('/login') }}" class="inline-flex items-center gap-2 bg-green-700 text-white px-8 py-3 rounded-xl font-semibold hover:bg-green-800 transition shadow-lg text-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+          Cek Kesiapan Kebun Saya
+        </a>
       </div>
     </div>
   </section>
@@ -926,6 +1058,144 @@
       </div>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // ═══════════════════════════════
+    // HOME PAGE CHARTS (ISPO Stats)
+    // ═══════════════════════════════
+    document.addEventListener('DOMContentLoaded', function () {
+      const pieLabels  = ['Sudah Layak', 'Cukup Layak', 'Proses Penilaian', 'Belum Layak', 'Belum Diajukan'];
+      const piePalette = ['#22C55E', '#FDE047', '#F59E0B', '#F87171', '#E5E7EB'];
+      const pieData    = [
+        {{ $ispoSudah }},
+        {{ $ispoCukupLayak }},
+        {{ $ispoProses }},
+        {{ $ispoBelumLayak }},
+        {{ $ispoBelum }}
+      ];
+
+      // ── Doughnut Chart ────────────────────────────────────
+      const pieCtx = document.getElementById('homePieChart');
+      if (pieCtx) {
+        const total = pieData.reduce((a, b) => a + b, 0) || 1;
+
+        const doughnutLabelPlugin = {
+          id: 'homeDoughnutLabel',
+          afterDatasetsDraw(chart) {
+            const { ctx, data } = chart;
+            const meta = chart.getDatasetMeta(0);
+            const vals = data.datasets[0].data;
+            const sum  = vals.reduce((a, b) => a + b, 0) || 1;
+            meta.data.forEach((arc, i) => {
+              if (!vals[i]) return;
+              const pct = ((vals[i] / sum) * 100).toFixed(1);
+              if (parseFloat(pct) < 5) return;
+              const mid = (arc.startAngle + arc.endAngle) / 2;
+              const r   = (arc.innerRadius + arc.outerRadius) / 2;
+              ctx.save();
+              ctx.font         = 'bold 11px Inter, sans-serif';
+              ctx.fillStyle    = (i === 1) ? '#78350f' : '#1e293b';
+              ctx.textAlign    = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillText(pct + '%', arc.x + Math.cos(mid) * r, arc.y + Math.sin(mid) * r);
+              ctx.restore();
+            });
+          }
+        };
+
+        new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: pieLabels,
+            datasets: [{
+              data: pieData,
+              backgroundColor: piePalette,
+              borderWidth: 2,
+              borderColor: '#fff',
+              hoverOffset: 6
+            }]
+          },
+          options: {
+            cutout: '60%',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.label}: ${ctx.raw} kebun (${((ctx.raw / total) * 100).toFixed(1)}%)`
+                }
+              }
+            }
+          },
+          plugins: [doughnutLabelPlugin]
+        });
+      }
+
+      // ── Horizontal Bar Chart ──────────────────────────────
+      const barCtx = document.getElementById('homeBarChart');
+      if (barCtx) {
+        const barLabels = ['Belum Diajukan', 'Belum Layak', 'Proses Penilaian', 'Cukup Layak', 'Sudah Layak'];
+        const barColors = ['#E5E7EB', '#F87171', '#F59E0B', '#FDE047', '#22C55E'];
+        const barData   = [
+          {{ $ispoBelum }},
+          {{ $ispoBelumLayak }},
+          {{ $ispoProses }},
+          {{ $ispoCukupLayak }},
+          {{ $ispoSudah }}
+        ];
+        const totalBar = barData.reduce((a, b) => a + b, 0) || 1;
+
+        new Chart(barCtx, {
+          type: 'bar',
+          data: {
+            labels: barLabels,
+            datasets: [{
+              data: barData,
+              backgroundColor: barColors,
+              borderRadius: 6,
+              maxBarThickness: 32,
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: { padding: { right: 50 } },
+            scales: {
+              x: { beginAtZero: true, ticks: { stepSize: 1, color: '#94a3b8', font: { size: 10 } }, grid: { color: '#f1f5f9' } },
+              y: { ticks: { color: '#374151', font: { size: 11 } }, grid: { display: false } }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.raw} kebun (${((ctx.raw / totalBar) * 100).toFixed(1)}%)`
+                }
+              }
+            }
+          },
+          plugins: [{
+            id: 'homeBarLabel',
+            afterDatasetsDraw(chart) {
+              const { ctx } = chart;
+              chart.getDatasetMeta(0).data.forEach((bar, i) => {
+                if (!barData[i]) return;
+                ctx.save();
+                ctx.font = 'bold 10px Inter, sans-serif';
+                ctx.fillStyle = '#475569';
+                ctx.textAlign = 'left';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(barData[i] + ' kebun', bar.x + 5, bar.y);
+                ctx.restore();
+              });
+            }
+          }]
+        });
+      }
+    });
+  </script>
 
   <script>
     // Mobile Menu Toggle

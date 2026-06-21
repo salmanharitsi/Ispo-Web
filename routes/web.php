@@ -6,7 +6,20 @@ use App\Http\Controllers\PekebunController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    $totalKebun      = \App\Models\Kebun::count();
+    $totalLuas       = \App\Models\Kebun::sum('luas_lahan');
+    $totalPekebun    = \App\Models\User::whereHas('kebun')->count();
+    $ispoSudah       = \App\Models\Kebun::where('status_ispo', 'sudah-layak')->count();
+    $ispoCukupLayak  = \App\Models\Kebun::where('status_ispo', 'cukup-layak')->count();
+    $ispoBelumLayak  = \App\Models\Kebun::where('status_ispo', 'belum-layak')->count();
+    $ispoProses      = \App\Models\Kebun::where('status_ispo', 'proses')->count();
+    $ispoBelum       = \App\Models\Kebun::where('status_ispo', 'belum-pengajuan')->count();
+
+    return view('home', compact(
+        'totalKebun', 'totalLuas', 'totalPekebun',
+        'ispoSudah', 'ispoCukupLayak', 'ispoBelumLayak',
+        'ispoProses', 'ispoBelum'
+    ));
 });
 
 
